@@ -1,4 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://1l52toog6a3o"]
+[gd_scene load_steps=10 format=3 uid="uid://1l52toog6a3o"]
+
+[ext_resource type="PackedScene" uid="uid://8by78r4lfkdn" path="res://player.tscn" id="1_dpcvc"]
+[ext_resource type="Script" path="res://main.gd" id="1_gnb0y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w48cv"]
 size = Vector3(80, 2, 80)
@@ -6,7 +9,23 @@ size = Vector3(80, 2, 80)
 [sub_resource type="BoxMesh" id="BoxMesh_4agbt"]
 size = Vector3(80, 2, 80)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_m05vp"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iq0rx"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ewpww"]
+
+[sub_resource type="Sky" id="Sky_cdg7h"]
+sky_material = SubResource("ProceduralSkyMaterial_ewpww")
+
+[sub_resource type="Environment" id="Environment_mll50"]
+background_mode = 2
+sky = SubResource("Sky_cdg7h")
+
 [node name="Main" type="Node3D"]
+script = ExtResource("1_gnb0y")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
@@ -15,3 +34,22 @@ shape = SubResource("BoxShape3D_w48cv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_4agbt")
+
+[node name="Box" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_m05vp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_iq0rx")
+
+[node name="Player" parent="." instance=ExtResource("1_dpcvc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02841, 1.97801, 4.89241)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.449241, 0.893411, 0, -0.893411, -0.449241, -5.09687, 9.87912, -4.43903)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mll50")

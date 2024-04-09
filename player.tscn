@@ -1,13 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://8by78r4lfkdn"]
+[gd_scene load_steps=4 format=3 uid="uid://8by78r4lfkdn"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_sxc4l"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uggkb"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qf1at"]
 
 [node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_sxc4l")
+LOOK_SENSITIVITY = 8.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_uggkb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_qf1at")
+
+[node name="CameraController" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/Camera3D"]
+update_mode = 1

@@ -22,18 +22,16 @@ func _input(event):
 		mouseDelta = event.relative
 
 func _physics_process(delta):
-	add_gravity(delta)
+	apply_gravity(delta)
 	move(delta)
 	adjust_camera_look(delta)
 	handle_jump()
 
-func add_gravity(delta):
+func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	
 func move(delta):
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
@@ -44,13 +42,13 @@ func move(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	move_and_slide()
 
-func handle_jump():
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
 func adjust_camera_look(delta):
 	var look_rotation = Vector3(mouseDelta.y, mouseDelta.x, 0) * LOOK_SENSITIVITY * delta
 	camera.rotation_degrees.x -= look_rotation.x
 	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, TILT_LOWER_LIMIT, TILT_UPPER_LIMIT)
 	rotation_degrees.y -= look_rotation.y
 	mouseDelta = Vector2()
+
+func handle_jump():
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY

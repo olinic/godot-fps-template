@@ -2,8 +2,9 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-@export var LOOK_SENSITIVITY: float
-const CONTROLLER_LOOK_MULTIPLIER: int = 35
+@export var HORIZONTAL_LOOK_SENSITIVITY: float
+@export var VERTICAL_LOOK_SENSITIVITY: float
+const CONTROLLER_LOOK_MULTIPLIER: int = 50
 const TILT_LOWER_LIMIT: float = -89
 const TILT_UPPER_LIMIT: float = 89
 
@@ -55,10 +56,10 @@ func controller_look(delta):
 	adjust_camera_look(delta, aim_dir * CONTROLLER_LOOK_MULTIPLIER)
 
 func adjust_camera_look(delta, look_rotation: Vector2):
-	look_rotation *=  LOOK_SENSITIVITY * delta
-	camera.rotation_degrees.x -= look_rotation.y
+	look_rotation *= delta
+	camera.rotation_degrees.x -= look_rotation.y * VERTICAL_LOOK_SENSITIVITY
 	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, TILT_LOWER_LIMIT, TILT_UPPER_LIMIT)
-	rotation_degrees.y -= look_rotation.x
+	rotation_degrees.y -= look_rotation.x * HORIZONTAL_LOOK_SENSITIVITY
 
 func handle_jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor():

@@ -8,7 +8,8 @@
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_sxc4l")
-LOOK_SENSITIVITY = 8.0
+HORIZONTAL_LOOK_SENSITIVITY = 7.0
+VERTICAL_LOOK_SENSITIVITY = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_uggkb")

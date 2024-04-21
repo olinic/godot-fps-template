@@ -78,11 +78,13 @@ func handle_jump():
 		velocity.y = JUMP_VELOCITY
 		
 func handle_sprint(direction):
-	if (Input.is_action_just_pressed("keyboard_sprint") or Input.is_action_just_pressed("controller_sprint")) and is_on_floor():
+	if (Input.is_action_just_pressed("keyboard_sprint") or Input.is_action_just_pressed("controller_sprint")) and is_on_floor() and is_moving_forward(direction):
 		is_sprinting = true
 	if Input.is_action_just_released("keyboard_sprint"):
 		is_sprinting = false
-	if direction == Vector3.ZERO:
+	if !is_moving_forward(direction):
 		is_sprinting = false
+func is_moving_forward(direction):
+	return direction.z < 0
 
 

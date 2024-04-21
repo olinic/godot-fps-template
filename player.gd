@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+const SPRINT_SPEED: float = 10.0
 const SPEED: float = 5.0
 const JUMP_VELOCITY: float = 4.5
 @export var HORIZONTAL_LOOK_SENSITIVITY: float
@@ -7,6 +8,7 @@ const JUMP_VELOCITY: float = 4.5
 const CONTROLLER_LOOK_MULTIPLIER: int = 50
 const VERTICAL_LOOK_LOWER_LIMIT: float = -89
 const VERTICAL_LOOK_UPPER_LIMIT: float = 89
+var is_sprinting: bool = false
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var camera: Camera3D
@@ -31,9 +33,14 @@ func apply_gravity(delta):
 		velocity.y -= gravity * delta
 
 func get_speed():
-	return SPEED
+	if is_sprinting:
+		return SPRINT_SPEED
+	else:
+		return SPEED
+	
 
 func move(delta):
+	handle_sprint()
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
@@ -43,6 +50,7 @@ func move(delta):
 		velocity.x = move_toward(velocity.x, 0, get_speed())
 		velocity.z = move_toward(velocity.z, 0, get_speed())
 	move_and_slide()
+	is_sprinting = false
 
 func aim(delta):
 	if mouseDelta != Vector2.ZERO:
@@ -67,3 +75,11 @@ func adjust_camera_look(delta, look_rotation: Vector2):
 func handle_jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		
+func handle_sprint():
+	if Input.is_action_pressed("sprint") and is_on_floor():
+		is_sprinting = true
+		get_speed()
+		
+		
+		

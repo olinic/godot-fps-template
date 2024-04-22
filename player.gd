@@ -8,6 +8,9 @@ const JUMP_VELOCITY: float = 4.5
 const CONTROLLER_LOOK_MULTIPLIER: int = 50
 const VERTICAL_LOOK_LOWER_LIMIT: float = -89
 const VERTICAL_LOOK_UPPER_LIMIT: float = 89
+const SPRINT_LIMIT_ANGLE: float = 0.2 # radians
+const SPRINT_LIMIT_ANGLE_LEFT: float = -PI * SPRINT_LIMIT_ANGLE
+const SPRINT_LIMIT_ANGLE_RIGHT: float = -PI * (1 - SPRINT_LIMIT_ANGLE)
 var is_sprinting: bool = false
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -88,4 +91,6 @@ func handle_sprint(input_direction: Vector2):
 		is_sprinting = false
 		
 func is_moving_forward(input_direction: Vector2):
-	return input_direction.y < 0
+	var angle = input_direction.angle()
+	return ((angle <= SPRINT_LIMIT_ANGLE_LEFT)
+			and (angle >= SPRINT_LIMIT_ANGLE_RIGHT))

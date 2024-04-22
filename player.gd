@@ -42,8 +42,8 @@ func get_speed():
 func move(delta):
 	
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	handle_sprint(input_dir)
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	handle_sprint(direction)
 	if direction:
 		velocity.x = direction.x * get_speed()
 		velocity.z = direction.z * get_speed()
@@ -77,14 +77,15 @@ func handle_jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		
-func handle_sprint(direction):
-	if (Input.is_action_just_pressed("keyboard_sprint") or Input.is_action_just_pressed("controller_sprint")) and is_on_floor() and is_moving_forward(direction):
+func handle_sprint(input_direction: Vector2):
+	if ((Input.is_action_just_pressed("keyboard_sprint") or Input.is_action_just_pressed("controller_sprint")) 
+			and is_on_floor() 
+			and is_moving_forward(input_direction)):
 		is_sprinting = true
 	if Input.is_action_just_released("keyboard_sprint"):
 		is_sprinting = false
-	if !is_moving_forward(direction):
+	if !is_moving_forward(input_direction):
 		is_sprinting = false
-func is_moving_forward(direction):
-	return direction.z < 0
-
-
+		
+func is_moving_forward(input_direction: Vector2):
+	return input_direction.y < 0

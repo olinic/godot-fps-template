@@ -8,9 +8,9 @@ const JUMP_VELOCITY: float = 4.5
 const CONTROLLER_LOOK_MULTIPLIER: int = 50
 const VERTICAL_LOOK_LOWER_LIMIT: float = -89
 const VERTICAL_LOOK_UPPER_LIMIT: float = 89
-const SPRINT_LIMIT_ANGLE: float = 0.2 # radians
-const SPRINT_LIMIT_ANGLE_LEFT: float = -PI * SPRINT_LIMIT_ANGLE
-const SPRINT_LIMIT_ANGLE_RIGHT: float = -PI * (1 - SPRINT_LIMIT_ANGLE)
+const SPRINT_LIMIT_ANGLE_MULTIPLIER: float = 0.22 # 0.25 = 45 degrees
+const SPRINT_LIMIT_ANGLE_LEFT: float = -PI * SPRINT_LIMIT_ANGLE_MULTIPLIER
+const SPRINT_LIMIT_ANGLE_RIGHT: float = -PI * (1 - SPRINT_LIMIT_ANGLE_MULTIPLIER)
 var is_sprinting: bool = false
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")

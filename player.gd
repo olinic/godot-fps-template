@@ -35,15 +35,7 @@ func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-func get_speed():
-	if is_sprinting:
-		return SPRINT_SPEED
-	else:
-		return SPEED
-	
-
 func move(delta):
-	
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	handle_sprint(input_dir)
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -54,7 +46,27 @@ func move(delta):
 		velocity.x = move_toward(velocity.x, 0, get_speed())
 		velocity.z = move_toward(velocity.z, 0, get_speed())
 	move_and_slide()
-	
+
+func handle_sprint(input_direction: Vector2):
+	if ((Input.is_action_just_pressed("keyboard_sprint") or Input.is_action_just_pressed("controller_sprint")) 
+			and is_on_floor() 
+			and is_moving_forward(input_direction)):
+		is_sprinting = true
+	if Input.is_action_just_released("keyboard_sprint"):
+		is_sprinting = false
+	if !is_moving_forward(input_direction):
+		is_sprinting = false
+
+func is_moving_forward(input_direction: Vector2):
+	var angle = input_direction.angle()
+	return ((angle <= SPRINT_LIMIT_ANGLE_LEFT)
+			and (angle >= SPRINT_LIMIT_ANGLE_RIGHT))
+
+func get_speed():
+	if is_sprinting:
+		return SPRINT_SPEED
+	else:
+		return SPEED
 
 func aim(delta):
 	if mouseDelta != Vector2.ZERO:
@@ -79,18 +91,3 @@ func adjust_camera_look(delta, look_rotation: Vector2):
 func handle_jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-		
-func handle_sprint(input_direction: Vector2):
-	if ((Input.is_action_just_pressed("keyboard_sprint") or Input.is_action_just_pressed("controller_sprint")) 
-			and is_on_floor() 
-			and is_moving_forward(input_direction)):
-		is_sprinting = true
-	if Input.is_action_just_released("keyboard_sprint"):
-		is_sprinting = false
-	if !is_moving_forward(input_direction):
-		is_sprinting = false
-		
-func is_moving_forward(input_direction: Vector2):
-	var angle = input_direction.angle()
-	return ((angle <= SPRINT_LIMIT_ANGLE_LEFT)
-			and (angle >= SPRINT_LIMIT_ANGLE_RIGHT))

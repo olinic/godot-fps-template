@@ -3,8 +3,6 @@ extends CharacterBody3D
 const SPRINT_SPEED: float = 10.0
 const SPEED: float = 5.0
 const JUMP_VELOCITY: float = 4.5
-@export var HORIZONTAL_LOOK_SENSITIVITY: float
-@export var VERTICAL_LOOK_SENSITIVITY: float
 const CONTROLLER_LOOK_MULTIPLIER: float = 0.08
 const VERTICAL_LOOK_LOWER_LIMIT: float = -90
 const VERTICAL_LOOK_UPPER_LIMIT: float = 90

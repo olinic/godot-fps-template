@@ -26,16 +26,16 @@ func _input(event):
 		mouse_motion = -event.relative * 0.001
 
 func _physics_process(delta):
-	aim(delta)
+	aim()
 	apply_gravity(delta)
-	move(delta)
+	move()
 	handle_jump()
 
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-func move(delta):
+func move():
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	handle_sprint(input_dir)
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -68,21 +68,21 @@ func get_speed():
 	else:
 		return SPEED
 
-func aim(delta):
+func aim():
 	if mouse_motion != Vector2.ZERO:
-		mouse_look(delta)
+		mouse_look()
 	else:
-		controller_look(delta)
+		controller_look()
 	
-func mouse_look(delta):
-	adjust_camera_look(delta, mouse_motion)
+func mouse_look():
+	adjust_camera_look(mouse_motion)
 	mouse_motion = Vector2()
 
-func controller_look(delta):
+func controller_look():
 	var aim_dir = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
-	adjust_camera_look(delta, -aim_dir * CONTROLLER_LOOK_MULTIPLIER)
+	adjust_camera_look(-aim_dir * CONTROLLER_LOOK_MULTIPLIER)
 
-func adjust_camera_look(delta, look_rotation: Vector2):
+func adjust_camera_look(look_rotation: Vector2):
 	rotate_y(look_rotation.x)
 	camera_controller.rotate_x(look_rotation.y)
 	camera_controller.rotation_degrees.x = clampf(

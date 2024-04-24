@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://8by78r4lfkdn"]
+[gd_scene load_steps=5 format=3 uid="uid://8by78r4lfkdn"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_sxc4l"]
+[ext_resource type="Script" path="res://Player/player.gd" id="1_sxc4l"]
+[ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_s6ifw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uggkb"]
 
@@ -20,7 +21,8 @@ mesh = SubResource("CapsuleMesh_qf1at")
 [node name="CameraController" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraController"]
+[node name="SmoothCamera" type="Camera3D" parent="CameraController"]
+script = ExtResource("2_s6ifw")
 
-[node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/Camera3D"]
+[node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/SmoothCamera"]
 update_mode = 1

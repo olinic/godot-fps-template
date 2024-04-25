@@ -3,7 +3,7 @@ extends CharacterBody3D
 const SPRINT_SPEED: float = 600.0
 const SPEED: float = 300.0
 const JUMP_VELOCITY: float = 4.5
-const CONTROLLER_LOOK_MULTIPLIER: float = 0.08
+const CONTROLLER_LOOK_MULTIPLIER: float = 7
 const VERTICAL_LOOK_LOWER_LIMIT: float = -90
 const VERTICAL_LOOK_UPPER_LIMIT: float = 90
 const SPRINT_LIMIT_ANGLE_MULTIPLIER: float = 0.22 # 0.25 = 45 degrees
@@ -22,10 +22,10 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		mouse_motion = -event.relative * 0.001
+		mouse_motion = -event.relative * 0.06
 
 func _physics_process(delta):
-	aim()
+	aim(delta)
 	apply_gravity(delta)
 	move(delta)
 	handle_jump()
@@ -65,23 +65,23 @@ func is_moving_forward(input_direction: Vector2):
 func get_speed(delta):
 	return (SPRINT_SPEED if is_sprinting else SPEED) * delta
 
-func aim():
+func aim(delta):
 	if mouse_motion != Vector2.ZERO:
-		mouse_look()
+		mouse_look(delta)
 	else:
-		controller_look()
+		controller_look(delta)
 	
-func mouse_look():
-	adjust_camera_look(mouse_motion)
+func mouse_look(delta):
+	adjust_camera_look(delta, mouse_motion)
 	mouse_motion = Vector2.ZERO
 
-func controller_look():
+func controller_look(delta):
 	var aim_dir = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
-	adjust_camera_look(-aim_dir * CONTROLLER_LOOK_MULTIPLIER)
+	adjust_camera_look(delta, -aim_dir * CONTROLLER_LOOK_MULTIPLIER)
 
-func adjust_camera_look(look_rotation: Vector2):
-	rotate_y(look_rotation.x)
-	camera_controller.rotate_x(look_rotation.y)
+func adjust_camera_look(delta, look_rotation: Vector2):
+	rotate_y(look_rotation.x * delta)
+	camera_controller.rotate_x(look_rotation.y * delta)
 	camera_controller.rotation_degrees.x = clampf(
 		camera_controller.rotation_degrees.x, 
 		VERTICAL_LOOK_LOWER_LIMIT, 

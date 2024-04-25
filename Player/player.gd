@@ -14,7 +14,8 @@ var is_sprinting: bool = false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera_controller = $CameraController
 
-var mouse_motion: Vector2 = Vector2()
+
+var mouse_motion: Vector2 = Vector2.ZERO
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -74,7 +75,7 @@ func aim():
 	
 func mouse_look():
 	adjust_camera_look(mouse_motion)
-	mouse_motion = Vector2()
+	mouse_motion = Vector2.ZERO
 
 func controller_look():
 	var aim_dir = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")

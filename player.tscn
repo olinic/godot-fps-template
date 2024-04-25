@@ -20,6 +20,7 @@ mesh = SubResource("CapsuleMesh_qf1at")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="SmoothCamera" type="Camera3D" parent="CameraController"]
+top_level = true
 script = ExtResource("2_s6ifw")
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/SmoothCamera"]

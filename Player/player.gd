@@ -17,12 +17,11 @@ var horizontal_look_sensitivity: float
 var vertical_look_sensitivity: float
 
 var is_sprinting: bool = false
+var mouse_motion: Vector2 = Vector2.ZERO
+var input_dir: Vector2 = Vector2.ZERO
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera_controller = $CameraController
-
-
-var mouse_motion: Vector2 = Vector2.ZERO
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -48,7 +47,8 @@ func apply_gravity(delta):
 		velocity.y -= gravity * delta
 
 func move(delta):
-	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	if is_on_floor():
+		input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	handle_sprint(input_dir)
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var speed = get_speed(delta)

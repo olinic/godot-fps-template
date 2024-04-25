@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
-const SPRINT_SPEED: float = 10.0
-const SPEED: float = 5.0
+const SPRINT_SPEED: float = 600.0
+const SPEED: float = 300.0
 const JUMP_VELOCITY: float = 4.5
 const CONTROLLER_LOOK_MULTIPLIER: float = 0.08
 const VERTICAL_LOOK_LOWER_LIMIT: float = -90
@@ -27,23 +27,24 @@ func _input(event):
 func _physics_process(delta):
 	aim()
 	apply_gravity(delta)
-	move()
+	move(delta)
 	handle_jump()
 
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-func move():
+func move(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	handle_sprint(input_dir)
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var speed = get_speed(delta)
 	if direction:
-		velocity.x = direction.x * get_speed()
-		velocity.z = direction.z * get_speed()
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, get_speed())
-		velocity.z = move_toward(velocity.z, 0, get_speed())
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
 	move_and_slide()
 
 func handle_sprint(input_direction: Vector2):
@@ -61,11 +62,8 @@ func is_moving_forward(input_direction: Vector2):
 	return ((angle <= SPRINT_LIMIT_ANGLE_LEFT)
 			and (angle >= SPRINT_LIMIT_ANGLE_RIGHT))
 
-func get_speed():
-	if is_sprinting:
-		return SPRINT_SPEED
-	else:
-		return SPEED
+func get_speed(delta):
+	return (SPRINT_SPEED if is_sprinting else SPEED) * delta
 
 func aim():
 	if mouse_motion != Vector2.ZERO:

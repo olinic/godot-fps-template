@@ -25,7 +25,7 @@ func _input(event):
 		mouse_motion = -event.relative * 0.06
 
 func _physics_process(delta):
-	aim(delta)
+	look_around(delta)
 	apply_gravity(delta)
 	move(delta)
 	handle_jump()
@@ -65,7 +65,7 @@ func is_moving_forward(input_direction: Vector2):
 func get_speed(delta):
 	return (SPRINT_SPEED if is_sprinting else SPEED) * delta
 
-func aim(delta):
+func look_around(delta):
 	if mouse_motion != Vector2.ZERO:
 		mouse_look(delta)
 	else:

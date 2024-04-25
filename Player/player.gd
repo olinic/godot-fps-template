@@ -9,6 +9,13 @@ const VERTICAL_LOOK_UPPER_LIMIT: float = 90
 const SPRINT_LIMIT_ANGLE_MULTIPLIER: float = 0.22 # 0.25 = 45 degrees
 const SPRINT_LIMIT_ANGLE_LEFT: float = -PI * SPRINT_LIMIT_ANGLE_MULTIPLIER
 const SPRINT_LIMIT_ANGLE_RIGHT: float = -PI * (1 - SPRINT_LIMIT_ANGLE_MULTIPLIER)
+
+@export var horizontal_look_setting: int = 6
+@export var vertical_look_setting: int = 6
+
+var horizontal_look_sensitivity: float
+var vertical_look_sensitivity: float
+
 var is_sprinting: bool = false
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -19,6 +26,12 @@ var mouse_motion: Vector2 = Vector2.ZERO
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	horizontal_look_sensitivity = setting_to_senstivity(horizontal_look_setting)
+	vertical_look_sensitivity = setting_to_senstivity(vertical_look_setting)
+
+func setting_to_senstivity(setting: int) -> float:
+	# 6 is regular speed. Adjust by 10% higher or lower based on setting.
+	return 0.4 + (0.1 * setting)
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -80,8 +93,8 @@ func controller_look(delta):
 	adjust_camera_look(delta, -aim_dir * CONTROLLER_LOOK_MULTIPLIER)
 
 func adjust_camera_look(delta, look_rotation: Vector2):
-	rotate_y(look_rotation.x * delta)
-	camera_controller.rotate_x(look_rotation.y * delta)
+	rotate_y(look_rotation.x * delta * horizontal_look_sensitivity)
+	camera_controller.rotate_x(look_rotation.y * delta * vertical_look_sensitivity)
 	camera_controller.rotation_degrees.x = clampf(
 		camera_controller.rotation_degrees.x, 
 		VERTICAL_LOOK_LOWER_LIMIT, 

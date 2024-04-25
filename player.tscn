@@ -9,6 +9,8 @@
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_sxc4l")
+horizontal_look_setting = 10
+vertical_look_setting = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_uggkb")

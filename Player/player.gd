@@ -18,7 +18,7 @@ var vertical_look_sensitivity: float
 
 var is_sprinting: bool = false
 var mouse_motion: Vector2 = Vector2.ZERO
-var input_dir: Vector2 = Vector2.ZERO
+var aerial_dir: Vector3 = Vector3.ZERO
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera_controller = $CameraController
@@ -40,17 +40,19 @@ func _physics_process(delta):
 	look_around(delta)
 	apply_gravity(delta)
 	move(delta)
-	handle_jump()
 
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
 func move(delta):
-	if is_on_floor():
-		input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	handle_sprint(input_dir)
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction: Vector3
+	if is_on_floor():
+		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	else:
+		direction = aerial_dir
 	var speed = get_speed(delta)
 	if direction:
 		velocity.x = direction.x * speed
@@ -59,6 +61,7 @@ func move(delta):
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 	move_and_slide()
+	handle_jump(direction)
 
 func handle_sprint(input_direction: Vector2):
 	if ((Input.is_action_just_pressed("keyboard_sprint") or Input.is_action_just_pressed("controller_sprint")) 
@@ -101,6 +104,7 @@ func adjust_camera_look(delta, look_rotation: Vector2):
 		VERTICAL_LOOK_UPPER_LIMIT
 	)
 
-func handle_jump():
+func handle_jump(direction):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		aerial_dir = direction

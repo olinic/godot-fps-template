@@ -86,3 +86,13 @@ func set_speed(speed, delta):
 	
 func get_speed():
 	return speed
+	
+func move(direction: Vector3, speed: float):
+	if direction:
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
+	
+	move_and_slide()

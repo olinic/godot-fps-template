@@ -22,18 +22,9 @@ func move(delta):
 	player.set_speed(SPEED, delta)
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	handle_sprint(input_dir)
-	var direction: Vector3
-	direction = (player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction = (player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var speed = player.get_speed()
-	
-	if direction:
-		player.velocity.x = direction.x * speed
-		player.velocity.z = direction.z * speed
-	else:
-		player.velocity.x = move_toward(player.velocity.x, 0, speed)
-		player.velocity.z = move_toward(player.velocity.z, 0, speed)
-	
-	player.move_and_slide()
+	player.move(direction, speed)
 	handle_jump(direction)
 
 func handle_sprint(input_direction: Vector2):

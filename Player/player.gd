@@ -1,3 +1,5 @@
+class_name Player
+
 extends CharacterBody3D
 
 const SPRINT_SPEED: float = 600.0
@@ -13,6 +15,8 @@ const SPRINT_LIMIT_ANGLE_RIGHT: float = -PI * (1 - SPRINT_LIMIT_ANGLE_MULTIPLIER
 @export var horizontal_look_setting: int = 6
 @export var vertical_look_setting: int = 6
 
+var state 
+
 var horizontal_look_sensitivity: float
 var vertical_look_sensitivity: float
 
@@ -22,6 +26,9 @@ var aerial_dir: Vector3 = Vector3.ZERO
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera_controller = $CameraController
+
+func change_state(state):
+	self.state = state
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -55,9 +62,11 @@ func move(delta):
 		direction = aerial_dir
 	var speed = get_speed(delta)
 	if direction:
+		change_state(Walk.new(self))
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 	else:
+		change_state(Idle.new(self))
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 	move_and_slide()

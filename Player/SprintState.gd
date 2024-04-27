@@ -1,13 +1,8 @@
 class_name Sprint
 
-const SPRINT_LIMIT_ANGLE_MULTIPLIER: float = 0.22 # 0.25 = 45 degrees
-const SPRINT_LIMIT_ANGLE_LEFT: float = -PI * SPRINT_LIMIT_ANGLE_MULTIPLIER
-const SPRINT_LIMIT_ANGLE_RIGHT: float = -PI * (1 - SPRINT_LIMIT_ANGLE_MULTIPLIER)
 const SPRINT_SPEED: float = 600.0
-const JUMP_VELOCITY: float = 4.5
 
-var player
-var aerial_dir: Vector3 = Vector3.ZERO
+var player: Player
 
 func _init(player: Player) -> void:
 	self.player = player

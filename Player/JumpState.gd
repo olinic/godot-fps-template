@@ -3,8 +3,7 @@ class_name Jump
 const SPEED: float = 300.0
 const JUMP_VELOCITY: float = 4.5
 
-var player
-
+var player: Player
 var aerial_dir: Vector3 = Vector3.ZERO
 var speed: float
 
@@ -17,12 +16,7 @@ func _init(player: Player, aerial_dir: Vector3, speed: float) -> void:
 	print("Entered Jump State.")
 
 func process(delta):
-	var direction = aerial_dir
-	
-	player.move(direction, speed, delta)
+	player.move(aerial_dir, speed, delta)
 	
 	if player.is_on_floor():
 		player.change_state(Walk.new(player))
-
-	
-	

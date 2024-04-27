@@ -16,16 +16,14 @@ func _init(player: Player) -> void:
 func process(delta):
 	player.set_speed(SPRINT_SPEED, delta)
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	
 	if (Input.is_action_just_released("keyboard_sprint") 
 			or !player.is_moving_forward(input_dir)):
 		player.change_state(Walk.new(player))
 		
-	var direction: Vector3
-	if player.is_on_floor():
-		direction = (player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	else:
-		direction = aerial_dir
+	var direction = (player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var speed = player.get_speed()
+	
 	if direction:
 		
 		player.velocity.x = direction.x * speed
@@ -33,12 +31,12 @@ func process(delta):
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, speed)
 		player.velocity.z = move_toward(player.velocity.z, 0, speed)
+	
 	player.move_and_slide()
 	handle_jump(direction)
 	
 func handle_jump(direction):
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
-		player.velocity.y = JUMP_VELOCITY
-		aerial_dir = direction
+		player.change_state(Jump.new(player, direction))
 	
 

@@ -16,8 +16,8 @@ func process(delta):
 		player.change_state(Walk.new(player))
 		
 	var direction = (player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	player.move(direction, SPRINT_SPEED, delta)
 	handle_jump(direction)
+	player.move(direction, SPRINT_SPEED, delta)
 	
 func handle_jump(direction):
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():

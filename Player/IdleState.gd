@@ -5,5 +5,5 @@ func _init(player: Player) -> void:
 	self.player = player
 	print("Entered Idle State.")
 
-func process():
+func process(delta):
 	pass

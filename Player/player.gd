@@ -80,17 +80,12 @@ func is_moving_forward(input_direction: Vector2):
 	var angle = input_direction.angle()
 	return ((angle <= SPRINT_LIMIT_ANGLE_LEFT)
 			and (angle >= SPRINT_LIMIT_ANGLE_RIGHT))
-
-func set_speed(speed, delta):
-	self.speed = speed * delta
 	
-func get_speed():
-	return speed
-	
-func move(direction: Vector3, speed: float):
+func move(direction: Vector3, speed: float, delta: float):
+	speed *= delta
 	if direction:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
+		velocity.x = direction.x * speed 
+		velocity.z = direction.z * speed 
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)

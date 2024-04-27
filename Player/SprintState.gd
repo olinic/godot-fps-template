@@ -14,6 +14,7 @@ func _init(player: Player) -> void:
 	print("Entered Sprint State.")
 
 func process(delta):
+	player.set_speed(SPRINT_SPEED, delta)
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	if (Input.is_action_just_released("keyboard_sprint") 
 			or !player.is_moving_forward(input_dir)):
@@ -24,7 +25,7 @@ func process(delta):
 		direction = (player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	else:
 		direction = aerial_dir
-	var speed = get_speed(delta)
+	var speed = player.get_speed()
 	if direction:
 		
 		player.velocity.x = direction.x * speed
@@ -35,9 +36,6 @@ func process(delta):
 	player.move_and_slide()
 	handle_jump(direction)
 	
-func get_speed(delta):
-	return SPRINT_SPEED * delta
-
 func handle_jump(direction):
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
 		player.velocity.y = JUMP_VELOCITY

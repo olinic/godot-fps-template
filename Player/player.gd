@@ -16,7 +16,7 @@ const SPRINT_LIMIT_ANGLE_RIGHT: float = -PI * (1 - SPRINT_LIMIT_ANGLE_MULTIPLIER
 @export var vertical_look_setting: int = 6
 
 var state 
-
+var speed = SPEED * .01666
 var horizontal_look_sensitivity: float
 var vertical_look_sensitivity: float
 
@@ -81,3 +81,8 @@ func is_moving_forward(input_direction: Vector2):
 	return ((angle <= SPRINT_LIMIT_ANGLE_LEFT)
 			and (angle >= SPRINT_LIMIT_ANGLE_RIGHT))
 
+func set_speed(speed, delta):
+	self.speed = speed * delta
+	
+func get_speed():
+	return speed

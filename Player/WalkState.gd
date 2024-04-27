@@ -40,13 +40,9 @@ func move(delta):
 func handle_sprint(input_direction: Vector2):
 	if ((Input.is_action_just_pressed("keyboard_sprint") or Input.is_action_just_pressed("controller_sprint")) 
 			and player.is_on_floor() 
-			and is_moving_forward(input_direction)):
+			and player.is_moving_forward(input_direction)):
 		player.change_state(Sprint.new(player))
 
-func is_moving_forward(input_direction: Vector2):
-	var angle = input_direction.angle()
-	return ((angle <= SPRINT_LIMIT_ANGLE_LEFT)
-			and (angle >= SPRINT_LIMIT_ANGLE_RIGHT))
 
 func get_speed(delta):
 	return SPEED * delta

@@ -76,3 +76,8 @@ func adjust_camera_look(delta, look_rotation: Vector2):
 		VERTICAL_LOOK_LOWER_LIMIT, 
 		VERTICAL_LOOK_UPPER_LIMIT
 	)
+func is_moving_forward(input_direction: Vector2):
+	var angle = input_direction.angle()
+	return ((angle <= SPRINT_LIMIT_ANGLE_LEFT)
+			and (angle >= SPRINT_LIMIT_ANGLE_RIGHT))
+

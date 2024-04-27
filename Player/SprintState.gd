@@ -16,7 +16,7 @@ func _init(player: Player) -> void:
 func process(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	if (Input.is_action_just_released("keyboard_sprint") 
-			or !is_moving_forward(input_dir)):
+			or !player.is_moving_forward(input_dir)):
 		player.change_state(Walk.new(player))
 		
 	var direction: Vector3
@@ -43,8 +43,4 @@ func handle_jump(direction):
 		player.velocity.y = JUMP_VELOCITY
 		aerial_dir = direction
 	
-func is_moving_forward(input_direction: Vector2):
-	var angle = input_direction.angle()
-	return ((angle <= SPRINT_LIMIT_ANGLE_LEFT)
-			and (angle >= SPRINT_LIMIT_ANGLE_RIGHT))
-	
+

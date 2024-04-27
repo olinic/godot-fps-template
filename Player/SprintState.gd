@@ -21,6 +21,6 @@ func process(delta):
 	
 func handle_jump(direction):
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
-		player.change_state(Jump.new(player, direction, SPRINT_SPEED))
+		player.change_state(Jump.new(player, direction, SPRINT_SPEED, self))
 	
 

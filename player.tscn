@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_sxc4l"]
 [ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_s6ifw"]
-[ext_resource type="PackedScene" uid="uid://dhofqgqocs304" path="res://Weapons/SMG.glb" id="3_gtvq7"]
+[ext_resource type="PackedScene" uid="uid://b24ku1p85yyw8" path="res://Weapons/SMG.tscn" id="3_gbn1o"]
 [ext_resource type="Script" path="res://Player/Crosshair.gd" id="3_j7ya5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uggkb"]
@@ -30,8 +30,7 @@ script = ExtResource("2_s6ifw")
 [node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/SmoothCamera"]
 update_mode = 1
 
-[node name="SMG" parent="CameraController/SmoothCamera" instance=ExtResource("3_gtvq7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.35, -1)
+[node name="SMG" parent="CameraController/SmoothCamera" instance=ExtResource("3_gbn1o")]
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15

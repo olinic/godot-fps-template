@@ -5,4 +5,5 @@
 [node name="HitscanWeapon" type="Node3D"]
 script = ExtResource("1_hhg4v")
 
-[node name="Cooldown Timer" type="Timer" parent="."]
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true

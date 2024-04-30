@@ -4,12 +4,6 @@
 [ext_resource type="Script" path="res://main.gd" id="1_gnb0y"]
 [ext_resource type="PackedScene" uid="uid://cry7pdahodwk1" path="res://Demo/Demo_Floor.tscn" id="3_rk7a3"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_m05vp"]
-size = Vector3(2, 2, 2)
-
-[sub_resource type="BoxMesh" id="BoxMesh_iq0rx"]
-size = Vector3(2, 2, 2)
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ewpww"]
 
 [sub_resource type="Sky" id="Sky_cdg7h"]
@@ -19,18 +13,14 @@ sky_material = SubResource("ProceduralSkyMaterial_ewpww")
 background_mode = 2
 sky = SubResource("Sky_cdg7h")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_m05vp"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iq0rx"]
+size = Vector3(2, 2, 2)
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_gnb0y")
-
-[node name="Box" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-shape = SubResource("BoxShape3D_m05vp")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Box"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-mesh = SubResource("BoxMesh_iq0rx")
 
 [node name="Player" parent="." instance=ExtResource("1_dpcvc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02841, 1.97801, 4.89241)
@@ -43,3 +33,70 @@ environment = SubResource("Environment_mll50")
 
 [node name="Demo_Floor" parent="." instance=ExtResource("3_rk7a3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Obsticles" type="Node3D" parent="."]
+
+[node name="Box" type="StaticBody3D" parent="Obsticles"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obsticles/Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_m05vp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obsticles/Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_iq0rx")
+
+[node name="Box2" type="StaticBody3D" parent="Obsticles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.8977, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obsticles/Box2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_m05vp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obsticles/Box2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_iq0rx")
+
+[node name="Box3" type="StaticBody3D" parent="Obsticles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.8977, 0, 31.0008)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obsticles/Box3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_m05vp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obsticles/Box3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_iq0rx")
+
+[node name="Box4" type="StaticBody3D" parent="Obsticles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.7771, 0, 31.0008)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obsticles/Box4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_m05vp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obsticles/Box4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_iq0rx")
+
+[node name="Box5" type="StaticBody3D" parent="Obsticles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.7771, 0, -46.022)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obsticles/Box5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_m05vp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obsticles/Box5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_iq0rx")
+
+[node name="Box6" type="StaticBody3D" parent="Obsticles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.7843, 0, -46.022)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obsticles/Box6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_m05vp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obsticles/Box6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_iq0rx")

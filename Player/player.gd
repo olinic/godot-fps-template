@@ -15,7 +15,7 @@ const SPRINT_LIMIT_ANGLE_RIGHT: float = -PI * (1 - SPRINT_LIMIT_ANGLE_MULTIPLIER
 @export var horizontal_look_setting: int = 6
 @export var vertical_look_setting: int = 6
 
-var state 
+var state = Walk.new(self)
 var speed = SPEED * .01666
 var horizontal_look_sensitivity: float
 var vertical_look_sensitivity: float
@@ -29,12 +29,13 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func change_state(state):
 	self.state = state
+	
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	horizontal_look_sensitivity = setting_to_senstivity(horizontal_look_setting)
 	vertical_look_sensitivity = setting_to_senstivity(vertical_look_setting)
-	change_state(Walk.new(self))
+	
 
 func setting_to_senstivity(setting: int) -> float:
 	# 6 is regular speed. Adjust by 10% higher or lower based on setting.
@@ -48,6 +49,7 @@ func _physics_process(delta):
 	look_around(delta)
 	apply_gravity(delta)
 	state.process(delta)
+	
 	
 
 func apply_gravity(delta):

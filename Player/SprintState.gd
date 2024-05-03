@@ -1,4 +1,5 @@
 class_name Sprint
+extends RefCounted
 
 const SPRINT_SPEED: float = 600.0
 
@@ -21,6 +22,6 @@ func process(delta):
 	
 func handle_jump(direction):
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
-		player.change_state(Jump.new(player, direction, SPRINT_SPEED, self))
+		player.change_state(Jump.new(player, direction, SPRINT_SPEED, Sprint.new(player)))
 	
 

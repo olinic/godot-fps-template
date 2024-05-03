@@ -1,4 +1,5 @@
 class_name Walk
+extends RefCounted
 
 const SPEED: float = 300.0
 
@@ -23,4 +24,5 @@ func handle_sprint(input_direction: Vector2):
 
 func handle_jump(direction: Vector3):
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
-		player.change_state(Jump.new(player, direction, SPEED, self))
+		player.change_state(Jump.new(player, direction, SPEED, Walk.new(player)))
+		

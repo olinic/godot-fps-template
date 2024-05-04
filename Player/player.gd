@@ -15,7 +15,7 @@ const SPRINT_LIMIT_ANGLE_RIGHT: float = -PI * (1 - SPRINT_LIMIT_ANGLE_MULTIPLIER
 @export var horizontal_look_setting: int = 6
 @export var vertical_look_setting: int = 6
 
-var state = Walk.new(self)
+var move_state = Walk.new(self)
 var speed = SPEED * .01666
 var horizontal_look_sensitivity: float
 var vertical_look_sensitivity: float
@@ -27,11 +27,11 @@ var aerial_dir: Vector3 = Vector3.ZERO
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera_controller = $CameraController
 
-func change_state(state):
-	self.state = state
+func change_move_state(state):
+	self.move_state = state
 	
-func get_state():
-	return self.state
+func get_move_state():
+	return self.move_state
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -50,10 +50,8 @@ func _input(event):
 func _physics_process(delta):
 	look_around(delta)
 	apply_gravity(delta)
-	state.process(delta)
+	move_state.process(delta)
 	
-	
-
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta

@@ -20,9 +20,9 @@ func handle_sprint(input_direction: Vector2):
 	if ((Input.is_action_just_pressed("keyboard_sprint") or Input.is_action_just_pressed("controller_sprint")) 
 			and player.is_on_floor() 
 			and player.is_moving_forward(input_direction)):
-		player.change_state(Sprint.new(player))
+		player.change_move_state(Sprint.new(player))
 
 func handle_jump(direction: Vector3):
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
-		player.change_state(Jump.new(player, direction, SPEED, Walk.new(player)))
+		player.change_move_state(Jump.new(player, direction, SPEED, Walk.new(player)))
 		

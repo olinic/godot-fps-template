@@ -22,4 +22,4 @@ func process(delta):
 	player.move(aerial_dir, speed, delta)
 	
 	if player.is_on_floor():
-		player.change_state(prev_state)
+		player.change_move_state(prev_state)

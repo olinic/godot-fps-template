@@ -32,17 +32,17 @@ func test_backward_is_moving_forward_false(backward: Vector2,
 			[Vector2.from_angle(PI * 3 / 4)]]) -> void:
 	assert_bool(player.is_moving_forward(backward)).is_false()
 	
-func test_init_get_state():
-	assert_object(player.get_state()).is_not_null().is_instanceof(Walk)
+func test_init_get_move_state():
+	assert_object(player.get_move_state()).is_not_null().is_instanceof(Walk)
 		
 		
 func test_change_state():
-	player.change_state(Sprint.new(player))
-	assert_object(player.get_state()).is_not_null().is_instanceof(Sprint)
+	player.change_move_state(Sprint.new(player))
+	assert_object(player.get_move_state()).is_not_null().is_instanceof(Sprint)
 	
 	
 func test_process():
 	var spy = spy(Sprint.new(player))
-	player.change_state(spy)
+	player.change_move_state(spy)
 	player._physics_process(1.0)
 	verify(spy, 1).process(1.0)

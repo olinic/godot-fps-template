@@ -30,6 +30,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func change_state(state):
 	self.state = state
 	
+func get_state():
+	return self.state
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

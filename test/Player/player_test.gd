@@ -14,7 +14,6 @@ func before_test():
 	player = auto_free(Player.new())
 	player.camera_controller = camera_controller
 	
-	
 func test_sideways_is_moving_forward_false(sideways: Vector2, test_parameters := [[Vector2.LEFT], [Vector2.RIGHT]]) -> void:
 	assert_bool(player.is_moving_forward(sideways)).is_false()
 
@@ -42,7 +41,7 @@ func test_change_state():
 	
 	
 func test_process():
-	var spy = spy(Sprint.new(player))
-	player.change_move_state(spy)
+	var player_spy = spy(Sprint.new(player))
+	player.change_move_state(player_spy)
 	player._physics_process(1.0)
-	verify(spy, 1).process(1.0)
+	verify(player_spy, 1).process(1.0)

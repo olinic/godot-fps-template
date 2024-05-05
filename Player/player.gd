@@ -15,69 +15,66 @@ const SPRINT_LIMIT_ANGLE_RIGHT: float = -PI * (1 - SPRINT_LIMIT_ANGLE_MULTIPLIER
 @export var horizontal_look_setting: int = 6
 @export var vertical_look_setting: int = 6
 
-var move_state = Walk.new(self)
-var speed = SPEED * .01666
-var horizontal_look_sensitivity: float
-var vertical_look_sensitivity: float
+var _move_state = Walk.new(self)
+var _horizontal_look_sensitivity: float
+var _vertical_look_sensitivity: float
 
-var is_sprinting: bool = false
-var mouse_motion: Vector2 = Vector2.ZERO
-var aerial_dir: Vector3 = Vector3.ZERO
+var _mouse_motion: Vector2 = Vector2.ZERO
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var _gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera_controller = $CameraController
 
 func change_move_state(state):
-	self.move_state = state
+	self._move_state = state
 	
 func get_move_state():
-	return self.move_state
+	return self._move_state
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	horizontal_look_sensitivity = setting_to_senstivity(horizontal_look_setting)
-	vertical_look_sensitivity = setting_to_senstivity(vertical_look_setting)
-	
+	_horizontal_look_sensitivity = _setting_to_senstivity(horizontal_look_setting)
+	_vertical_look_sensitivity = _setting_to_senstivity(vertical_look_setting)
 
-func setting_to_senstivity(setting: int) -> float:
+func _setting_to_senstivity(setting: int) -> float:
 	# 6 is regular speed. Adjust by 10% higher or lower based on setting.
 	return 0.4 + (0.1 * setting)
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		mouse_motion = -event.relative * 0.06
+		_mouse_motion = -event.relative * 0.06
 
 func _physics_process(delta):
-	look_around(delta)
-	apply_gravity(delta)
-	move_state.process(delta)
+	_look_around(delta)
+	_apply_gravity(delta)
+	_move_state.process(delta)
 	
-func apply_gravity(delta):
+func _apply_gravity(delta):
 	if not is_on_floor():
-		velocity.y -= gravity * delta
+		velocity.y -= _gravity * delta
 
-func look_around(delta):
-	if mouse_motion != Vector2.ZERO:
-		mouse_look(delta)
+func _look_around(delta):
+	if _mouse_motion != Vector2.ZERO:
+		_mouse_look(delta)
 	else:
-		controller_look(delta)
+		_controller_look(delta)
 	
-func mouse_look(delta):
-	adjust_camera_look(delta, mouse_motion)
-	mouse_motion = Vector2.ZERO
+func _mouse_look(delta):
+	_adjust_camera_look(delta, _mouse_motion)
+	_mouse_motion = Vector2.ZERO
 
-func controller_look(delta):
+func _controller_look(delta):
 	var aim_dir = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
-	adjust_camera_look(delta, -aim_dir * CONTROLLER_LOOK_MULTIPLIER)
+	_adjust_camera_look(delta, -aim_dir * CONTROLLER_LOOK_MULTIPLIER)
 
-func adjust_camera_look(delta, look_rotation: Vector2):
-	rotate_y(look_rotation.x * delta * horizontal_look_sensitivity)
-	camera_controller.rotate_x(look_rotation.y * delta * vertical_look_sensitivity)
+func _adjust_camera_look(delta, look_rotation: Vector2):
+	rotate_y(look_rotation.x * delta * _horizontal_look_sensitivity)
+	camera_controller.rotate_x(look_rotation.y * delta * _vertical_look_sensitivity)
 	camera_controller.rotation_degrees.x = clampf(
 		camera_controller.rotation_degrees.x, 
 		VERTICAL_LOOK_LOWER_LIMIT, 
 		VERTICAL_LOOK_UPPER_LIMIT
 	)
+
 func is_moving_forward(input_direction: Vector2):
 	var angle = input_direction.angle()
 	return ((angle <= SPRINT_LIMIT_ANGLE_LEFT)
@@ -91,5 +88,4 @@ func move(direction: Vector3, speed: float, delta: float):
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
-	
 	move_and_slide()

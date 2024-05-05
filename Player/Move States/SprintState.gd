@@ -9,6 +9,17 @@ func _init(player: Player) -> void:
 	self._player = player
 	print("Entered Sprint State.")
 
+func get_velocity(delta: float, input_dir: Vector2) -> Vector3:
+	var direction = (_player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var velocity = Vector3.ZERO
+	if direction:
+		velocity.x = direction.x * SPRINT_SPEED * delta
+		velocity.z = direction.z * SPRINT_SPEED * delta
+	return velocity
+
+func handle_transition() -> void:
+	pass
+
 func process(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	

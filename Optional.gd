@@ -25,6 +25,6 @@ func or_else(other: Variant) -> Variant:
 func is_present() -> bool:
 	return _is_present
 
-func if_present(callback) -> void:
+func if_present(callback: Callable) -> void:
 	if _is_present:
 		callback.call(_value)

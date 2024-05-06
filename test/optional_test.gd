@@ -19,16 +19,12 @@ func test_optional_empty():
 
 func test_optional_if_present_no_value():
 	var opt = Optional.empty()
-	var callback = func(val):
-		self.success = true
-	opt.if_present(callback)
+	opt.if_present(func(val): self.success = true)
 	assert_bool(success).is_false()
 
 func test_optional_if_present():
 	var opt = Optional.of(1)
-	var callback = func(val):
-		self.success = true
-	opt.if_present(callback)
+	opt.if_present(func(val): self.success = true)
 	assert_bool(success).is_true()
 	
 func test_or_else_with_value():

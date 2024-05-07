@@ -17,6 +17,9 @@ func _init(player: Player, aerial_dir: Vector3, speed: float, prev_state) -> voi
 	player.velocity.y = JUMP_VELOCITY
 	print("Entered Jump State.")
 
+func get_initial_velocity_change() -> Vector3:
+	return Vector3(0, JUMP_VELOCITY, 0)
+
 func process(delta):
 	_player.move(_aerial_dir, _speed, delta)
 	

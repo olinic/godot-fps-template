@@ -1,5 +1,4 @@
 class_name Jump
-extends RefCounted
 
 const SPEED: float = 300.0
 const JUMP_VELOCITY: float = 4.5

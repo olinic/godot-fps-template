@@ -1,5 +1,4 @@
 class_name Optional
-extends RefCounted
 
 var _is_present: bool = false
 var _value: Variant:

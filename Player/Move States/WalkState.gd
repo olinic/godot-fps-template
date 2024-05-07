@@ -1,5 +1,4 @@
 class_name Walk
-extends RefCounted
 
 const SPEED: float = 300.0
 

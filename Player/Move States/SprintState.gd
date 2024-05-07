@@ -37,6 +37,7 @@ func get_next_state() -> Optional:
 	if Input.is_action_just_pressed("jump") or !_player_is_on_floor.call(): # TODO avoid "jumping" when falling off edge 
 		_next_state = Optional.of(
 				Jump.new(_player, _direction, SPRINT_SPEED, Sprint.new(_player, _player.is_on_floor)))
+	# TODO address the following issue: player stops keyboard sprinting mid-air, but continues sprinting when landing 
 	elif (Input.is_action_just_released("keyboard_sprint")
 			or !Sprint.is_moving_forward(_input_dir)):
 		_next_state = Optional.of(Walk.new(_player))

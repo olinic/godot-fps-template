@@ -7,6 +7,7 @@ var _player: Player
 var _player_is_on_floor: Callable
 var _next_state := Optional.empty()
 var _direction: Vector3
+var _input_dir: Vector2
 
 func _init(player: Player, player_is_on_floor: Callable) -> void:
 	self._player = player
@@ -14,6 +15,7 @@ func _init(player: Player, player_is_on_floor: Callable) -> void:
 	print("Entered Sprint State.")
 
 func get_velocity(delta: float, input_dir: Vector2) -> Vector3:
+	_input_dir = input_dir
 	_direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
 	var velocity = Vector3.ZERO
 	if _direction:
@@ -25,6 +27,9 @@ func get_next_state() -> Optional:
 	if Input.is_action_just_pressed("jump") or !_player_is_on_floor.call(): # TODO avoid "jumping" when falling off edge 
 		_next_state = Optional.of(
 				Jump.new(_player, _direction, SPRINT_SPEED, Sprint.new(_player, _player.is_on_floor)))
+	elif (Input.is_action_just_released("keyboard_sprint")
+			or !_player.is_moving_forward(_input_dir)):
+		_next_state = Optional.of(Walk.new(_player))
 	return _next_state
 
 func process(delta):

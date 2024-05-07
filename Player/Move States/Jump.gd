@@ -20,6 +20,9 @@ func _init(player: Player, aerial_dir: Vector3, speed: float, prev_state) -> voi
 func get_initial_velocity_change() -> Vector3:
 	return Vector3(0, JUMP_VELOCITY, 0)
 
+func get_velocity(_delta: float, _input_dir: Vector2) -> Vector3:
+	return _aerial_dir
+
 func process(delta):
 	_player.move(_aerial_dir, _speed, delta)
 	

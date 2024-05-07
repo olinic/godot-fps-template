@@ -8,9 +8,6 @@ const JUMP_VELOCITY: float = 4.5
 const CONTROLLER_LOOK_MULTIPLIER: float = 7
 const VERTICAL_LOOK_LOWER_LIMIT: float = -90
 const VERTICAL_LOOK_UPPER_LIMIT: float = 90
-const SPRINT_LIMIT_ANGLE_MULTIPLIER: float = 0.22 # 0.25 = 45 degrees
-const SPRINT_LIMIT_ANGLE_LEFT: float = -PI * SPRINT_LIMIT_ANGLE_MULTIPLIER
-const SPRINT_LIMIT_ANGLE_RIGHT: float = -PI * (1 - SPRINT_LIMIT_ANGLE_MULTIPLIER)
 
 @export var horizontal_look_setting: int = 6
 @export var vertical_look_setting: int = 6
@@ -74,11 +71,6 @@ func _adjust_camera_look(delta, look_rotation: Vector2):
 		VERTICAL_LOOK_LOWER_LIMIT, 
 		VERTICAL_LOOK_UPPER_LIMIT
 	)
-
-func is_forward(input_direction: Vector2):
-	var angle = input_direction.angle()
-	return ((angle <= SPRINT_LIMIT_ANGLE_LEFT)
-			and (angle >= SPRINT_LIMIT_ANGLE_RIGHT))
 	
 func move(direction: Vector3, speed: float, delta: float):
 	speed *= delta

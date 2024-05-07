@@ -11,7 +11,7 @@ func before():
 	player = auto_free(Player.new())
 
 func before_test():
-	jump_state = auto_free(Jump.new(player, curr_velocity, 1.0, Walk.new(player)))
+	jump_state = auto_free(Jump.new(player, func(): return false, curr_velocity, 1.0, Walk.new(player)))
 
 func test_get_initial_velocity_change():
 	assert_vector(jump_state.get_initial_velocity_change()).is_equal(Vector3(0, Jump.JUMP_VELOCITY, 0))
@@ -21,3 +21,9 @@ func test_get_velocity():
 
 func test_get_next_state_stay_in_jump():
 	assert_bool(jump_state.get_next_state().is_present()).is_false()
+
+func test_get_next_state_transition_on_landing():
+	var landed := func(): return true
+	jump_state = auto_free(Jump.new(player, landed, curr_velocity, 1.0, Walk.new(player)))
+	assert_bool(jump_state.get_next_state().is_present()).is_true()
+	assert_object(jump_state.get_next_state().get_value()).is_instanceof(Walk)

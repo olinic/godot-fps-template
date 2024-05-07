@@ -1,19 +1,21 @@
 class_name Optional
 extends RefCounted
 
-var _value: Variant
 var _is_present: bool = false
+var _value: Variant:
+	get:
+		return _value
+	set(value):
+		self._is_present = true
+		_value = value
 
 static func of(value: Variant) -> Optional:
 	var opt = Optional.new()
 	opt._value = value
-	opt._is_present = true
 	return opt
 
 static func empty() -> Optional:
-	var opt = Optional.new()
-	opt._is_present = false
-	return opt
+	return Optional.new()
 
 func get_value() -> Variant:
 	assert(_is_present, "Optional is empty")

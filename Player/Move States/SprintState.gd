@@ -22,6 +22,9 @@ func _init(player: Player, player_is_on_floor: Callable) -> void:
 	self._player_is_on_floor = player_is_on_floor
 	print("Entered Sprint State.")
 
+func get_initial_velocity_change() -> Vector3:
+	return Vector3.ZERO
+
 func get_velocity(delta: float, input_dir: Vector2) -> Vector3:
 	_input_dir = input_dir
 	_direction = Vector3(input_dir.x, 0, input_dir.y).normalized()

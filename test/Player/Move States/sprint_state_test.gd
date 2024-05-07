@@ -12,6 +12,9 @@ func before():
 func before_test():
 	sprint_state = auto_free(Sprint.new(player, func(): return true))
 
+func test_get_initial_velocity_change():
+	assert_vector(sprint_state.get_initial_velocity_change()).is_equal(Vector3.ZERO)
+
 func test_get_velocity():
 	assert_vector(sprint_state.get_velocity(1.0, Vector2(1, 0))).is_equal(Vector3(600, 0, 0))
 	assert_vector(sprint_state.get_velocity(1.0, Vector2(0, 1))).is_equal(Vector3(0, 0, 600))

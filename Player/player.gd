@@ -8,6 +8,7 @@ const JUMP_VELOCITY: float = 4.5
 const CONTROLLER_LOOK_MULTIPLIER: float = 7
 const VERTICAL_LOOK_LOWER_LIMIT: float = -90
 const VERTICAL_LOOK_UPPER_LIMIT: float = 90
+var fall_multiplier: float = 2.0
 
 @export var horizontal_look_setting: int = 6
 @export var vertical_look_setting: int = 6
@@ -47,7 +48,10 @@ func _physics_process(delta):
 	
 func _apply_gravity(delta):
 	if not is_on_floor():
-		velocity.y -= _gravity * delta
+		if velocity.y >= 0:
+			velocity.y -= _gravity * delta
+		else:
+			velocity.y -= _gravity * delta * fall_multiplier
 
 func _look_around(delta):
 	if _mouse_motion != Vector2.ZERO:

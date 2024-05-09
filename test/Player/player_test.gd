@@ -14,34 +14,16 @@ func before_test():
 	player = auto_free(Player.new())
 	player.camera_controller = camera_controller
 	
-func test_sideways_is_moving_forward_false(sideways: Vector2, test_parameters := [[Vector2.LEFT], [Vector2.RIGHT]]) -> void:
-	assert_bool(player.is_moving_forward(sideways)).is_false()
-
-func test_forward_is_moving_forward_true(forward: Vector2, 
-		test_parameters := [
-			[Vector2.UP], 
-			[Vector2.from_angle(-PI / 4)], 
-			[Vector2.from_angle(-PI * 3 / 4)]]) -> void:
-	assert_bool(player.is_moving_forward(forward)).is_true()
-
-func test_backward_is_moving_forward_false(backward: Vector2, 
-		test_parameters := [
-			[Vector2.DOWN], 
-			[Vector2.from_angle(PI / 4)], 
-			[Vector2.from_angle(PI * 3 / 4)]]) -> void:
-	assert_bool(player.is_moving_forward(backward)).is_false()
-	
 func test_init_get_move_state():
 	assert_object(player.get_move_state()).is_not_null().is_instanceof(Walk)
 		
-		
 func test_change_state():
-	player.change_move_state(Sprint.new(player))
+	player.change_move_state(Sprint.new(player, player.is_on_floor))
 	assert_object(player.get_move_state()).is_not_null().is_instanceof(Sprint)
 	
 	
 func test_process():
-	var player_spy = spy(Sprint.new(player))
+	var player_spy = spy(Sprint.new(player, player.is_on_floor))
 	player.change_move_state(player_spy)
 	player._physics_process(1.0)
 	verify(player_spy, 1).process(1.0)

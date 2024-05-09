@@ -12,6 +12,24 @@ func before():
 func before_test():
 	sprint_state = auto_free(Sprint.new(player, func(): return true))
 
+func test_sideways_is_moving_forward_false(sideways: Vector2, 
+		test_parameters := [[Vector2.LEFT], [Vector2.RIGHT]]) -> void:
+	assert_bool(Sprint.is_moving_forward(sideways)).is_false()
+
+func test_forward_is_moving_forward_true(forward: Vector2, 
+		test_parameters := [
+			[Vector2.UP], 
+			[Vector2.from_angle(-PI / 4)], 
+			[Vector2.from_angle(-PI * 3 / 4)]]) -> void:
+	assert_bool(Sprint.is_moving_forward(forward)).is_true()
+
+func test_backward_is_moving_forward_false(backward: Vector2, 
+		test_parameters := [
+			[Vector2.DOWN], 
+			[Vector2.from_angle(PI / 4)], 
+			[Vector2.from_angle(PI * 3 / 4)]]) -> void:
+	assert_bool(Sprint.is_moving_forward(backward)).is_false()
+
 func test_get_initial_velocity_change():
 	assert_vector(sprint_state.get_initial_velocity_change()).is_equal(Vector3.ZERO)
 

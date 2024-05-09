@@ -53,7 +53,7 @@ func test_get_next_state_to_jump_on_run_off_edge():
 	var not_on_floor = func(): return false
 	sprint_state = auto_free(Sprint.new(player, not_on_floor))
 	assert_bool(sprint_state.get_next_state().is_present()).is_true()
-	assert_object(sprint_state.get_next_state().get_value()).is_instanceof(Jump)
+	assert_object(sprint_state.get_next_state().get_value()).is_instanceof(Fall)
 
 func test_get_next_state_to_walk_on_keyboard_release():
 	Input.action_release("keyboard_sprint")

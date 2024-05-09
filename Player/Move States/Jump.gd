@@ -9,6 +9,7 @@ var _speed: float
 var _target_state: Variant
 var _next_state := Optional.empty()
 var _gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var _state_name = "Jump"
 
 @export var jump_height: float = 1.0
 
@@ -20,7 +21,7 @@ func _init(player: Player, player_is_on_floor: Callable, aerial_dir: Vector3, sp
 	self._target_state = target_state
 
 	player.velocity.y = sqrt(jump_height * 2.0 * _gravity)
-	print("Entered Jump State.")
+	print("Entered " + _state_name + " State.")
 
 func get_initial_velocity_change() -> Vector3:
 	return Vector3(0, jump_height, 0)

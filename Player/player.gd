@@ -2,9 +2,8 @@ class_name Player
 
 extends CharacterBody3D
 
-const SPRINT_SPEED: float = 600.0
-const SPEED: float = 300.0
-const JUMP_VELOCITY: float = 4.5
+
+
 const CONTROLLER_LOOK_MULTIPLIER: float = 7
 const VERTICAL_LOOK_LOWER_LIMIT: float = -90
 const VERTICAL_LOOK_UPPER_LIMIT: float = 90
@@ -13,7 +12,7 @@ var fall_multiplier: float = 2.0
 @export var horizontal_look_setting: int = 6
 @export var vertical_look_setting: int = 6
 
-var _move_state = Walk.new(self)
+var _move_state = Walk.new(self, self.is_on_floor)
 var _horizontal_look_sensitivity: float
 var _vertical_look_sensitivity: float
 

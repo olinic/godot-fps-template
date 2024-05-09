@@ -29,7 +29,7 @@ func get_initial_velocity_change() -> Vector3:
 func get_velocity(_delta: float, _input_dir: Vector2) -> Vector3:
 	return _aerial_dir
 
-func get_next_state() -> Optional:
+func get_next_state(_input_dir: Vector2) -> Optional:
 	if _player_is_on_floor.call():
 		_next_state = Optional.of(_target_state)
 	return _next_state

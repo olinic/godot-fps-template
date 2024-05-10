@@ -34,7 +34,7 @@ func get_next_state(input_dir: Vector2) -> Optional:
 		_next_state = Optional.of(
 				Fall.new(_player, _player_is_on_floor, _velocity, SPEED, Walk.new(_player, _player_is_on_floor)))
 	# TODO address the following issue: player stops keyboard sprinting mid-air, but continues sprinting when landing 
-	elif (Input.is_action_just_pressed("keyboard_sprint") or Input.is_action_just_pressed("controller_sprint") 
+	elif ((Input.is_action_just_pressed("keyboard_sprint") or Input.is_action_just_pressed("controller_sprint"))
 			and Sprint.is_moving_forward(input_dir)):
 		_next_state = Optional.of(Sprint.new(_player, _player_is_on_floor))
 	return _next_state

@@ -12,6 +12,9 @@ func before():
 func before_test():
 	sprint_state = auto_free(Sprint.new(player, func(): return true))
 
+func test_no_movement_is_moving_forward_false():
+	assert_bool(Sprint.is_moving_forward(Vector2.ZERO)).is_false()
+
 func test_sideways_is_moving_forward_false(sideways: Vector2, 
 		test_parameters := [[Vector2.LEFT], [Vector2.RIGHT]]) -> void:
 	assert_bool(Sprint.is_moving_forward(sideways)).is_false()

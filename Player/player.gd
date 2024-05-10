@@ -2,12 +2,9 @@ class_name Player
 
 extends CharacterBody3D
 
-
-
 const CONTROLLER_LOOK_MULTIPLIER: float = 7
 const VERTICAL_LOOK_LOWER_LIMIT: float = -90
 const VERTICAL_LOOK_UPPER_LIMIT: float = 90
-var fall_multiplier: float = 2.0
 
 @export var horizontal_look_setting: int = 6
 @export var vertical_look_setting: int = 6
@@ -18,11 +15,12 @@ var _vertical_look_sensitivity: float
 
 var _mouse_motion: Vector2 = Vector2.ZERO
 
-var _gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera_controller = $CameraController
 
 func change_move_state(state):
 	self._move_state = state
+	print("Changed state to ", _move_state.get_name())
+	velocity += self._move_state.get_initial_velocity_change()
 	
 func get_move_state():
 	return self._move_state
@@ -42,15 +40,12 @@ func _input(event):
 
 func _physics_process(delta):
 	_look_around(delta)
-	_apply_gravity(delta)
-	_move_state.process(delta)
-	
-func _apply_gravity(delta):
-	if not is_on_floor():
-		if velocity.y >= 0:
-			velocity.y -= _gravity * delta
-		else:
-			velocity.y -= _gravity * delta * fall_multiplier
+	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	var move_velocity = _move_state.get_velocity(delta, input_dir)
+	set_velocity(move_velocity)
+	_move_state.get_next_state(input_dir).if_present(change_move_state)
+	move_and_slide()
+
 
 func _look_around(delta):
 	if _mouse_motion != Vector2.ZERO:

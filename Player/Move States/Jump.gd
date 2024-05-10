@@ -1,6 +1,7 @@
 class_name Jump
 
 const SPEED: float = 300.0
+const FALL_MULTIPLIER: float = 2.0
 
 var _player: Player
 var _player_is_on_floor: Callable
@@ -16,26 +17,24 @@ var _state_name = "Jump"
 func _init(player: Player, player_is_on_floor: Callable, aerial_dir: Vector3, speed: float, target_state) -> void:
 	self._player = player
 	self._player_is_on_floor = player_is_on_floor
-	self._aerial_dir = aerial_dir
+	self._aerial_dir = aerial_dir + get_initial_velocity_change()
 	self._speed = speed
 	self._target_state = target_state
 
-	player.velocity.y = sqrt(jump_height * 2.0 * _gravity)
-	print("Entered " + _state_name + " State.")
+func get_name() -> String:
+	return _state_name
 
 func get_initial_velocity_change() -> Vector3:
-	return Vector3(0, jump_height, 0)
+	return Vector3(0, sqrt(jump_height * 2.0 * _gravity), 0)
 
-func get_velocity(_delta: float, _input_dir: Vector2) -> Vector3:
+func get_velocity(delta: float, _input_dir: Vector2) -> Vector3:
+	if _aerial_dir.y >= 0:
+		_aerial_dir.y -= _gravity * delta
+	else:
+		_aerial_dir.y -= _gravity * delta * FALL_MULTIPLIER
 	return _aerial_dir
 
 func get_next_state(_input_dir: Vector2) -> Optional:
 	if _player_is_on_floor.call():
 		_next_state = Optional.of(_target_state)
 	return _next_state
-
-func process(delta):
-	_player.move(_aerial_dir, _speed, delta)
-	
-	if _player.is_on_floor():
-		_player.change_move_state(_target_state)

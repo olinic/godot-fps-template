@@ -14,10 +14,14 @@ func before_test():
 	jump_state = auto_free(Jump.new(player, func(): return false, curr_velocity, 1.0, Walk.new(player, player.is_on_floor)))
 
 func test_get_initial_velocity_change():
-	assert_vector(jump_state.get_initial_velocity_change()).is_equal(Vector3(0, jump_state.jump_height, 0))
+	assert_vector(jump_state.get_initial_velocity_change())\
+			.is_equal(Vector3(0, sqrt(jump_state.jump_height * 2.0 * jump_state._gravity), 0))
 
 func test_get_velocity():
-	assert_vector(jump_state.get_velocity(1.0, Vector2(0.5, 0.5))).is_equal(curr_velocity)
+	var velocity = jump_state.get_velocity(1.0, Vector2(0.5, 0.5))
+	assert_float(velocity.x).is_equal(1)
+	assert_float(velocity.y).is_less(0) # falling
+	assert_float(velocity.z).is_equal(1)
 
 func test_get_next_state_stay_in_jump():
 	assert_bool(jump_state.get_next_state(Vector2.UP).is_present()).is_false()

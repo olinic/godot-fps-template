@@ -20,10 +20,3 @@ func test_init_get_move_state():
 func test_change_state():
 	player.change_move_state(Sprint.new(player, player.is_on_floor))
 	assert_object(player.get_move_state()).is_not_null().is_instanceof(Sprint)
-	
-	
-func test_process():
-	var player_spy = spy(Sprint.new(player, player.is_on_floor))
-	player.change_move_state(player_spy)
-	player._physics_process(1.0)
-	verify(player_spy, 1).process(1.0)

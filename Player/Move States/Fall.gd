@@ -6,5 +6,8 @@ func _init(player: Player, player_is_on_floor: Callable, aerial_dir: Vector3, sp
 	super(player, player_is_on_floor, aerial_dir, speed, target_state)
 	player.velocity.y = 0
 	
+func get_name() -> String:
+	return "Fall"
+
 func get_initial_velocity_change() -> Vector3:
 	return Vector3(0, 0, 0)

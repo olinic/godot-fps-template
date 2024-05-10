@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://b0n6qccb20hlf"]
+
+[ext_resource type="Texture2D" uid="uid://c6j6qf2xbbv74" path="res://SWAT_Guy/SWAT_Guy_Ch15_1001_Diffuse.png" id="1_lcuqu"]
+[ext_resource type="Texture2D" uid="uid://bpd1r6v57o7d3" path="res://SWAT_Guy/SWAT_Guy_Ch15_1001_Glossiness.png" id="2_gl7b6"]
+[ext_resource type="Texture2D" uid="uid://u2to5vt4kqq" path="res://SWAT_Guy/SWAT_Guy_Ch15_1001_Normal.png" id="3_vkxsx"]
+
+[resource]
+resource_name = "Ch15_body"
+cull_mode = 2
+albedo_texture = ExtResource("1_lcuqu")
+metallic = 0.5
+metallic_texture = ExtResource("2_gl7b6")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_gl7b6")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_vkxsx")

@@ -46,6 +46,7 @@ func test_get_next_state_keep_walking():
 func test_get_next_state_to_jump_on_action():
 	Input.action_press("jump")
 	assert_object(walk_state.get_next_state(Vector2.UP).get_value()).is_instanceof(Jump)
+	Input.action_release("jump")
 
 func test_get_next_state_to_fall_on_walk_off_edge():
 	var not_on_floor = func(): return false
@@ -55,15 +56,22 @@ func test_get_next_state_to_fall_on_walk_off_edge():
 func test_controller_get_next_state_to_sprint_on_is_moving_forward():
 	Input.action_press("controller_sprint")
 	assert_object(walk_state.get_next_state(Vector2.UP).get_value()).is_instanceof(Sprint)
+	Input.action_release("controller_sprint")
 
 func test_controller_get_next_state_no_sprint_on_no_movement():
 	Input.action_press("controller_sprint")
 	assert_bool(walk_state.get_next_state(Vector2.ZERO).is_present()).is_false()
+	Input.action_release("controller_sprint")
 
 func test_keyboard_get_next_state_to_sprint_on_is_moving_forward():
 	Input.action_press("keyboard_sprint")
 	assert_object(walk_state.get_next_state(Vector2.UP).get_value()).is_instanceof(Sprint)
+	Input.action_release("keyboard_sprint")
 
 func test_keyboard_get_next_state_no_sprint_on_no_movement():
 	Input.action_press("keyboard_sprint")
 	assert_bool(walk_state.get_next_state(Vector2.ZERO).is_present()).is_false()
+	Input.action_release("keyboard_sprint")
+
+
+

@@ -51,6 +51,7 @@ func test_get_next_state_to_jump_on_action():
 	Input.action_press("jump")
 	assert_bool(sprint_state.get_next_state(Vector2.UP).is_present()).is_true()
 	assert_object(sprint_state.get_next_state(Vector2.UP).get_value()).is_instanceof(Jump)
+	Input.action_release("jump")
 
 func test_get_next_state_to_fall_on_sprint_off_edge():
 	var not_on_floor = func(): return false

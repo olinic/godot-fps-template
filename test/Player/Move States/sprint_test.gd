@@ -37,11 +37,11 @@ func test_get_initial_velocity_change():
 	assert_vector(sprint_state.get_initial_velocity_change()).is_equal(Vector3.ZERO)
 
 func test_get_velocity():
-	assert_vector(sprint_state.get_velocity(1.0, Vector2(1, 0))).is_equal(Vector3(Sprint.SPRINT_SPEED, 0, 0))
-	assert_vector(sprint_state.get_velocity(1.0, Vector2(0, 1))).is_equal(Vector3(0, 0, Sprint.SPRINT_SPEED))
+	assert_vector(sprint_state.get_velocity(1.0, Vector2(1, 0))).is_equal(Vector3(sprint_state._speed, 0, 0))
+	assert_vector(sprint_state.get_velocity(1.0, Vector2(0, 1))).is_equal(Vector3(0, 0, sprint_state._speed))
 
 func test_normalized_get_velocity():
-	assert_vector(sprint_state.get_velocity(1.0, Vector2(1, 1))).is_less(Vector3(Sprint.SPRINT_SPEED, 0, Sprint.SPRINT_SPEED))
+	assert_vector(sprint_state.get_velocity(1.0, Vector2(1, 1))).is_less(Vector3(sprint_state._speed, 0, sprint_state._speed))
 
 func test_get_next_state_keep_sprinting():
 	sprint_state.get_velocity(1.0, Vector2.UP)

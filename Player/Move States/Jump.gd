@@ -2,7 +2,6 @@ class_name Jump
 
 const SPEED: float = 300.0
 
-var _player: Player
 var _player_is_on_floor: Callable
 var _aerial_dir: Vector3 = Vector3.ZERO
 var _speed: float
@@ -14,8 +13,7 @@ var _state_name = "Jump"
 @export var jump_height: float = 1.0
 @export var fall_multiplier: float = 2.0
 
-func _init(player: Player, player_is_on_floor: Callable, aerial_dir: Vector3, speed: float, target_state) -> void:
-	self._player = player
+func _init(player_is_on_floor: Callable, aerial_dir: Vector3, speed: float, target_state) -> void:
 	self._player_is_on_floor = player_is_on_floor
 	self._aerial_dir = aerial_dir + get_initial_velocity_change()
 	self._speed = speed

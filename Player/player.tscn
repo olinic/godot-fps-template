@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://8by78r4lfkdn"]
 
-[ext_resource type="Script" path="res://Player/player.gd" id="1_sxc4l"]
+[ext_resource type="Script" path="res://Player/player.cs" id="1_vgjuy"]
 [ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_s6ifw"]
 [ext_resource type="PackedScene" uid="uid://b24ku1p85yyw8" path="res://Weapons/SMG.tscn" id="3_gbn1o"]
 [ext_resource type="Script" path="res://Player/Crosshair.gd" id="3_j7ya5"]
@@ -10,9 +10,7 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qf1at"]
 
 [node name="Player" type="CharacterBody3D"]
-script = ExtResource("1_sxc4l")
-horizontal_look_setting = 10
-vertical_look_setting = 10
+script = ExtResource("1_vgjuy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_uggkb")

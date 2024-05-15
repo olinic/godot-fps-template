@@ -19,7 +19,7 @@ public partial class player : CharacterBody3D
         Vector3 direction = new Vector3(inputDir.X, 0, inputDir.Y).Normalized();
         float speed = 300;
         Velocity = new Vector3(0, 0, 0);
-        if (direction.IsZeroApprox())
+        if (direction != Vector3.Zero)
         {
             Velocity = new Vector3(
                     direction.X * speed * (float)delta,

@@ -44,7 +44,7 @@ public partial class player : CharacterBody3D
 	{
 		LookAround((float)delta);
 		Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_forward", "move_backward");
-		Vector3 direction = new Vector3(-inputDir.X, 0, -inputDir.Y).Normalized();
+		Vector3 direction = new Vector3(inputDir.X, 0, inputDir.Y).Normalized();
 		float speed = 300;
 		
 		if (direction != Vector3.Zero)
@@ -84,8 +84,8 @@ public partial class player : CharacterBody3D
 	}
 	public void AdjustCameraLook(float delta, Vector2 lookRotation)
 	{
-		RotateY(lookRotation.X * delta * HorizontalLookSensitivity);
-		CameraController.RotateX( lookRotation.Y * delta * VerticalLookSensitivity);
+		RotateY(-lookRotation.X * delta * HorizontalLookSensitivity * 0.06f);
+		CameraController.RotateX( -lookRotation.Y * delta * VerticalLookSensitivity * 0.06f);
 		CameraController.RotationDegrees = new Vector3(
 			Mathf.Clamp(
 				CameraController.RotationDegrees.X, 

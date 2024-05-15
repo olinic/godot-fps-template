@@ -18,7 +18,7 @@ public partial class player : CharacterBody3D
         Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_forward", "move_backward");
         Vector3 direction = new Vector3(inputDir.X, 0, inputDir.Y).Normalized();
         float speed = 300;
-        Velocity = new Vector3(0, 0, 0);
+        
         if (direction != Vector3.Zero)
         {
             Velocity = new Vector3(
@@ -26,6 +26,10 @@ public partial class player : CharacterBody3D
                     0,
                     direction.Z * speed * (float)delta);
 
+        } 
+        else 
+        {
+            Velocity = Vector3.Zero;
         }
         this.MoveAndSlide();
     }

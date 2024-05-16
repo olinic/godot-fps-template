@@ -36,7 +36,7 @@ public partial class player : CharacterBody3D
 	{
 		if(@event is InputEventMouseMotion eventMouseMotion)
 		{
-			MouseMotion = eventMouseMotion.Relative;
+			MouseMotion = -eventMouseMotion.Relative * 0.06f;
 		}
 	}
 
@@ -84,8 +84,8 @@ public partial class player : CharacterBody3D
 	}
 	public void AdjustCameraLook(float delta, Vector2 lookRotation)
 	{
-		RotateY(-lookRotation.X * delta * HorizontalLookSensitivity * 0.06f);
-		CameraController.RotateX( -lookRotation.Y * delta * VerticalLookSensitivity * 0.06f);
+		RotateY(lookRotation.X * delta * HorizontalLookSensitivity );
+		CameraController.RotateX(lookRotation.Y * delta * VerticalLookSensitivity);
 		CameraController.RotationDegrees = new Vector3(
 			Mathf.Clamp(
 				CameraController.RotationDegrees.X, 

@@ -49,11 +49,10 @@ public partial class player : CharacterBody3D
 		
 		if (direction != Vector3.Zero)
 		{
-			Velocity = new Vector3(
+			Velocity = Transform.Basis * new Vector3(
 					direction.X * speed * (float)delta,
 					0,
 					direction.Z * speed * (float)delta);
-
 		} 
 		else 
 		{

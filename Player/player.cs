@@ -17,6 +17,8 @@ public partial class player : CharacterBody3D
 
 	private Node3D CameraController;
 
+	private IMoveState _moveState;
+
 	private Vector2 MouseMotion = Vector2.Zero;
 
 	public override void _Ready()

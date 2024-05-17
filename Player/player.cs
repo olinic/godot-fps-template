@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.ComponentModel;
 
-public partial class player : CharacterBody3D
+public partial class player : CharacterBody3D, IMoveStateProvider
 {
 	private const float ControllerLookMulitplier = 7; 
 	private const float VerticalLookLowerLimit = -90; 
@@ -21,6 +21,10 @@ public partial class player : CharacterBody3D
 
 	private Vector2 MouseMotion = Vector2.Zero;
 
+	public player()
+	{
+		_moveState = new Walk(this);
+	}
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -46,21 +50,9 @@ public partial class player : CharacterBody3D
 	{
 		LookAround((float)delta);
 		Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_forward", "move_backward");
-		Vector3 direction = new Vector3(inputDir.X, 0, inputDir.Y).Normalized();
-		float speed = 300;
+		Velocity = _moveState.GetVelocity((float)delta, inputDir, Transform.Basis);
 		
-		if (direction != Vector3.Zero)
-		{
-			Velocity = Transform.Basis * new Vector3(
-					direction.X * speed * (float)delta,
-					0,
-					direction.Z * speed * (float)delta);
-		} 
-		else 
-		{
-			Velocity = Vector3.Zero;
-		}
-		this.MoveAndSlide();
+		MoveAndSlide();
 	}
 	public void LookAround(float delta)
 	{
@@ -98,4 +90,25 @@ public partial class player : CharacterBody3D
 		);
 		
 	}
+
+    public Walk GetWalk()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Sprint GetSprint()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Jump GetJumpWith(System.Numerics.Vector3 aerialDir, float speed, IMoveState nextState)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Fall GetFall()
+    {
+        throw new NotImplementedException();
+    }
+
 }

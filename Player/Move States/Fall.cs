@@ -1,4 +1,4 @@
-using System.Numerics;
+using Godot;
 public class Fall : IMoveState
 {
 
@@ -7,7 +7,7 @@ public class Fall : IMoveState
         return Optional<IMoveState>.Empty();
     }
 
-    public Vector3 GetVelocity(float delta, Vector2 inputDir)
+    public Vector3 GetVelocity(float delta, Vector2 inputDir, Basis playerBasis)
     {
         return Vector3.Zero;
     }  

@@ -2,10 +2,10 @@ using System.Security.Cryptography.X509Certificates;
 using Godot;
 public class Walk : IMoveState
 {
-    private float _speed = 300.0f;
-    private IMoveStateProvider _provider;
-    private Optional<IMoveState> _nextState = Optional<IMoveState>.Empty();
-    private Vector3 _velocity;
+    protected float _speed = 300.0f;
+    protected IMoveStateProvider _provider;
+    protected readonly Optional<IMoveState> _empty = Optional<IMoveState>.Empty();
+    protected Vector3 _velocity;
 
     public Walk(IMoveStateProvider provider)
     {
@@ -30,9 +30,16 @@ public class Walk : IMoveState
         
     }   
      
-    public Optional<IMoveState> GetNextState(Vector2 inputDir, bool isPlayerOnFloor)
+    public virtual Optional<IMoveState> GetNextState(Vector2 inputDir, bool isPlayerOnFloor)
     {
-        return Optional<IMoveState>.Empty();
+        if ((Input.IsActionJustPressed("keyboard_sprint") || Input.IsActionJustPressed("controller_sprint"))
+			&& Sprint.IsMovingForward(inputDir))
+        {
+		    return Optional<IMoveState>.Of(_provider.GetSprint());
+        }
+        else
+        {
+    	    return _empty;
+        }
     }
-
 }

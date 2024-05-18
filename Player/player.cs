@@ -18,12 +18,16 @@ public partial class player : CharacterBody3D, IMoveStateProvider
 	private Node3D CameraController;
 
 	private IMoveState _moveState;
+	private Walk _walk;
+	private Sprint _sprint;
 
 	private Vector2 MouseMotion = Vector2.Zero;
 
 	public player()
 	{
-		_moveState = new Walk(this);
+		_walk = new Walk(this);
+		_sprint = new Sprint(this);
+		ChangeState(_walk);
 	}
 	public override void _Ready()
 	{
@@ -51,15 +55,15 @@ public partial class player : CharacterBody3D, IMoveStateProvider
 		LookAround((float)delta);
 		Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_forward", "move_backward");
 		Velocity = _moveState.GetVelocity((float)delta, inputDir, Transform.Basis);
-		
+		_moveState.GetNextState(inputDir, IsOnFloor()).IfPresent(ChangeState);
 		MoveAndSlide();
 	}
+
 	public void LookAround(float delta)
 	{
 		if (MouseMotion != Vector2.Zero)
 		{
 			MouseLook(delta);
-			Console.WriteLine("Sensing Mouse Motion");
 		}
 		else
 		{
@@ -91,14 +95,20 @@ public partial class player : CharacterBody3D, IMoveStateProvider
 		
 	}
 
+	private void ChangeState(IMoveState newState)
+	{
+		_moveState = newState;
+		GD.Print("Changed state to " + _moveState.GetType().Name);
+	}
+
     public Walk GetWalk()
     {
-        throw new NotImplementedException();
+        return _walk;
     }
 
     public Sprint GetSprint()
     {
-        throw new NotImplementedException();
+        return _sprint;
     }
 
     public Jump GetJumpWith(System.Numerics.Vector3 aerialDir, float speed, IMoveState nextState)

@@ -1,15 +1,35 @@
 using Godot;
 
-public class Sprint : IMoveState
+public class Sprint : Walk
 {
 
-    public Optional<IMoveState> GetNextState(Vector2 inputDir, bool isPlayerOnFloor)
+    private const float SPRINT_LIMIT_ANGLE_MULTIPLIER = 0.22f; // 0.25 = 45 degrees
+    private const float SPRINT_LIMIT_ANGLE_LEFT = -Mathf.Pi * SPRINT_LIMIT_ANGLE_MULTIPLIER;
+    private const float SPRINT_LIMIT_ANGLE_RIGHT = -Mathf.Pi * (1 - SPRINT_LIMIT_ANGLE_MULTIPLIER);
+
+    public static bool IsMovingForward(Vector2 inputDir)
     {
-        return Optional<IMoveState>.Empty();
+        var angle = inputDir.Angle();
+        return (angle <= SPRINT_LIMIT_ANGLE_LEFT)
+                && (angle >= SPRINT_LIMIT_ANGLE_RIGHT);
     }
 
-    public Vector3 GetVelocity(float delta, Vector2 inputDir, Basis playerBasis)
+    public Sprint(IMoveStateProvider provider): base(provider)
     {
-        return Vector3.Zero;
+        this._speed = 600;
     }
+
+    public override Optional<IMoveState> GetNextState(Vector2 inputDir, bool isPlayerOnFloor)
+    {
+        if (Input.IsActionJustReleased("keyboard_sprint")
+			|| !Sprint.IsMovingForward(inputDir))
+        {
+    		return Optional<IMoveState>.Of(_provider.GetWalk());
+        }
+        else
+        {
+            return _empty;
+        }
+    }
+
 }

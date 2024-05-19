@@ -15,3 +15,6 @@ data_*/
 mono_crash.*.json
 .vscode/settings.json
 addons/gdUnit4/GdUnitRunner.cfg
+
+# GdUnit4
+TestResults/

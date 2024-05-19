@@ -18,4 +18,4 @@ addons/gdUnit4/GdUnitRunner.cfg
 
 # GdUnit4
 TestResults/
-GdUnitRunner.*.cfg
+GdUnitRunner*.cfg

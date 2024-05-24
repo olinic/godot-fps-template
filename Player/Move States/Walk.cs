@@ -5,7 +5,7 @@ public class Walk : IMoveState
     protected float _speed = 300.0f;
     protected IMoveStateProvider _provider;
     protected readonly Optional<IMoveState> _empty = Optional<IMoveState>.Empty();
-    protected Vector3 _velocity;
+    protected Godot.Vector3 _velocity;
 
     public Walk(IMoveStateProvider provider)
     {
@@ -37,9 +37,13 @@ public class Walk : IMoveState
         {
 		    return Optional<IMoveState>.Of(_provider.GetSprint());
         }
+        else if(Input.IsActionJustPressed("jump"))
+        {
+            return Optional<IMoveState>.Of(_provider.GetJumpWith(_velocity, this));
+        }
         else
         {
-    	    return _empty;
+            return _empty;
         }
     }
 }

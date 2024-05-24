@@ -1,10 +1,10 @@
+using Godot;
 
-using System.Numerics;
 
 public interface IMoveStateProvider
 {
     Walk GetWalk();
     Sprint GetSprint();
-    Jump GetJumpWith(Vector3 aerialDir, float speed, IMoveState nextState);
+    Jump GetJumpWith(Vector3 aerialDir, IMoveState targetState);
     Fall GetFall();
 }

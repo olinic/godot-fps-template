@@ -20,6 +20,7 @@ public partial class player : CharacterBody3D, IMoveStateProvider
 	private IMoveState _moveState;
 	private Walk _walk;
 	private Sprint _sprint;
+	private Jump _jump;
 
 	private Vector2 MouseMotion = Vector2.Zero;
 
@@ -27,6 +28,7 @@ public partial class player : CharacterBody3D, IMoveStateProvider
 	{
 		_walk = new Walk(this);
 		_sprint = new Sprint(this);
+		_jump = new Jump(this);
 		ChangeState(_walk);
 	}
 	public override void _Ready()
@@ -99,6 +101,7 @@ public partial class player : CharacterBody3D, IMoveStateProvider
 	{
 		_moveState = newState;
 		GD.Print("Changed state to " + _moveState.GetType().Name);
+		Velocity = Velocity with {Y = Velocity.Y + _moveState.GetInitialVelocityChange().Y};
 	}
 
     public Walk GetWalk()
@@ -111,9 +114,11 @@ public partial class player : CharacterBody3D, IMoveStateProvider
         return _sprint;
     }
 
-    public Jump GetJumpWith(System.Numerics.Vector3 aerialDir, float speed, IMoveState nextState)
+    public Jump GetJumpWith(Vector3 aerialDir, IMoveState targetState)
     {
-        throw new NotImplementedException();
+		_jump.SetAerialDir(aerialDir);
+		_jump.SetTargetState(targetState);
+        return _jump;
     }
 
     public Fall GetFall()

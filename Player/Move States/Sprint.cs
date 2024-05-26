@@ -34,9 +34,13 @@ public class Sprint : Walk
         {
     		return Optional<IMoveState>.Of(_provider.GetWalk());
         }
-        else
+        else if (Input.IsActionPressed("keyboard_sprint"))
         {
             return _empty;
+        }
+        else
+        {
+            return Optional<IMoveState>.Of(_provider.GetWalk());
         }
     }
 

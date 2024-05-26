@@ -21,6 +21,10 @@ public class Sprint : Walk
 
     public override Optional<IMoveState> GetNextState(Vector2 inputDir, bool isPlayerOnFloor)
     {
+        if (!isPlayerOnFloor)
+        {
+            return Optional<IMoveState>.Of(_provider.GetFallWith(_velocity, this));
+        }
         if (Input.IsActionJustPressed("jump"))
         {
             return Optional<IMoveState>.Of(_provider.GetJumpWith(_velocity, this));

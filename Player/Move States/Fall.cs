@@ -1,14 +1,12 @@
 using Godot;
-public class Fall : IMoveState
+public class Fall : Jump
 {
 
-    public Optional<IMoveState> GetNextState(Vector2 inputDir, bool isPlayerOnFloor)
-    {
-        return Optional<IMoveState>.Empty();
-    }
+    public Fall(IMoveStateProvider provider): base(provider)
+    {}
 
-    public Vector3 GetVelocity(float delta, Vector2 inputDir, Basis playerBasis)
+    public override Vector3 GetInitialVelocityChange()
     {
-        return Vector3.Zero;
-    }  
+        return new Vector3(0, 0, 0);
+    }
 }

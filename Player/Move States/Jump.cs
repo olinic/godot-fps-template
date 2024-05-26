@@ -25,7 +25,7 @@ public class Jump : IMoveState
         this._provider = provider;
     }
 
-    public Vector3 GetInitialVelocityChange()
+    public virtual Vector3 GetInitialVelocityChange()
     {
         return new Vector3(0,(float) Math.Sqrt(JumpHeight/Gravity * 2.0f) *  Gravity, 0);
     }
@@ -56,7 +56,7 @@ public class Jump : IMoveState
         return AerialVelocity;
     }
     
-    public void SetAerialDir(Vector3 aerialDir)
+    public void SetCurrentVelocity(Vector3 aerialDir)
     {
         this.AerialVelocity = aerialDir + GetInitialVelocityChange();
     }

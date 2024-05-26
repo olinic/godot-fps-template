@@ -32,6 +32,10 @@ public class Walk : IMoveState
      
     public virtual Optional<IMoveState> GetNextState(Vector2 inputDir, bool isPlayerOnFloor)
     {
+        if (!isPlayerOnFloor)
+        {
+            return Optional<IMoveState>.Of(_provider.GetFallWith(_velocity, this));
+        }
         if ((Input.IsActionJustPressed("keyboard_sprint") || Input.IsActionJustPressed("controller_sprint"))
 			&& Sprint.IsMovingForward(inputDir))
         {

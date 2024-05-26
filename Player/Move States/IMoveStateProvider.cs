@@ -5,6 +5,6 @@ public interface IMoveStateProvider
 {
     Walk GetWalk();
     Sprint GetSprint();
-    Jump GetJumpWith(Vector3 aerialDir, IMoveState targetState);
-    Fall GetFall();
+    Jump GetJumpWith(Vector3 currVelocity, IMoveState targetState);
+    Fall GetFallWith(Vector3 currVelocity, IMoveState targetState);
 }

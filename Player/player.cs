@@ -40,7 +40,7 @@ public partial class player : CharacterBody3D, IMoveStateProvider
 	}
 	public float SettingToSensitivity(int setting)
 	{
-		//6 is regular speed. Adjust by 10% higher or lower based on setting.
+		// 6 is regular speed. Adjust by 10% higher or lower based on setting.
 		return 0.4f + (0.1f * setting);
 	}
 

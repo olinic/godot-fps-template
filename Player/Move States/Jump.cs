@@ -16,7 +16,7 @@ public class Jump : IMoveState
 
     
     [Export]
-    public float JumpHeight = 3.0f;
+    public float JumpHeight = 1.5f;
     [Export]
     public float FallMultiplier = 1.8f;
 
@@ -45,15 +45,14 @@ public class Jump : IMoveState
     public Vector3 GetVelocity(float delta, Vector2 inputDir, Basis playerBasis)
     {
 
-        // if(AerialVelocity.Y >= 0)
-        // {
-        //     AerialVelocity = AerialVelocity with { Y = AerialVelocity.Y - (Gravity * delta)};
-        // }
-        // else
+        if(AerialVelocity.Y >= 0)
+        {
+            AerialVelocity = AerialVelocity with { Y = AerialVelocity.Y - (Gravity * delta)};
+        }
+        else
         {
             AerialVelocity = AerialVelocity with { Y = AerialVelocity.Y - (Gravity * delta * FallMultiplier)};
         }
-        GD.Print(AerialVelocity.Y);
         return AerialVelocity;
     }
     

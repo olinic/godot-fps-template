@@ -16,7 +16,7 @@ public class Sprint : Walk
 
     public Sprint(IMoveStateProvider provider): base(provider)
     {
-        this._speed = 600;
+        this._speed = 500;
     }
 
     public override Optional<IMoveState> GetNextState(Vector2 inputDir, bool isPlayerOnFloor)

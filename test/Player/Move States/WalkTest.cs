@@ -82,4 +82,18 @@ public class WalkTest
         InputWrapper.ActionPress("controller_sprint");
         AssertBool(Walk.GetNextState(Vector2.Zero, true).IsPresent()).IsFalse();
     }
+
+    [TestCase]
+    public void GivenKeyboardSprintInputAndMovingForward_GetNextState_ReturnsSprint()
+    {
+        InputWrapper.ActionPress("keyboard_sprint");
+        AssertObject(Walk.GetNextState(Vector2.Up, true).GetValue()).IsInstanceOf<Sprint>();
+    }
+
+    [TestCase]
+    public void GivenKeyboardSprintInputAndNotMovingForward_GetNextState_ReturnsEmpty()
+    {
+        InputWrapper.ActionPress("keyboard_sprint");
+        AssertBool(Walk.GetNextState(Vector2.Zero, true).IsPresent()).IsFalse();
+    }
 }

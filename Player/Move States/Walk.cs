@@ -50,4 +50,9 @@ public class Walk : IMoveState
             return _empty;
         }
     }
+
+    public float GetSpeed()
+    {
+        return _speed;
+    }
 }

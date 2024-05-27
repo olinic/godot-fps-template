@@ -14,7 +14,7 @@ func before_test():
 	jump_state = auto_free(Jump.new(func(): return false, curr_velocity, 1.0, Walk.new(player, player.is_on_floor)))
 
 func test_get_initial_velocity_change():
-	assert_vector(jump_state.get_initial_velocity_change())\
+	assert_vector(jump_state.get_initial_velocity_change())
 			.is_equal(Vector3(0, sqrt(jump_state.jump_height * 2.0 * jump_state._gravity), 0))
 
 func test_get_velocity():

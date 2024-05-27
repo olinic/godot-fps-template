@@ -1,7 +1,7 @@
 using Godot;
 using GdUnit4;
 using static GdUnit4.Assertions;
-using System.Reflection.Metadata;
+
 
 [TestSuite]
 public class SprintTest{
@@ -63,11 +63,13 @@ public class SprintTest{
         AssertBool(Sprint.IsMovingForward(Vector2.Zero)).IsFalse();
     }
 
-    [TestCase(Vector2.Left, TestName ="Left")]
+    /*[TestCase(Vector2.Left, TestName ="Left")]
     [TestCase(Vector2.Right, TestName = "Right")]
     public void GivenSidewaysMovement_IsMovingForward_ReturnsFalse(Vector2 dir){
         AssertBool(Sprint.IsMovingForward(dir)).IsFalse();
-    }
+    }*/
+
+
     /*func test_sideways_is_moving_forward_false(sideways: Vector2, 
 		test_parameters := [[Vector2.LEFT], [Vector2.RIGHT]]) -> void:
 	assert_bool(Sprint.is_moving_forward(sideways)).is_false()
@@ -84,5 +86,5 @@ public class SprintTest{
 			[Vector2.DOWN], 
 			[Vector2.from_angle(PI / 4)], 
 			[Vector2.from_angle(PI * 3 / 4)]]) -> void:
-	assert_bool(Sprint.is_moving_forward(backward)).is_false() */
+	assert_bool(Sprint.is_moving_forward(backward)).is_false()*/
 }

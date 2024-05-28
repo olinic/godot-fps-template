@@ -38,7 +38,7 @@ public class Jump : IMoveState
         }
         else if(Input.IsActionJustPressed("jump"))
         {
-            return Optional<IMoveState>.Of(_provider.GetDoubleJumpWith(_velocity, this));
+            return Optional<IMoveState>.Of(_provider.GetDoubleJumpWith(AerialVelocity, this));
         }
         else
         {

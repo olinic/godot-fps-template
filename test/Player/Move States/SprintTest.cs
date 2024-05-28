@@ -3,6 +3,7 @@ using GdUnit4;
 using static GdUnit4.Assertions;
 
 
+
 [TestSuite]
 public class SprintTest{
     private player Player;
@@ -63,28 +64,37 @@ public class SprintTest{
         AssertBool(Sprint.IsMovingForward(Vector2.Zero)).IsFalse();
     }
 
-    /*[TestCase(Vector2.Left, TestName ="Left")]
-    [TestCase(Vector2.Right, TestName = "Right")]
-    public void GivenSidewaysMovement_IsMovingForward_ReturnsFalse(Vector2 dir){
-        AssertBool(Sprint.IsMovingForward(dir)).IsFalse();
-    }*/
+    [TestCase(-1, 0, TestName ="Left")]
+    [TestCase(1, 0, TestName = "Right")]
+    public void GivenSidewaysMovement_IsMovingForward_ReturnsFalse(int x, int y)
+    {
+        AssertBool(Sprint.IsMovingForward(new Vector2(x,y))).IsFalse();
+    }
 
+    [TestCase(0, -1, TestName = "forward")]
+    public void GivenForwardMovement_IsMovingForward_ReturnsTrue(int x, int y)
+    {
+        AssertBool(Sprint.IsMovingForward(new Vector2(x,y))).IsTrue();
+    }
 
-    /*func test_sideways_is_moving_forward_false(sideways: Vector2, 
-		test_parameters := [[Vector2.LEFT], [Vector2.RIGHT]]) -> void:
-	assert_bool(Sprint.is_moving_forward(sideways)).is_false()
+    //Need to check which is left and right.
+    [TestCase(-Mathf.Pi / 4, TestName = "Left Angle")]
+    [TestCase(-Mathf.Pi*3/4, TestName = "Right Angle")]
+    public void GivenForwardMovementAngle_IsMovingForward_ReturnsTrue(float angle)
+    {
+        AssertBool(Sprint.IsMovingForward(Vector2.FromAngle(angle))).IsTrue();
+    }
 
-    func test_forward_is_moving_forward_true(forward: Vector2, 
-		test_parameters := [
-			[Vector2.UP], 
-			[Vector2.from_angle(-PI / 4)], 
-			[Vector2.from_angle(-PI * 3 / 4)]]) -> void:
-	assert_bool(Sprint.is_moving_forward(forward)).is_true()
+    [TestCase(0, 1, TestName = "Backward")]
+    public void GivenBackwardMovement_IsMovingForward_ReturnsFalse(int x, int y)
+    {
+        AssertBool(Sprint.IsMovingForward(new Vector2(x,y))).IsFalse();
+    }
 
-    func test_backward_is_moving_forward_false(backward: Vector2, 
-		test_parameters := [
-			[Vector2.DOWN], 
-			[Vector2.from_angle(PI / 4)], 
-			[Vector2.from_angle(PI * 3 / 4)]]) -> void:
-	assert_bool(Sprint.is_moving_forward(backward)).is_false()*/
+    //Need to check which is left and right.
+    [TestCase(Mathf.Pi /4 ,TestName = "Left Angle Backward")]
+    [TestCase(Mathf.Pi *3/4 ,TestName = "Right Angle Backward")]
+    public void GivenBackwardMovementAngle_IsMovingForward_ReturnsFalse(float angle){
+        AssertBool(Sprint.IsMovingForward(Vector2.FromAngle(angle)));
+    }
 }

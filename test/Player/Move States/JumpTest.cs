@@ -58,6 +58,11 @@ public class Jumptest{
             AssertObject(Jump.GetNextState(Vector2.Up, true).GetValue()).IsInstanceOf<Sprint>();  
         }
     }
-    
-    //TODO: test no transition to any state when landed is false.
+
+    [TestCase]
+    public void GivenNoLanding_GetNextState_ReturnsJump()
+    {
+        Jump.SetTargetState(new Jump(Player));
+        AssertObject(Jump.GetNextState(Vector2.Up, true).GetValue()).IsInstanceOf<Jump>();    
+    }
 }

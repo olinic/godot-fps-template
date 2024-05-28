@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using Godot;
 
 
-public class Jump : IMoveState
+public class DoubleJump : IMoveState
 {
     public readonly float  Gravity = (float) ProjectSettings.GetSetting("physics/3d/default_gravity");
     private Vector3 AerialVelocity = Vector3.Zero;
@@ -20,7 +20,7 @@ public class Jump : IMoveState
     [Export]
     public float FallMultiplier = 1.8f;
 
-    public Jump(IMoveStateProvider provider)
+    public DoubleJump(IMoveStateProvider provider)
     {
         this._provider = provider;
     }
@@ -35,10 +35,6 @@ public class Jump : IMoveState
         if (isPlayerOnFloor)
         {
 		    return Optional<IMoveState>.Of(TargetState);
-        }
-        else if(Input.IsActionJustPressed("jump"))
-        {
-            return Optional<IMoveState>.Of(_provider.GetDoubleJumpWith(_velocity, this));
         }
         else
         {

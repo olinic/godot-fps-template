@@ -71,27 +71,18 @@ public class SprintTest{
     }
 
     [TestCase(0, -1, TestName = "forward")]
+    [TestCase(-1, -1, TestName = "Left 45 Degrees")]
+    [TestCase(1, -1, TestName = "Right 45 Degrees")]
     public void GivenForwardMovement_IsMovingForward_ReturnsTrue(int x, int y)
     {
         AssertBool(Sprint.IsMovingForward(new Vector2(x,y))).IsTrue();
     }
 
-    [TestCase(-Mathf.Pi / 4, TestName = "Left 45 Degrees")]
-    [TestCase(-Mathf.Pi*3/4, TestName = "Right 45 Degrees")]
-    public void GivenForwardMovementAngle_IsMovingForward_ReturnsTrue(float angle)
-    {
-        AssertBool(Sprint.IsMovingForward(Vector2.FromAngle(angle))).IsTrue();
-    }
-
     [TestCase(0, 1, TestName = "Backward")]
+    [TestCase(-1, 1,TestName = "Left 45 Degrees Backward")]
+    [TestCase(1, 1,TestName = "Right 45 Degrees Backward")]
     public void GivenBackwardMovement_IsMovingForward_ReturnsFalse(int x, int y)
     {
         AssertBool(Sprint.IsMovingForward(new Vector2(x,y))).IsFalse();
-    }
-
-    [TestCase(Mathf.Pi /4 ,TestName = "Left 45 Degrees Backward")]
-    [TestCase(Mathf.Pi *3/4 ,TestName = "Right 45 Degrees Backward")]
-    public void GivenBackwardMovementAngle_IsMovingForward_ReturnsFalse(float angle){
-        AssertBool(Sprint.IsMovingForward(Vector2.FromAngle(angle)));
     }
 }

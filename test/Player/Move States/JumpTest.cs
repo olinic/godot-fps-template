@@ -31,7 +31,10 @@ public class Jumptest{
     {
         IMoveState JumpState = (IMoveState) Jump;
         AssertVector(JumpState.GetInitialVelocityChange())
-            .Equals(new Vector3(0, (float) Math.Sqrt(Jump.JumpHeight/Jump.Gravity * 2.0f) *  Jump.Gravity,0));
+            .Equals(new Vector3(
+                0, 
+                (float) Math.Sqrt(Jump.GetJumpHeight()/Jump.GetGravity() * 2.0f) *  Jump.GetGravity(),
+                0));
     }
 
     [TestCase]
@@ -43,20 +46,11 @@ public class Jumptest{
         AssertFloat(_velocity.Z).Equals(1); 
     }
     
-   [TestCase( 1, TestName= "Walk")]
-   [TestCase( 2, TestName= "Sprint")]
-    public void GivenLanding_GetNextState_ReturnsWalkOrSprint(int x)
+   [TestCase]
+    public void GivenLanding_GetNextState_ReturnsTargetState()
     {
-        if(x == 1)
-        {
-            Jump.SetTargetState(new Walk(Player));
-            AssertObject(Jump.GetNextState(Vector2.Up, true).GetValue()).IsInstanceOf<Walk>();        
-        }
-        else if(x == 2)
-        {
-            Jump.SetTargetState(new Sprint(Player));
-            AssertObject(Jump.GetNextState(Vector2.Up, true).GetValue()).IsInstanceOf<Sprint>();  
-        }
+        Jump.SetTargetState(new Walk(Player));
+        AssertObject(Jump.GetNextState(Vector2.Up, true).GetValue()).IsInstanceOf<Walk>();        
     }
 
     [TestCase]

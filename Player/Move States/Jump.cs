@@ -5,7 +5,7 @@ using Godot;
 
 public class Jump : IMoveState
 {
-    public readonly float  Gravity = (float) ProjectSettings.GetSetting("physics/3d/default_gravity");
+    private readonly float Gravity = (float) ProjectSettings.GetSetting("physics/3d/default_gravity");
     private Vector3 AerialVelocity = Vector3.Zero;
     private Optional<IMoveState> NextState = Optional<IMoveState>.Empty();
     private IMoveState TargetState;
@@ -15,10 +15,8 @@ public class Jump : IMoveState
     protected Vector3 _velocity;
 
     
-    [Export]
-    public float JumpHeight = 1.5f;
-    [Export]
-    public float FallMultiplier = 1.8f;
+    private float JumpHeight = 1.5f;
+    private float FallMultiplier = 1.8f;
 
     public Jump(IMoveStateProvider provider)
     {
@@ -70,4 +68,13 @@ public class Jump : IMoveState
         this.TargetState = targetState;
     }
 
+    public float GetGravity()
+    {
+        return Gravity;
+    }
+
+    public float GetJumpHeight()
+    {
+        return JumpHeight;
+    }
 }

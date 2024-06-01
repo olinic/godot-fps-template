@@ -6,7 +6,7 @@ using Godot;
 public class Jump : IMoveState
 {
     private readonly float Gravity = (float) ProjectSettings.GetSetting("physics/3d/default_gravity");
-    private Vector3 AerialVelocity = Vector3.Zero;
+    protected Vector3 AerialVelocity = Vector3.Zero;
     private Optional<IMoveState> NextState = Optional<IMoveState>.Empty();
     private IMoveState TargetState;
 

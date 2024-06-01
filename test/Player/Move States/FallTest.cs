@@ -30,7 +30,7 @@ public class FallTest
     public void GetInitialVelocityChange()
     {
         IMoveState FallState = (IMoveState) Fall;
-        AssertVector(FallState.GetInitialVelocityChange())
-            .Equals(Vector3.Zero);
+        AssertVector(FallState.GetInitialVelocity(new Vector3(1, 1, 1)))
+            .Equals(new Vector3(1, 1, 1));
     }
 }

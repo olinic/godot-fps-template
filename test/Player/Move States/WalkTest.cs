@@ -30,8 +30,8 @@ public class WalkTest
     public void GetInitialVelocityChange()
     {
         IMoveState WalkState = (IMoveState) Walk;
-        AssertVector(WalkState.GetInitialVelocityChange())
-                .Equals(new Vector3(0,0,0));
+        AssertVector(WalkState.GetInitialVelocity(new Vector3(1, 1, 1)))
+                .Equals(new Vector3(1, 1, 1));
     }
 
     [TestCase]

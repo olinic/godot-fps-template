@@ -30,11 +30,11 @@ public class Jumptest{
      public void GetInitialVelocityChange()
     {
         IMoveState JumpState = (IMoveState) Jump;
-        AssertVector(JumpState.GetInitialVelocityChange())
+        AssertVector(JumpState.GetInitialVelocity(new Vector3(1, 1, 1)))
             .Equals(new Vector3(
-                0, 
+                1, 
                 (float) Math.Sqrt(Jump.GetJumpHeight()/Jump.GetGravity() * 2.0f) *  Jump.GetGravity(),
-                0));
+                1));
     }
 
     [TestCase]
@@ -54,9 +54,18 @@ public class Jumptest{
     }
 
     [TestCase]
-    public void GivenNoLanding_GetNextState_ReturnsJump()
+    public void GivenStillInAir_GetNextState_ReturnsJump()
     {
-        Jump.SetTargetState(new Jump(Player));
-        AssertObject(Jump.GetNextState(Vector2.Up, true).GetValue()).IsInstanceOf<Jump>();    
+        AssertBool(Jump.GetNextState(Vector2.Up, false).IsPresent()).IsFalse();
+    }
+
+    [TestCase]
+    public void GivenJump_GetNextState_ReturnsDoubleJump()
+    {
+        InputWrapper.ActionPress("jump");
+        Jump.SetTargetState(new Walk(Player));
+        IMoveState DblJump = Jump.GetNextState(Vector2.Up, false).GetValue();
+        AssertObject(DblJump).IsInstanceOf<DoubleJump>();
+        AssertObject(((DoubleJump) DblJump).GetTargetState()).IsInstanceOf<Walk>();  
     }
 }

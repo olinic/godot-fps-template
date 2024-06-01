@@ -5,8 +5,8 @@ public class Fall : Jump
     public Fall(IMoveStateProvider provider): base(provider)
     {}
 
-    public override Vector3 GetInitialVelocityChange()
+    public override Vector3 GetInitialVelocity(Vector3 currVelocity)
     {
-        return new Vector3(0, 0, 0);
+        return currVelocity;
     }
 }

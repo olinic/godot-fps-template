@@ -29,8 +29,8 @@ public class SprintTest{
     public void GetInitialVelocityChange()
     {
         IMoveState SprintState = (IMoveState) Sprint;
-        AssertVector(SprintState.GetInitialVelocityChange())
-            .Equals(Vector3.Zero);
+        AssertVector(SprintState.GetInitialVelocity(new Vector3(1, 1, 1)))
+            .Equals(new Vector3(1, 1, 1));
     }
     [TestCase]
     public void GivenInputInOneDirection_GetVelocity_ReturnsVelocityWithSprintSpeed()

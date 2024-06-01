@@ -19,4 +19,10 @@ public class DoubleJump : Jump
     	    return _empty;
         }
     }
+
+    public override void SetCurrentVelocity(Vector3 aerialDir)
+    {
+        // Ignore current Y velocity for a nice double jump feel
+        this.AerialVelocity = aerialDir with { Y = AdjustedVelocity }; 
+    }
 }

@@ -16,7 +16,7 @@ public class Jump : IMoveState
 
     
     private float JumpHeight = 1.5f;
-    private float AdjustedVelocity;
+    protected float AdjustedVelocity;
     private float FallMultiplier = 1.8f;
 
     public Jump(IMoveStateProvider provider)
@@ -35,6 +35,20 @@ public class Jump : IMoveState
         };
     }
 
+    public Vector3 GetVelocity(float delta, Vector2 inputDir, Basis playerBasis)
+    {
+
+        if(AerialVelocity.Y >= 0)
+        {
+            AerialVelocity = AerialVelocity with { Y = AerialVelocity.Y - (Gravity * delta)};
+        }
+        else
+        {
+            AerialVelocity = AerialVelocity with { Y = AerialVelocity.Y - (Gravity * delta * FallMultiplier)};
+        }
+        return AerialVelocity;
+    }
+
     public virtual Optional<IMoveState> GetNextState(Vector2 inputDir, bool isPlayerOnFloor)
     {
         if (isPlayerOnFloor)
@@ -51,21 +65,7 @@ public class Jump : IMoveState
         }
     }
 
-    public Vector3 GetVelocity(float delta, Vector2 inputDir, Basis playerBasis)
-    {
-
-        if(AerialVelocity.Y >= 0)
-        {
-            AerialVelocity = AerialVelocity with { Y = AerialVelocity.Y - (Gravity * delta)};
-        }
-        else
-        {
-            AerialVelocity = AerialVelocity with { Y = AerialVelocity.Y - (Gravity * delta * FallMultiplier)};
-        }
-        return AerialVelocity;
-    }
-    
-    public void SetCurrentVelocity(Vector3 aerialDir)
+    public virtual void SetCurrentVelocity(Vector3 aerialDir)
     {
         this.AerialVelocity = aerialDir with { Y = aerialDir.Y + AdjustedVelocity };
     }

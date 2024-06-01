@@ -7,11 +7,7 @@ public class Fall : Jump
 
     public override Vector3 GetInitialVelocity(Vector3 currVelocity)
     {
-        return currVelocity with {};
-    }
-
-    public override void SetCurrentVelocity(Vector3 aerialDir)
-    {
-        this.AerialVelocity = aerialDir with {};
+        AerialVelocity = currVelocity;
+        return AerialVelocity;
     }
 }

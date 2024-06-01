@@ -120,21 +120,18 @@ public partial class player : CharacterBody3D, IMoveStateProvider
 
     public Jump GetJumpWith(Vector3 aerialDir, IMoveState targetState)
     {
-		_jump.SetCurrentVelocity(aerialDir);
 		_jump.SetTargetState(targetState);
         return _jump;
     }
 
 	public DoubleJump GetDoubleJumpWith(Vector3 aerialDir, IMoveState targetState)
     {
-		_doubleJump.SetCurrentVelocity(aerialDir);
 		_doubleJump.SetTargetState(targetState);
         return _doubleJump;
     }
 
     public Fall GetFallWith(Vector3 currVelocity, IMoveState targetState)
     {
-		_fall.SetCurrentVelocity(currVelocity);
 		_fall.SetTargetState(targetState);
         return _fall;
     }

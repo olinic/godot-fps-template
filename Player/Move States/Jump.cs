@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using Godot;
 
 
@@ -24,12 +23,13 @@ public class Jump : IMoveState
 
     public virtual Vector3 GetInitialVelocity(Vector3 currentVelocity)
     {
-        return currentVelocity with 
+        AerialVelocity = currentVelocity with 
         { 
             X = currentVelocity.X, 
             Y = AdjustedVelocity, 
             Z = currentVelocity.Z 
         };
+        return AerialVelocity;
     }
 
     public Vector3 GetVelocity(float delta, Vector2 inputDir, Basis playerBasis)
@@ -60,11 +60,6 @@ public class Jump : IMoveState
         {
     	    return _empty;
         }
-    }
-
-    public virtual void SetCurrentVelocity(Vector3 aerialDir)
-    {
-        this.AerialVelocity = aerialDir with { Y = aerialDir.Y + AdjustedVelocity };
     }
 
     public void SetTargetState(IMoveState targetState)

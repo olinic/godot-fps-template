@@ -85,4 +85,11 @@ public class SprintTest{
     {
         AssertBool(Sprint.IsMovingForward(new Vector2(x,y))).IsFalse();
     }
+
+    [TestCase]
+    public void GivenSprintToggled_GetNextState_ReturnsWalk()
+    {
+        InputWrapper.ActionPress("sprint");
+        AssertObject(Sprint.GetNextState(Vector2.Up, true).GetValue()).IsInstanceOf<Walk>();
+    }
 }

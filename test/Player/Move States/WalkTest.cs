@@ -70,13 +70,6 @@ public class WalkTest
     }
 
     [TestCase]
-    public void GivenControllerSprintInputAndMovingForward_GetNextState_ReturnsSprint()
-    {
-        InputWrapper.ActionPress("controller_sprint");
-        AssertObject(Walk.GetNextState(Vector2.Up, true).GetValue()).IsInstanceOf<Sprint>();
-    }
-
-    [TestCase]
     public void GivenControllerSprintInputAndNotMovingForward_GetNextState_ReturnsEmpty()
     {
         InputWrapper.ActionPress("controller_sprint");
@@ -84,16 +77,16 @@ public class WalkTest
     }
 
     [TestCase]
-    public void GivenKeyboardSprintInputAndMovingForward_GetNextState_ReturnsSprint()
+    public void GivenSprintInputAndMovingForward_GetNextState_ReturnsSprint()
     {
-        InputWrapper.ActionPress("keyboard_sprint");
+        InputWrapper.ActionPress("sprint");
         AssertObject(Walk.GetNextState(Vector2.Up, true).GetValue()).IsInstanceOf<Sprint>();
     }
 
     [TestCase]
-    public void GivenKeyboardSprintInputAndNotMovingForward_GetNextState_ReturnsEmpty()
+    public void GivenSprintInputAndNotMovingForward_GetNextState_ReturnsEmpty()
     {
-        InputWrapper.ActionPress("keyboard_sprint");
+        InputWrapper.ActionPress("sprint");
         AssertBool(Walk.GetNextState(Vector2.Zero, true).IsPresent()).IsFalse();
     }
 }

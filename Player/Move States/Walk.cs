@@ -36,8 +36,7 @@ public class Walk : IMoveState
         {
             return Optional<IMoveState>.Of(_provider.GetFallWith(_velocity, this));
         }
-        if ((Input.IsActionJustPressed("keyboard_sprint") || Input.IsActionJustPressed("controller_sprint"))
-			&& Sprint.IsMovingForward(inputDir))
+        if (Input.IsActionJustPressed("sprint") && Sprint.IsMovingForward(inputDir))
         {
 		    return Optional<IMoveState>.Of(_provider.GetSprint());
         }

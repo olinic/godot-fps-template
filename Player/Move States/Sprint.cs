@@ -29,19 +29,13 @@ public class Sprint : Walk
         {
             return Optional<IMoveState>.Of(_provider.GetJumpWith(_velocity, this));
         }
-        else if (Input.IsActionJustReleased("keyboard_sprint")
-			|| !Sprint.IsMovingForward(inputDir))
+        else if (!Sprint.IsMovingForward(inputDir) || Input.IsActionJustPressed("sprint"))
         {
     		return Optional<IMoveState>.Of(_provider.GetWalk());
         }
-        else if (Input.IsActionPressed("keyboard_sprint"))
+        else
         {
             return _empty;
         }
-        else
-        {
-            return Optional<IMoveState>.Of(_provider.GetWalk());
-        }
     }
-
 }

@@ -5,19 +5,16 @@ using Godot;
 
 public class Jump : IMoveState
 {
-    private readonly float Gravity = (float) ProjectSettings.GetSetting("physics/3d/default_gravity");
-    protected Vector3 AerialVelocity = Vector3.Zero;
-    private Optional<IMoveState> NextState = Optional<IMoveState>.Empty();
-    private IMoveState TargetState;
-
     protected IMoveStateProvider _provider;
     protected readonly Optional<IMoveState> _empty = Optional<IMoveState>.Empty();
-    protected Vector3 _velocity;
+    protected Vector3 AerialVelocity = Vector3.Zero;
+    protected float AdjustedVelocity;
 
     
-    private float JumpHeight = 1.5f;
-    protected float AdjustedVelocity;
-    private float FallMultiplier = 1.8f;
+    private readonly float Gravity = (float) ProjectSettings.GetSetting("physics/3d/default_gravity");
+    private IMoveState TargetState;
+    private const float JumpHeight = 1.5f;
+    private const float FallMultiplier = 1.8f;
 
     public Jump(IMoveStateProvider provider)
     {

@@ -105,7 +105,7 @@ public partial class player : CharacterBody3D, IMoveStateProvider
 	{
 		_moveState = newState;
 		Velocity = _moveState.GetInitialVelocity(Velocity);
-		GD.Print("Changed state to " + _moveState.GetType().Name + " with velocity of " + Velocity);
+		GD.Print("Changed state to " + _moveState.GetType().Name);
 	}
 
     public Walk GetWalk()

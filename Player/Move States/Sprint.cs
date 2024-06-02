@@ -23,11 +23,11 @@ public class Sprint : Walk
     {
         if (!isPlayerOnFloor)
         {
-            return Optional<IMoveState>.Of(_provider.GetFallWith(_velocity, this));
+            return Optional<IMoveState>.Of(_provider.GetFallWith(this));
         }
         if (Input.IsActionJustPressed("jump"))
         {
-            return Optional<IMoveState>.Of(_provider.GetJumpWith(_velocity, this));
+            return Optional<IMoveState>.Of(_provider.GetJumpWith(this));
         }
         else if (!Sprint.IsMovingForward(inputDir) || Input.IsActionJustPressed("sprint"))
         {

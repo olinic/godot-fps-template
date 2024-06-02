@@ -5,7 +5,6 @@ public class Walk : IMoveState
     protected float _speed = 300.0f;
     protected IMoveStateProvider _provider;
     protected readonly Optional<IMoveState> _empty = Optional<IMoveState>.Empty();
-    protected Godot.Vector3 _velocity;
 
     public Walk(IMoveStateProvider provider)
     {
@@ -15,18 +14,14 @@ public class Walk : IMoveState
     public Vector3 GetVelocity(float delta, Vector2 inputDir, Basis playerBasis)
     {
         Vector3 direction = new Vector3(inputDir.X, 0, inputDir.Y).Normalized();
-	    
+	    Vector3 velocity = Vector3.Zero;
         if (direction != Vector3.Zero)
         {
-            _velocity.X = direction.X * _speed * delta;
-            _velocity.Z = direction.Z * _speed * delta;
+            velocity.X = direction.X * _speed * delta;
+            velocity.Z = direction.Z * _speed * delta;
         }
-        else
-        {
-            _velocity = Vector3.Zero;
-        }
-        _velocity = playerBasis * _velocity;
-        return _velocity;
+        velocity = playerBasis * velocity;
+        return velocity;
         
     }   
      
@@ -34,7 +29,7 @@ public class Walk : IMoveState
     {
         if (!isPlayerOnFloor)
         {
-            return Optional<IMoveState>.Of(_provider.GetFallWith(_velocity, this));
+            return Optional<IMoveState>.Of(_provider.GetFallWith(this));
         }
         if (Input.IsActionJustPressed("sprint") && Sprint.IsMovingForward(inputDir))
         {
@@ -42,7 +37,7 @@ public class Walk : IMoveState
         }
         else if(Input.IsActionJustPressed("jump"))
         {
-            return Optional<IMoveState>.Of(_provider.GetJumpWith(_velocity, this));
+            return Optional<IMoveState>.Of(_provider.GetJumpWith(this));
         }
         else
         {

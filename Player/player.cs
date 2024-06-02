@@ -118,19 +118,19 @@ public partial class player : CharacterBody3D, IMoveStateProvider
         return _sprint;
     }
 
-    public Jump GetJumpWith(Vector3 aerialDir, IMoveState targetState)
+    public Jump GetJumpWith(IMoveState targetState)
     {
 		_jump.SetTargetState(targetState);
         return _jump;
     }
 
-	public DoubleJump GetDoubleJumpWith(Vector3 aerialDir, IMoveState targetState)
+	public DoubleJump GetDoubleJumpWith(IMoveState targetState)
     {
 		_doubleJump.SetTargetState(targetState);
         return _doubleJump;
     }
 
-    public Fall GetFallWith(Vector3 currVelocity, IMoveState targetState)
+    public Fall GetFallWith(IMoveState targetState)
     {
 		_fall.SetTargetState(targetState);
         return _fall;

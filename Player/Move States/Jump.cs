@@ -52,10 +52,6 @@ public class Jump : IMoveState
         {
 		    return Optional<IMoveState>.Of(TargetState);
         }
-        else if(Input.IsActionJustPressed("jump"))
-        {
-            return Optional<IMoveState>.Of(_provider.GetDoubleJumpWith(TargetState));
-        }
         else
         {
     	    return _empty;

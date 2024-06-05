@@ -21,7 +21,6 @@ public partial class player : CharacterBody3D, IMoveStateProvider
 	private Walk _walk;
 	private Sprint _sprint;
 	private Jump _jump;
-	private DoubleJump _doubleJump;
 	private Fall _fall;
 
 	private Vector2 MouseMotion = Vector2.Zero;
@@ -31,7 +30,6 @@ public partial class player : CharacterBody3D, IMoveStateProvider
 		_walk = new Walk(this);
 		_sprint = new Sprint(this);
 		_jump = new Jump(this);
-		_doubleJump = new DoubleJump(this);
 		_fall = new Fall(this);
 		ChangeState(_walk);
 	}
@@ -122,12 +120,6 @@ public partial class player : CharacterBody3D, IMoveStateProvider
     {
 		_jump.SetTargetState(targetState);
         return _jump;
-    }
-
-	public DoubleJump GetDoubleJumpWith(IMoveState targetState)
-    {
-		_doubleJump.SetTargetState(targetState);
-        return _doubleJump;
     }
 
     public Fall GetFallWith(IMoveState targetState)

@@ -58,14 +58,4 @@ public class Jumptest{
     {
         AssertBool(Jump.GetNextState(Vector2.Up, false).IsPresent()).IsFalse();
     }
-
-    [TestCase]
-    public void GivenJump_GetNextState_ReturnsDoubleJump()
-    {
-        InputWrapper.ActionPress("jump");
-        Jump.SetTargetState(new Walk(Player));
-        IMoveState DblJump = Jump.GetNextState(Vector2.Up, false).GetValue();
-        AssertObject(DblJump).IsInstanceOf<DoubleJump>();
-        AssertObject(((DoubleJump) DblJump).GetTargetState()).IsInstanceOf<Walk>();  
-    }
 }

@@ -24,6 +24,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 [node name="SmoothCamera" type="Camera3D" parent="CameraController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5889, 0)
 top_level = true
+cull_mask = 1048573
 script = ExtResource("2_s6ifw")
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/SmoothCamera"]

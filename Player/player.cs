@@ -61,6 +61,14 @@ public partial class player : CharacterBody3D, IMoveStateProvider
 		Velocity = _moveState.GetVelocity((float)delta, inputDir, Transform.Basis);
 		_moveState.GetNextState(inputDir, IsOnFloor()).IfPresent(ChangeState);
 		MoveAndSlide();
+		for (int i = 0; i < GetSlideCollisionCount(); i++)
+		{
+			var collision = GetSlideCollision(i);
+			if (((Node)collision.GetCollider()).IsInGroup("NoZone"))
+			{
+				GD.Print("uh oh!");
+			}
+		}
 	}
 
 	public void LookAround(float delta)

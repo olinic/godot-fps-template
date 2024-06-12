@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://1l52toog6a3o"]
+[gd_scene load_steps=10 format=3 uid="uid://1l52toog6a3o"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_yq6do"]
 [ext_resource type="PackedScene" uid="uid://8by78r4lfkdn" path="res://Player/player.tscn" id="2_kbfp0"]
@@ -14,6 +14,8 @@ sky_material = SubResource("ProceduralSkyMaterial_ewpww")
 [sub_resource type="Environment" id="Environment_mll50"]
 background_mode = 2
 sky = SubResource("Sky_cdg7h")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_on1sf"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_yq6do")
@@ -327,3 +329,9 @@ radius = 3.0
 height = 0.5
 sides = 16
 material = ExtResource("4_lqfxj")
+
+[node name="Lower Bound" type="StaticBody3D" parent="." groups=["NoZone"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lower Bound"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+shape = SubResource("WorldBoundaryShape3D_on1sf")

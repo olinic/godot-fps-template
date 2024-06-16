@@ -8,11 +8,6 @@ using System.Threading;
 [TestSuite]
 public class HealthComponentTest
 {
-    private bool HealthDepleted = false;
-    private void OnHealthDepleted()
-    {
-        HealthDepleted = true;
-    }
     [TestCase]
     public void GivenAttack_ApplyDamage_ReducesHealth()
     {
@@ -27,14 +22,12 @@ public class HealthComponentTest
     public async Task GivenHealthReachesZero_ApplyDamage_Deletes()
     {
         HealthComponent health = new HealthComponent();
-        AssertSignal(health).IsNotEmitted("health_depleted");
+        await AssertSignal(health).IsNotEmitted("health_depleted").WithTimeout(100);
         health._Ready();
-        health.health_depleted += OnHealthDepleted;
         Attack attack = new Attack();
         attack.Damage = 1000;
         health.ApplyDamage(attack);
+        await AssertSignal(health).IsEmitted("health_depleted").WithTimeout(100);
         AssertInt(health.Health).IsEqual(0);
-        await AssertSignal(health).IsEmitted("health_depleted").WithTimeout(200);
-        AssertBool(HealthDepleted).IsTrue();
     }
 }

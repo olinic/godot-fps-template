@@ -1,15 +1,16 @@
 using Godot;
-using System;
 
 public partial class HitboxComponent : Node3D
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+	[Export]
+	public HealthComponent health;
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public void ApplyDamage(Attack attack)
 	{
+		// Requirements: Player needs the 
+		// Option 1: Two CollisionShapes (one for hitbox, one for the player)
+		// Option 2: Upon collision, look for the hitbox component among the direct children
+
+		health.ApplyDamage(attack);
 	}
 }

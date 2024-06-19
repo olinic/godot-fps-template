@@ -1,20 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://8by78r4lfkdn"]
+[gd_scene load_steps=10 format=3 uid="uid://8by78r4lfkdn"]
 
 [ext_resource type="Script" path="res://Player/player.cs" id="1_vgjuy"]
 [ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_s6ifw"]
 [ext_resource type="PackedScene" uid="uid://b24ku1p85yyw8" path="res://Weapons/SMG.tscn" id="3_gbn1o"]
 [ext_resource type="Script" path="res://Player/Crosshair.gd" id="3_j7ya5"]
-[ext_resource type="Script" path="res://Player/HealthComponent.cs" id="5_i7kxv"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uggkb"]
+[ext_resource type="PackedScene" uid="uid://dbagux3odyp51" path="res://Player/HealthComponent.tscn" id="5_cwc2g"]
+[ext_resource type="PackedScene" uid="uid://0dsgm8b4840u" path="res://Player/HitboxComponent.tscn" id="6_labdc"]
+[ext_resource type="Script" path="res://Player/HitboxComponent.cs" id="7_edghr"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qf1at"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uggkb"]
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_vgjuy")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_uggkb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_qf1at")
@@ -65,5 +64,17 @@ grow_vertical = 2
 layout_mode = 2
 script = ExtResource("3_j7ya5")
 
-[node name="HealthComponent" type="Node3D" parent="."]
-script = ExtResource("5_i7kxv")
+[node name="HealthComponent" parent="." instance=ExtResource("5_cwc2g")]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("6_labdc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.292233, 0)
+script = ExtResource("7_edghr")
+
+[node name="Hitbox" type="CollisionShape3D" parent="HitboxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.286251, 0)
+shape = SubResource("CapsuleShape3D_uggkb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_uggkb")
+
+[connection signal="body_entered" from="HitboxComponent" to="." method="OnHitboxComponentBodyEntered"]

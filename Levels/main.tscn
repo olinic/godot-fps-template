@@ -1,12 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://1l52toog6a3o"]
+[gd_scene load_steps=10 format=3 uid="uid://1l52toog6a3o"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_yq6do"]
 [ext_resource type="PackedScene" uid="uid://8by78r4lfkdn" path="res://Player/player.tscn" id="2_kbfp0"]
 [ext_resource type="PackedScene" uid="uid://cry7pdahodwk1" path="res://Demo/Demo_Floor.tscn" id="3_ya4a7"]
 [ext_resource type="Material" uid="uid://wnd73sylvq6n" path="res://Levels/Materials/Orange.tres" id="4_lqfxj"]
 [ext_resource type="Material" uid="uid://c76ke5ysg6dao" path="res://Levels/Materials/Grey.tres" id="5_rtmdl"]
-[ext_resource type="Script" path="res://Player/HitboxComponent.cs" id="6_vl1cw"]
-[ext_resource type="Script" path="res://Player/HealthComponent.cs" id="7_voxks"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ewpww"]
 
@@ -337,9 +335,3 @@ material = ExtResource("4_lqfxj")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lower Bound"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 shape = SubResource("WorldBoundaryShape3D_on1sf")
-
-[node name="HitboxComponent" type="Node3D" parent="Lower Bound"]
-script = ExtResource("6_vl1cw")
-
-[node name="HealthComponent" type="Node3D" parent="Lower Bound"]
-script = ExtResource("7_voxks")

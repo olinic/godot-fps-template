@@ -135,4 +135,9 @@ public partial class player : CharacterBody3D, IMoveStateProvider
 		_fall.SetTargetState(targetState);
         return _fall;
     }
+
+	public void OnHitboxComponentBodyEntered(Node3D body)
+	{
+		GD.Print("Entered Area");
+	}
 }

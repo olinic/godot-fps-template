@@ -66,9 +66,10 @@ script = ExtResource("3_j7ya5")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_cwc2g")]
 
-[node name="HitboxComponent" parent="." instance=ExtResource("6_labdc")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health") instance=ExtResource("6_labdc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.292233, 0)
 script = ExtResource("7_edghr")
+health = NodePath("../HealthComponent")
 
 [node name="Hitbox" type="CollisionShape3D" parent="HitboxComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.286251, 0)
@@ -77,4 +78,5 @@ shape = SubResource("CapsuleShape3D_uggkb")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_uggkb")
 
-[connection signal="body_entered" from="HitboxComponent" to="." method="OnHitboxComponentBodyEntered"]
+[connection signal="health_depleted" from="HealthComponent" to="." method="OnHealthComponentHealthDepleted"]
+[connection signal="body_entered" from="HitboxComponent" to="HitboxComponent" method="OnHitboxComponentBodyEntered"]

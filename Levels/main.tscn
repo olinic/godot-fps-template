@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://1l52toog6a3o"]
+[gd_scene load_steps=11 format=3 uid="uid://1l52toog6a3o"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_yq6do"]
 [ext_resource type="PackedScene" uid="uid://8by78r4lfkdn" path="res://Player/player.tscn" id="2_kbfp0"]
 [ext_resource type="PackedScene" uid="uid://cry7pdahodwk1" path="res://Demo/Demo_Floor.tscn" id="3_ya4a7"]
 [ext_resource type="Material" uid="uid://wnd73sylvq6n" path="res://Levels/Materials/Orange.tres" id="4_lqfxj"]
 [ext_resource type="Material" uid="uid://c76ke5ysg6dao" path="res://Levels/Materials/Grey.tres" id="5_rtmdl"]
+[ext_resource type="Script" path="res://Levels/DamageArea.cs" id="6_do4jt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ewpww"]
 
@@ -21,7 +22,7 @@ sky = SubResource("Sky_cdg7h")
 script = ExtResource("1_yq6do")
 
 [node name="Player" parent="." instance=ExtResource("2_kbfp0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02841, 1.97801, 4.89241)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9469, 1.97801, 33.1903)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.449241, 0.893411, 0, -0.893411, -0.449241, -5.09687, 9.87912, -4.43903)
@@ -330,8 +331,9 @@ height = 0.5
 sides = 16
 material = ExtResource("4_lqfxj")
 
-[node name="Lower Bound" type="StaticBody3D" parent="." groups=["NoZone"]]
+[node name="DamageArea" type="StaticBody3D" parent="." groups=["NoZone"]]
+script = ExtResource("6_do4jt")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Lower Bound"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 shape = SubResource("WorldBoundaryShape3D_on1sf")

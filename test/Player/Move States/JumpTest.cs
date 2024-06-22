@@ -5,14 +5,14 @@ using System;
 
 [TestSuite]
 public class Jumptest{
-    private player Player;
+    private Player Player;
     private Jump Jump;
 
     
 
     [Before]
     public void Before(){
-        Player = new player();
+        Player = new Player();
     }
 
     [BeforeTest]

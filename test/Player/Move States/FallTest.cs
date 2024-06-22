@@ -6,13 +6,13 @@ using static GdUnit4.Assertions;
 [TestSuite]
 public class FallTest
 {
-    private player Player;
+    private Player Player;
     private Fall Fall;
 
     [Before]
     public void Before()
     {
-        Player = new player();
+        Player = new Player();
     }
 
     [BeforeTest]

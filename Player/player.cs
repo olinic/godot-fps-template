@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.ComponentModel;
 
-public partial class player : CharacterBody3D, IMoveStateProvider
+public partial class Player : CharacterBody3D, IMoveStateProvider
 {
 	private const float ControllerLookMulitplier = 7; 
 	private const float VerticalLookLowerLimit = -90; 
@@ -25,7 +25,7 @@ public partial class player : CharacterBody3D, IMoveStateProvider
 
 	private Vector2 MouseMotion = Vector2.Zero;
 
-	public player()
+	public Player()
 	{
 		_walk = new Walk(this);
 		_sprint = new Sprint(this);

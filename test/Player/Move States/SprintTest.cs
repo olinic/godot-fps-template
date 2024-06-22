@@ -6,12 +6,12 @@ using static GdUnit4.Assertions;
 
 [TestSuite]
 public class SprintTest{
-    private player Player;
+    private Player Player;
     private Sprint Sprint;
 
     [Before]
     public void Before(){
-        Player = new player();
+        Player = new Player();
     }
 
     [BeforeTest]

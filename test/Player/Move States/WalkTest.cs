@@ -5,13 +5,13 @@ using static GdUnit4.Assertions;
 [TestSuite]
 public class WalkTest
 {
-    private player Player;
+    private Player Player;
     private Walk Walk;
 
     [Before]
     public void Before()
     {
-        Player = new player();
+        Player = new Player();
     }
 
     [BeforeTest]

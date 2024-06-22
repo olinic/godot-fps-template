@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://8by78r4lfkdn"]
 
-[ext_resource type="Script" path="res://Player/player.cs" id="1_vgjuy"]
+[ext_resource type="Script" path="res://Player/Player.cs" id="1_vgjuy"]
 [ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_s6ifw"]
 [ext_resource type="PackedScene" uid="uid://b24ku1p85yyw8" path="res://Weapons/SMG.tscn" id="3_gbn1o"]
 [ext_resource type="Script" path="res://Player/Crosshair.gd" id="3_j7ya5"]

@@ -2,8 +2,7 @@ using Godot;
 using GdUnit4;
 using static GdUnit4.Assertions;
 using System.Threading.Tasks;
-using System.Threading;
-
+using static TestUtils.SignalTester;
 
 [TestSuite]
 public class HealthComponentTest
@@ -22,12 +21,10 @@ public class HealthComponentTest
     public async Task GivenHealthReachesZero_ApplyDamage_Deletes()
     {
         HealthComponent health = new HealthComponent();
-        await AssertSignal(health).IsNotEmitted("health_depleted").WithTimeout(100);
         health._Ready();
         Attack attack = new Attack();
         attack.Damage = 1000;
-        health.ApplyDamage(attack);
-        await AssertSignal(health).IsEmitted("health_depleted").WithTimeout(100);
+        await AssertSignalEmitted("health_depleted", () => health.ApplyDamage(attack)).On(health);
         AssertInt(health.Health).IsEqual(0);
     }
 }

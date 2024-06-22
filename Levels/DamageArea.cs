@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class DamageArea : Area3D, ICanAttack
+public partial class DamageArea : Node3D, ICanAttack
 {
     public Attack GetAttack()
     {

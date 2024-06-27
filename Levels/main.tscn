@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://1l52toog6a3o"]
+[gd_scene load_steps=12 format=3 uid="uid://1l52toog6a3o"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_yq6do"]
 [ext_resource type="PackedScene" uid="uid://8by78r4lfkdn" path="res://Player/player.tscn" id="2_kbfp0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://wnd73sylvq6n" path="res://Levels/Materials/Orange.tres" id="4_lqfxj"]
 [ext_resource type="Material" uid="uid://c76ke5ysg6dao" path="res://Levels/Materials/Grey.tres" id="5_rtmdl"]
 [ext_resource type="Script" path="res://Levels/DamageArea.cs" id="6_do4jt"]
+[ext_resource type="PackedScene" uid="uid://c50syaf06uecf" path="res://Enemy/enemy.tscn" id="7_dsd2v"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ewpww"]
 
@@ -337,3 +338,6 @@ script = ExtResource("6_do4jt")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 shape = SubResource("WorldBoundaryShape3D_on1sf")
+
+[node name="Enemy" parent="." instance=ExtResource("7_dsd2v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.68994, 2.01188, 0)

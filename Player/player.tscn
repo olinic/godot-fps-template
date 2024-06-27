@@ -30,10 +30,10 @@ script = ExtResource("2_s6ifw")
 [node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/SmoothCamera"]
 update_mode = 1
 
-[node name="SMG" parent="CameraController/SmoothCamera" instance=ExtResource("3_gbn1o")]
-
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraController/SmoothCamera"]
 remote_path = NodePath("../../../SubViewportContainer/SubViewport/Weapon Camera")
+
+[node name="SMG" parent="CameraController/SmoothCamera" instance=ExtResource("3_gbn1o")]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15

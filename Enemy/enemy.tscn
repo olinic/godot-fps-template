@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3 uid="uid://c50syaf06uecf"]
+
+[ext_resource type="Script" path="res://Enemy/enemy.cs" id="1_w4er2"]
+[ext_resource type="PackedScene" uid="uid://dbagux3odyp51" path="res://Player/HealthComponent.tscn" id="2_q8tcm"]
+[ext_resource type="PackedScene" uid="uid://0dsgm8b4840u" path="res://Player/HitboxComponent.tscn" id="3_a26rv"]
+[ext_resource type="Script" path="res://Player/HitboxComponent.cs" id="4_2n5tf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mh6nu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxivp"]
+albedo_color = Color(0.500741, 1.2153e-06, 1.44392e-07, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_acfsn"]
+material = SubResource("StandardMaterial3D_rxivp")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r0kmt"]
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_w4er2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_mh6nu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_acfsn")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_q8tcm")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_a26rv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.292233, 0)
+script = ExtResource("4_2n5tf")
+health = NodePath("../HealthComponent")
+
+[node name="Hitbox" type="CollisionShape3D" parent="HitboxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.286251, 0)
+shape = SubResource("CapsuleShape3D_r0kmt")

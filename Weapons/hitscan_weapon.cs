@@ -39,24 +39,22 @@ public partial class hitscan_weapon : Node3D, ICanAttack
        
         _WeaponMesh.Position = _WeaponMesh.Position.Lerp(_WeaponPosition, (float)delta * 10.0f);
 	}
-    public Attack GetAttack()
-    {
-        return new Attack()
-        {
-            Damage = 100
-        };
-    }
-    public HealthComponent health;
 	 private void Shoot()
     {
         
         _CooldownTimer.Start(1.0f / _FireRate);
-        if(_RayCast3D.GetCollider() is HitboxComponent enemy)
+        if(_RayCast3D.GetCollider() is ICanTakeDamage target)
         {
             GD.PrintT("Weapon Fired!", _RayCast3D.GetCollider());
             
-            enemy.ApplyDamage(new Attack() { Damage = 100});
+            target.ApplyDamage(GetAttack());
         }
         _WeaponMesh.Position = _WeaponMesh.Position with { Z = _WeaponMesh.Position.Z + _Recoil};
     }
+
+    public Attack GetAttack()
+    {
+        return new Attack() { Damage = 100};
+    }
+
 }

@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class HitboxComponent : Node3D
+public partial class HitboxComponent : Node3D, ICanTakeDamage
 {
 	[Export]
 	public HealthComponent health;

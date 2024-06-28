@@ -1,7 +1,8 @@
 using Godot;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 
-public partial class hitscan_weapon : Node3D
+public partial class hitscan_weapon : Node3D, ICanAttack
 {
 	[Export]
     private float _FireRate = 14.0f;
@@ -38,10 +39,24 @@ public partial class hitscan_weapon : Node3D
        
         _WeaponMesh.Position = _WeaponMesh.Position.Lerp(_WeaponPosition, (float)delta * 10.0f);
 	}
+    public Attack GetAttack()
+    {
+        return new Attack()
+        {
+            Damage = 100
+        };
+    }
+    public HealthComponent health;
 	 private void Shoot()
     {
+        
         _CooldownTimer.Start(1.0f / _FireRate);
-        GD.PrintT("Weapon Fired!", _RayCast3D.GetCollider());
+        if(_RayCast3D.GetCollider() is HitboxComponent enemy)
+        {
+            GD.PrintT("Weapon Fired!", _RayCast3D.GetCollider());
+            
+            enemy.ApplyDamage(new Attack() { Damage = 100});
+        }
         _WeaponMesh.Position = _WeaponMesh.Position with { Z = _WeaponMesh.Position.Z + _Recoil};
     }
 }

@@ -10,7 +10,15 @@ public partial class HitboxComponent : Node3D
 		
 		if (body is ICanAttack attacker)
 		{
+			//GD.Print("Doing Damage!");
 			health.ApplyDamage(attacker.GetAttack());
 		}
+	}
+	public void ApplyDamage(Attack attack)
+	{
+		
+			GD.Print("Doing Damage!");
+			health.ApplyDamage(attack);
+		
 	}
 }

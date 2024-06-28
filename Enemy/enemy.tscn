@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c50syaf06uecf"]
 
-[ext_resource type="Script" path="res://Enemy/enemy.cs" id="1_w4er2"]
+[ext_resource type="Script" path="res://Enemy/Enemy.cs" id="1_w4er2"]
 [ext_resource type="PackedScene" uid="uid://dbagux3odyp51" path="res://Player/HealthComponent.tscn" id="2_q8tcm"]
 [ext_resource type="PackedScene" uid="uid://0dsgm8b4840u" path="res://Player/HitboxComponent.tscn" id="3_a26rv"]
 [ext_resource type="Script" path="res://Player/HitboxComponent.cs" id="4_2n5tf"]
@@ -34,3 +34,5 @@ health = NodePath("../HealthComponent")
 [node name="Hitbox" type="CollisionShape3D" parent="HitboxComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.286251, 0)
 shape = SubResource("CapsuleShape3D_r0kmt")
+
+[connection signal="health_depleted" from="HealthComponent" to="." method="OnHealthComponentHealthDepleted"]

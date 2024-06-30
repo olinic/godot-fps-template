@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class HealthBar : TextureProgressBar
+public partial class HealthBar : ProgressBar
 {
 
     public void OnHealthComponentHealthChanged(Health health)

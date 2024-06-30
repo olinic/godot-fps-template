@@ -36,9 +36,15 @@ health = NodePath("../HealthComponent")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.286251, 0)
 shape = SubResource("CapsuleShape3D_r0kmt")
 
-[node name="HealthBar" type="TextureProgressBar" parent="."]
-offset_right = 287.0
-offset_bottom = 40.0
+[node name="HealthBar" type="ProgressBar" parent="."]
+modulate = Color(1, 0, 0, 1)
+show_behind_parent = true
+anchors_preset = -1
+offset_left = 3.0
+offset_right = 290.0
+offset_bottom = 28.0
+value = 100.0
+show_percentage = false
 script = ExtResource("5_gdi7j")
 
 [connection signal="health_changed" from="HealthComponent" to="HealthBar" method="OnHealthComponentHealthChanged"]

@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class HealthComponent : Node3D, ICanTakeDamage
 {
@@ -7,25 +6,35 @@ public partial class HealthComponent : Node3D, ICanTakeDamage
 	
 	[Signal]
 	public delegate void health_depletedEventHandler();
+
+	[Signal]
+	public delegate void health_changedEventHandler(Health health);
+
+	private Health _health;
+
+	public override void _Ready()
+	{
+		_health = new Health() 
+		{
+			Value = MAX_HEALTH,
+			Max = MAX_HEALTH
+		};
+	}
+
 	public void ApplyDamage(Attack attack)
 	{
-		_health -= attack.Damage; 
-		if(_health <= 0)
+		_health.Value -= attack.Damage;
+		_health.Value = Mathf.Clamp(_health.Value, 0, _health.Max);
+		EmitSignal(SignalName.health_changed, _health);
+		if(_health.Value == 0)
 		{
 			EmitSignal(SignalName.health_depleted);
 		}
 	}
 
-	private int _health;
-	public int Health 
+	
+	public Health Health 
 	{
 		get{ return _health; }
 	}
-
-	public override void _Ready()
-	{
-		_health = MAX_HEALTH;
-	}
-	
-	
 }

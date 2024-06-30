@@ -15,7 +15,7 @@ public class HealthComponentTest
         Attack attack = new Attack();
         attack.Damage = 300;
         health.ApplyDamage(attack);
-        AssertInt(health.Health).IsEqual(700);
+        AssertInt(health.Health.Value).IsEqual(700);
     }
     [TestCase]
     public async Task GivenHealthReachesZero_ApplyDamage_Deletes()
@@ -25,6 +25,6 @@ public class HealthComponentTest
         Attack attack = new Attack();
         attack.Damage = 1000;
         await AssertSignalEmitted("health_depleted", () => health.ApplyDamage(attack)).On(health);
-        AssertInt(health.Health).IsEqual(0);
+        AssertInt(health.Health.Value).IsEqual(0);
     }
 }

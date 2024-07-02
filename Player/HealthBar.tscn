@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cihcnaryq5wt5"]
+
+[ext_resource type="Script" path="res://Player/HealthBar.cs" id="1_8qedv"]
+[ext_resource type="Script" path="res://Player/HealthBarProgress.cs" id="2_7sb3n"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fmjh4"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Sprite3D" type="Sprite3D" node_paths=PackedStringArray("progress")]
+billboard = 1
+double_sided = false
+texture = SubResource("ViewportTexture_fmjh4")
+script = ExtResource("1_8qedv")
+progress = NodePath("SubViewport/HealthBarProgress")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(291, 29)
+
+[node name="HealthBarProgress" type="ProgressBar" parent="SubViewport"]
+modulate = Color(1, 0, 0, 1)
+show_behind_parent = true
+offset_left = 3.0
+offset_right = 290.0
+offset_bottom = 28.0
+value = 100.0
+show_percentage = false
+script = ExtResource("2_7sb3n")

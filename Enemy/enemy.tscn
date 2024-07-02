@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c50syaf06uecf"]
+[gd_scene load_steps=11 format=3 uid="uid://c50syaf06uecf"]
 
 [ext_resource type="Script" path="res://Enemy/Enemy.cs" id="1_w4er2"]
 [ext_resource type="PackedScene" uid="uid://dbagux3odyp51" path="res://Player/HealthComponent.tscn" id="2_q8tcm"]
 [ext_resource type="PackedScene" uid="uid://0dsgm8b4840u" path="res://Player/HitboxComponent.tscn" id="3_a26rv"]
 [ext_resource type="Script" path="res://Player/HitboxComponent.cs" id="4_2n5tf"]
-[ext_resource type="Script" path="res://Enemy/HealthBar.cs" id="5_gdi7j"]
+[ext_resource type="PackedScene" uid="uid://cihcnaryq5wt5" path="res://Player/HealthBar.tscn" id="5_84gxg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mh6nu"]
 
@@ -15,6 +15,9 @@ albedo_color = Color(0.500741, 1.2153e-06, 1.44392e-07, 1)
 material = SubResource("StandardMaterial3D_rxivp")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r0kmt"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_iff47"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_w4er2")
@@ -36,16 +39,9 @@ health = NodePath("../HealthComponent")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.286251, 0)
 shape = SubResource("CapsuleShape3D_r0kmt")
 
-[node name="HealthBar" type="ProgressBar" parent="."]
-modulate = Color(1, 0, 0, 1)
-show_behind_parent = true
-anchors_preset = -1
-offset_left = 3.0
-offset_right = 290.0
-offset_bottom = 28.0
-value = 100.0
-show_percentage = false
-script = ExtResource("5_gdi7j")
+[node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("5_84gxg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28496, 0)
+texture = SubResource("ViewportTexture_iff47")
+HealthComponent = NodePath("../HealthComponent")
 
-[connection signal="health_changed" from="HealthComponent" to="HealthBar" method="OnHealthComponentHealthChanged"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="OnHealthComponentHealthDepleted"]

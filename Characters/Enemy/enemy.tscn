@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://c50syaf06uecf"]
 
-[ext_resource type="Script" path="res://Enemy/Enemy.cs" id="1_w4er2"]
-[ext_resource type="PackedScene" uid="uid://dbagux3odyp51" path="res://Player/HealthComponent.tscn" id="2_q8tcm"]
-[ext_resource type="PackedScene" uid="uid://0dsgm8b4840u" path="res://Player/HitboxComponent.tscn" id="3_a26rv"]
-[ext_resource type="Script" path="res://Player/HitboxComponent.cs" id="4_2n5tf"]
-[ext_resource type="PackedScene" uid="uid://cihcnaryq5wt5" path="res://Player/HealthBar.tscn" id="5_84gxg"]
+[ext_resource type="Script" path="res://Characters/Enemy/Enemy.cs" id="1_w4er2"]
+[ext_resource type="PackedScene" uid="uid://dbagux3odyp51" path="res://Characters/Health/HealthComponent.tscn" id="2_q8tcm"]
+[ext_resource type="PackedScene" uid="uid://0dsgm8b4840u" path="res://Characters/HitboxComponent.tscn" id="3_a26rv"]
+[ext_resource type="Script" path="res://Characters/HitboxComponent.cs" id="4_2n5tf"]
+[ext_resource type="PackedScene" uid="uid://cihcnaryq5wt5" path="res://Characters/Health/HealthBar.tscn" id="5_84gxg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mh6nu"]
 

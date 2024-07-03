@@ -58,17 +58,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5889, 0)
 cull_mask = 2
 current = true
 
-[node name="WeaponHandler" type="Node3D" parent="SubViewportContainer/SubViewport/Weapon Camera" node_paths=PackedStringArray("primary", "secondary", "AmmoLabel")]
+[node name="WeaponHandler" type="Node3D" parent="SubViewportContainer/SubViewport/Weapon Camera" node_paths=PackedStringArray("primary", "secondary", "_CooldownTimer", "AmmoLabel")]
 script = ExtResource("3_blyuh")
 primary = NodePath("SMG")
 secondary = NodePath("Rifle")
+_CooldownTimer = NodePath("CooldownTimer")
 AmmoLabel = NodePath("../../../../MarginContainer/AmmoLabel")
 
 [node name="Rifle" parent="SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler" instance=ExtResource("3_l8g2k")]
+FireRate = 144.0
 AmmoCapacity = 6
+WeaponType = 1
 
 [node name="SMG" parent="SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler" instance=ExtResource("5_uaofy")]
+FireRate = 14.0
+_Recoil = 0.05
 AmmoCapacity = 20
+
+[node name="CooldownTimer" type="Timer" parent="SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler"]
+one_shot = true
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15

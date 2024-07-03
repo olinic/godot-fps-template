@@ -8,7 +8,8 @@ public partial class WeaponHandler: Node3D
     private hitscan_weapon primary;
     [Export] 
     private hitscan_weapon secondary;
-
+    [Export]
+    private Timer _CooldownTimer;
     private hitscan_weapon _EquippedWeapon;
     
     [Export]
@@ -18,6 +19,33 @@ public partial class WeaponHandler: Node3D
     {
         Equip(primary);
         UnEquip(secondary);
+    }
+    public override void _PhysicsProcess(double delta)
+    {
+
+        if(_EquippedWeapon.WeaponType == FireMode.Auto)
+        {
+            if(Input.IsActionPressed("fire"))
+            {
+                shoot(delta);
+            }
+        }
+        else
+        {
+            if(Input.IsActionJustPressed("fire"))
+            {
+               shoot(delta);
+            }
+        }
+    }
+    public void shoot(double delta)
+    {
+        if(_CooldownTimer.IsStopped() && _EquippedWeapon.AmmoCapacity > 0)
+        {
+            _EquippedWeapon.Shoot(delta);
+            _CooldownTimer.Start(1.0f / _EquippedWeapon.FireRate);
+        }
+        UpdateAmmoLabel(_EquippedWeapon.GetAmmoCount());
     }
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -38,6 +66,7 @@ public partial class WeaponHandler: Node3D
     }
     public void Equip(hitscan_weapon active_weapon)
     {
+        _EquippedWeapon = active_weapon;
         UpdateAmmoLabel(active_weapon.GetAmmoCount());
         active_weapon.Visible = true;
         active_weapon.SetProcess(true);
@@ -71,4 +100,5 @@ public partial class WeaponHandler: Node3D
     {
         AmmoLabel.Text = ammoCount.ToString();
     }
+    
 }

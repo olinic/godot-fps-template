@@ -1,5 +1,5 @@
 public interface IGun
 {
-    public void Shoot();
+    public void Shoot(double delta);
     public int GetAmmoCount();
 }

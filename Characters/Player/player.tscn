@@ -78,5 +78,24 @@ shape = SubResource("CapsuleShape3D_uggkb")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_uggkb")
 
+[node name="HUD" type="Node3D" parent="."]
+
+[node name="AmmoTracker" type="RichTextLabel" parent="HUD"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -44.9438
+offset_top = -55.5208
+offset_right = -4.94385
+offset_bottom = -15.5208
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 26
+text = "25"
+scroll_active = false
+autowrap_mode = 0
+
 [connection signal="health_depleted" from="HealthComponent" to="." method="OnHealthComponentHealthDepleted"]
 [connection signal="body_entered" from="HitboxComponent" to="HitboxComponent" method="OnHitboxComponentBodyEntered"]

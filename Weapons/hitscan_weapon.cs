@@ -1,8 +1,6 @@
 using Godot;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
 
-public partial class hitscan_weapon : Node3D, ICanAttack
+public partial class hitscan_weapon : Node3D, IGun, ICanAttack
 {
 	[Export]
     private float _FireRate = 14.0f;
@@ -10,6 +8,8 @@ public partial class hitscan_weapon : Node3D, ICanAttack
     private float _Recoil = 0.05f;
     [Export]
     private Node3D _WeaponMesh;
+    [Export]
+    private int _AmmoCapacity = 20;
 
     private Timer _CooldownTimer;
     private Vector3 _WeaponPosition;
@@ -39,7 +39,8 @@ public partial class hitscan_weapon : Node3D, ICanAttack
        
         _WeaponMesh.Position = _WeaponMesh.Position.Lerp(_WeaponPosition, (float)delta * 10.0f);
 	}
-	 private void Shoot()
+
+	public void Shoot()
     {
         
         _CooldownTimer.Start(1.0f / _FireRate);
@@ -57,4 +58,8 @@ public partial class hitscan_weapon : Node3D, ICanAttack
         return new Attack() { Damage = 100};
     }
 
+    public int GetAmmoCount()
+    {
+        return _AmmoCapacity;
+    }
 }

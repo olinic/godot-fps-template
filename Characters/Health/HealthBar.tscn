@@ -14,14 +14,14 @@ script = ExtResource("1_qtyx8")
 progress = NodePath("SubViewport/HealthBarProgress")
 
 [node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(291, 29)
+disable_3d = true
+size = Vector2i(287, 29)
 
 [node name="HealthBarProgress" type="ProgressBar" parent="SubViewport"]
 modulate = Color(1, 0, 0, 1)
-show_behind_parent = true
-offset_left = 3.0
-offset_right = 290.0
+offset_right = 287.0
 offset_bottom = 28.0
+step = 1.0
 value = 100.0
 show_percentage = false
 script = ExtResource("2_axxwt")

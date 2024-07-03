@@ -11,9 +11,9 @@ public partial class WeaponHandler: Node3D
     [Export]
     private Timer _CooldownTimer;
     private hitscan_weapon _EquippedWeapon;
-    
-    [Export]
-    public Label AmmoLabel;
+
+    [Signal]
+	public delegate void ammo_updateEventHandler(int ammoCount);
 
     public override void _Ready()
     {
@@ -98,7 +98,8 @@ public partial class WeaponHandler: Node3D
     }
     public void UpdateAmmoLabel(int ammoCount)
     {
-        AmmoLabel.Text = ammoCount.ToString();
+        //AmmoLabel.Text = ammoCount.ToString();
+        EmitSignal(SignalName.ammo_update, ammoCount);
     }
     
 }

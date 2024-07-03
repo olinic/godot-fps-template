@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://8by78r4lfkdn"]
+[gd_scene load_steps=14 format=3 uid="uid://8by78r4lfkdn"]
 
 [ext_resource type="Script" path="res://Characters/Player/Player.cs" id="1_vgjuy"]
 [ext_resource type="Script" path="res://Characters/Player/SmoothCamera.gd" id="2_s6ifw"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b24ku1p85yyw8" path="res://Weapons/SMG.tscn" id="5_uaofy"]
 [ext_resource type="PackedScene" uid="uid://0dsgm8b4840u" path="res://Characters/HitboxComponent.tscn" id="6_labdc"]
 [ext_resource type="Script" path="res://Characters/HitboxComponent.cs" id="7_edghr"]
+[ext_resource type="Script" path="res://Characters/Player/AmmoLabel.cs" id="10_wunak"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qf1at"]
 
@@ -142,6 +143,8 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "999"
 label_settings = SubResource("LabelSettings_ds0l4")
+script = ExtResource("10_wunak")
 
+[connection signal="ammo_update" from="SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler" to="MarginContainer/AmmoLabel" method="OnWeaponHandlerAmmoUpdate"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="OnHealthComponentHealthDepleted"]
 [connection signal="body_entered" from="HitboxComponent" to="HitboxComponent" method="OnHitboxComponentBodyEntered"]

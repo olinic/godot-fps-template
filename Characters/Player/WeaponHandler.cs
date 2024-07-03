@@ -3,10 +3,10 @@ using Godot;
 
 public partial class WeaponHandler: Node3D
 {
-    [ExportGroup("My Weapons")]
-    [Export] 
+    
+  
     private hitscan_weapon primary;
-    [Export] 
+ 
     private hitscan_weapon secondary;
     [Export]
     private Timer _CooldownTimer;
@@ -17,6 +17,11 @@ public partial class WeaponHandler: Node3D
 
     public override void _Ready()
     {
+        primary = (hitscan_weapon) GD.Load<PackedScene>("res://Weapons/SMG.tscn").Instantiate();
+        secondary = (hitscan_weapon) GD.Load<PackedScene>("res://Weapons/Rifle.tscn").Instantiate();
+        AddChild(primary);
+        AddChild(secondary);
+
         Equip(primary);
         UnEquip(secondary);
     }

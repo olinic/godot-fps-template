@@ -42,15 +42,20 @@ public partial class WeaponHandler: Node3D
                shoot(delta);
             }
         }
+        if(Input.IsActionJustPressed("reload"))
+        {
+            _EquippedWeapon.Reload();
+            UpdateAmmoLabel(_EquippedWeapon.GetAmmoCapacity(), _EquippedWeapon.GetCurrentAmmo());
+        }
     }
     public void shoot(double delta)
     {
-        if(_CooldownTimer.IsStopped() && _EquippedWeapon.AmmoCapacity > 0)
+        if(_CooldownTimer.IsStopped() && _EquippedWeapon.CurrentAmmo > 0)
         {
             _EquippedWeapon.Shoot(delta);
             _CooldownTimer.Start(1.0f / _EquippedWeapon.FireRate);
         }
-        UpdateAmmoLabel(_EquippedWeapon.GetAmmoCount());
+        UpdateAmmoLabel(_EquippedWeapon.GetAmmoCapacity(), _EquippedWeapon.GetCurrentAmmo());
     }
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -72,7 +77,7 @@ public partial class WeaponHandler: Node3D
     public void Equip(hitscan_weapon active_weapon)
     {
         _EquippedWeapon = active_weapon;
-        UpdateAmmoLabel(active_weapon.GetAmmoCount());
+        UpdateAmmoLabel(active_weapon.GetAmmoCapacity(), active_weapon.GetCurrentAmmo());
         active_weapon.Visible = true;
         active_weapon.SetProcess(true);
     }
@@ -97,14 +102,12 @@ public partial class WeaponHandler: Node3D
         //     {
         //         child.Visible = true;
         //         child.SetProcess(true);
-        //     }
-            
+        //     }  
         // }
     }
-    public void UpdateAmmoLabel(int ammoCount)
+    public void UpdateAmmoLabel(int AmmoCapacity, int CurrentAmmo)
     {
         //AmmoLabel.Text = ammoCount.ToString();
-        EmitSignal(SignalName.ammo_update, ammoCount);
+        EmitSignal(SignalName.ammo_update, AmmoCapacity, CurrentAmmo);
     }
-    
 }

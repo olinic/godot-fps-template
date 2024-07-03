@@ -3,8 +3,8 @@ using System;
 
 public partial class AmmoLabel : Label
 {
-	public void OnWeaponHandlerAmmoUpdate(int ammoCount)
+	public void OnWeaponHandlerAmmoUpdate(int AmmoCapacity, int CurrentAmmo)
 	{
-		Text = ammoCount.ToString();
+		Text = CurrentAmmo.ToString() + "/" + AmmoCapacity.ToString();
 	}
 }

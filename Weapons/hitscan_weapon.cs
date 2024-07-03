@@ -8,8 +8,9 @@ public partial class hitscan_weapon : Node3D, IGun, ICanAttack
     private float _Recoil = 0.05f;
     [Export]
     private Node3D _WeaponMesh;
+    
     [Export]
-    private int _AmmoCapacity = 20;
+    public int AmmoCapacity;
     [Export]
     private int _Damage;
     [Export]
@@ -38,7 +39,7 @@ public partial class hitscan_weapon : Node3D, IGun, ICanAttack
         {
             if(Input.IsActionPressed("fire"))
             {
-                if(_CooldownTimer.IsStopped())
+                if(_CooldownTimer.IsStopped() && AmmoCapacity > 0)
                 {
                     Shoot();
                 }
@@ -48,7 +49,7 @@ public partial class hitscan_weapon : Node3D, IGun, ICanAttack
         {
             if(Input.IsActionJustPressed("fire"))
             {
-               if(_CooldownTimer.IsStopped())
+               if(_CooldownTimer.IsStopped() && AmmoCapacity > 0)
                 {
                     Shoot();
                 } 
@@ -60,7 +61,7 @@ public partial class hitscan_weapon : Node3D, IGun, ICanAttack
 
 	public void Shoot()
     {
-        SetAmmoCount(GetAmmoCount() - 1);
+        AmmoCapacity--;
         _CooldownTimer.Start(1.0f / _FireRate);
         if(_RayCast3D.GetCollider() is ICanTakeDamage target)
         {
@@ -78,10 +79,7 @@ public partial class hitscan_weapon : Node3D, IGun, ICanAttack
 
     public int GetAmmoCount()
     {
-        return _AmmoCapacity;
+        return AmmoCapacity;
     }
-    public void SetAmmoCount(int AmmoCapacity)
-    {
-        this._AmmoCapacity = AmmoCapacity;
-    }
+    
 }

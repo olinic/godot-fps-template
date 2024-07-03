@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://8by78r4lfkdn"]
+[gd_scene load_steps=13 format=3 uid="uid://8by78r4lfkdn"]
 
 [ext_resource type="Script" path="res://Characters/Player/Player.cs" id="1_vgjuy"]
 [ext_resource type="Script" path="res://Characters/Player/SmoothCamera.gd" id="2_s6ifw"]
@@ -14,6 +14,9 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uggkb"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_ds0l4"]
+font_size = 64
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_vgjuy")
 
@@ -27,6 +30,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5889, 0)
 top_level = true
 cull_mask = 1048573
+current = true
 script = ExtResource("2_s6ifw")
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/SmoothCamera"]
@@ -52,15 +56,19 @@ render_target_update_mode = 4
 [node name="Weapon Camera" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5889, 0)
 cull_mask = 2
+current = true
 
-[node name="WeaponHandler" type="Node3D" parent="SubViewportContainer/SubViewport/Weapon Camera" node_paths=PackedStringArray("weapon_1", "weapon_2")]
+[node name="WeaponHandler" type="Node3D" parent="SubViewportContainer/SubViewport/Weapon Camera" node_paths=PackedStringArray("primary", "secondary", "AmmoLabel")]
 script = ExtResource("3_blyuh")
-weapon_1 = NodePath("SMG")
-weapon_2 = NodePath("Rifle")
+primary = NodePath("SMG")
+secondary = NodePath("Rifle")
+AmmoLabel = NodePath("../../../../MarginContainer/AmmoLabel")
 
 [node name="Rifle" parent="SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler" instance=ExtResource("3_l8g2k")]
+AmmoCapacity = 6
 
 [node name="SMG" parent="SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler" instance=ExtResource("5_uaofy")]
+AmmoCapacity = 20
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
@@ -90,6 +98,7 @@ shape = SubResource("CapsuleShape3D_uggkb")
 [node name="HUD" type="Node3D" parent="."]
 
 [node name="AmmoTracker" type="RichTextLabel" parent="HUD"]
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -105,6 +114,26 @@ theme_override_font_sizes/normal_font_size = 26
 text = "25"
 scroll_active = false
 autowrap_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="AmmoLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "999"
+label_settings = SubResource("LabelSettings_ds0l4")
 
 [connection signal="health_depleted" from="HealthComponent" to="." method="OnHealthComponentHealthDepleted"]
 [connection signal="body_entered" from="HitboxComponent" to="HitboxComponent" method="OnHitboxComponentBodyEntered"]

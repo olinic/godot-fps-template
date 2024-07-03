@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://3k37y08uy0sn"]
+
+[ext_resource type="PackedScene" uid="uid://cqomnalqqa2oj" path="res://Weapons/hitscan_weapon.tscn" id="1_61ton"]
+[ext_resource type="PackedScene" uid="uid://cxtthr1judv1w" path="res://Weapons/Rifle.glb" id="2_0gvqw"]
+
+[node name="Rifle" node_paths=PackedStringArray("_WeaponMesh") instance=ExtResource("1_61ton")]
+_FireRate = 8.0
+_Recoil = 0.3
+_WeaponMesh = NodePath("Rifle")
+_Damage = 334
+_WeaponType = 1
+
+[node name="Rifle" parent="." index="2" instance=ExtResource("2_0gvqw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.35, -1)
+
+[node name="Part_104" parent="Rifle" index="0"]
+layers = 2
+
+[node name="Gun butt_018" parent="Rifle" index="1"]
+layers = 2
+
+[node name="Part_106" parent="Rifle" index="2"]
+layers = 2
+
+[node name="Grip_027" parent="Rifle" index="3"]
+layers = 2
+
+[node name="Part_108" parent="Rifle" index="4"]
+layers = 2
+
+[node name="Scope_022" parent="Rifle" index="5"]
+layers = 2
+
+[node name="Scope_023" parent="Rifle" index="6"]
+layers = 2
+
+[node name="Extra accessories_008" parent="Rifle" index="7"]
+layers = 2
+
+[node name="Part_112" parent="Rifle" index="8"]
+layers = 2
+
+[node name="Part_113" parent="Rifle" index="9"]
+layers = 2
+
+[node name="Muzzle breaks" parent="Rifle" index="10"]
+layers = 2
+
+[editable path="Rifle"]

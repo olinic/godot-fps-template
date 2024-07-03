@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://8by78r4lfkdn"]
+[gd_scene load_steps=12 format=3 uid="uid://8by78r4lfkdn"]
 
 [ext_resource type="Script" path="res://Characters/Player/Player.cs" id="1_vgjuy"]
 [ext_resource type="Script" path="res://Characters/Player/SmoothCamera.gd" id="2_s6ifw"]
-[ext_resource type="PackedScene" uid="uid://b24ku1p85yyw8" path="res://Weapons/SMG.tscn" id="3_gbn1o"]
+[ext_resource type="Script" path="res://Characters/Player/WeaponHandler.cs" id="3_blyuh"]
 [ext_resource type="Script" path="res://Characters/Player/Crosshair.gd" id="3_j7ya5"]
+[ext_resource type="PackedScene" uid="uid://3k37y08uy0sn" path="res://Weapons/Rifle.tscn" id="3_l8g2k"]
 [ext_resource type="PackedScene" uid="uid://dbagux3odyp51" path="res://Characters/Health/HealthComponent.tscn" id="5_cwc2g"]
+[ext_resource type="PackedScene" uid="uid://b24ku1p85yyw8" path="res://Weapons/SMG.tscn" id="5_uaofy"]
 [ext_resource type="PackedScene" uid="uid://0dsgm8b4840u" path="res://Characters/HitboxComponent.tscn" id="6_labdc"]
 [ext_resource type="Script" path="res://Characters/HitboxComponent.cs" id="7_edghr"]
 
@@ -33,8 +35,6 @@ update_mode = 1
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraController/SmoothCamera"]
 remote_path = NodePath("../../../SubViewportContainer/SubViewport/Weapon Camera")
 
-[node name="SMG" parent="CameraController/SmoothCamera" instance=ExtResource("3_gbn1o")]
-
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,6 +52,15 @@ render_target_update_mode = 4
 [node name="Weapon Camera" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5889, 0)
 cull_mask = 2
+
+[node name="WeaponHandler" type="Node3D" parent="SubViewportContainer/SubViewport/Weapon Camera" node_paths=PackedStringArray("weapon_1", "weapon_2")]
+script = ExtResource("3_blyuh")
+weapon_1 = NodePath("SMG")
+weapon_2 = NodePath("Rifle")
+
+[node name="Rifle" parent="SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler" instance=ExtResource("3_l8g2k")]
+
+[node name="SMG" parent="SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler" instance=ExtResource("5_uaofy")]
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15

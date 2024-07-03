@@ -1,5 +1,5 @@
 using Godot;
-
+public enum FireMode {Auto, Semi};
 public partial class hitscan_weapon : Node3D, IGun, ICanAttack
 {
 	[Export]
@@ -10,10 +10,15 @@ public partial class hitscan_weapon : Node3D, IGun, ICanAttack
     private Node3D _WeaponMesh;
     [Export]
     private int _AmmoCapacity = 20;
+    [Export]
+    private int _Damage;
+    [Export]
+    private FireMode _WeaponType;
 
     private Timer _CooldownTimer;
     private Vector3 _WeaponPosition;
     private RayCast3D _RayCast3D;
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -29,11 +34,24 @@ public partial class hitscan_weapon : Node3D, IGun, ICanAttack
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		 if(Input.IsActionPressed("fire"))
+        if(_WeaponType == FireMode.Auto)
         {
-            if(_CooldownTimer.IsStopped())
+            if(Input.IsActionPressed("fire"))
             {
-                Shoot();
+                if(_CooldownTimer.IsStopped())
+                {
+                    Shoot();
+                }
+            }
+        }
+        else
+        {
+            if(Input.IsActionJustPressed("fire"))
+            {
+               if(_CooldownTimer.IsStopped())
+                {
+                    Shoot();
+                } 
             }
         }
        
@@ -42,7 +60,7 @@ public partial class hitscan_weapon : Node3D, IGun, ICanAttack
 
 	public void Shoot()
     {
-        
+        SetAmmoCount(GetAmmoCount() - 1);
         _CooldownTimer.Start(1.0f / _FireRate);
         if(_RayCast3D.GetCollider() is ICanTakeDamage target)
         {
@@ -55,11 +73,15 @@ public partial class hitscan_weapon : Node3D, IGun, ICanAttack
 
     public Attack GetAttack()
     {
-        return new Attack() { Damage = 100};
+        return new Attack() { Damage = _Damage};
     }
 
     public int GetAmmoCount()
     {
         return _AmmoCapacity;
+    }
+    public void SetAmmoCount(int AmmoCapacity)
+    {
+        this._AmmoCapacity = AmmoCapacity;
     }
 }

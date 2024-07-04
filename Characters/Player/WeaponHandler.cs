@@ -71,7 +71,15 @@ public partial class WeaponHandler: Node3D
         }
         if(@event.IsActionPressed("controller_switch_weapons"))
         {
-            ControllerEquip();
+            if(_EquippedWeapon == primary)
+            {
+                ControllerEquip(secondary);
+            }
+            else
+            {
+                ControllerEquip(primary);
+            }
+
         }
     }
     public void Equip(hitscan_weapon active_weapon)
@@ -88,22 +96,14 @@ public partial class WeaponHandler: Node3D
     }
         
     
-    public void ControllerEquip()
+    public void ControllerEquip(hitscan_weapon active_weapon)
     {
-        // GD.Print("Equip Method");
-        // foreach(hitscan_weapon child in GetChildren())
-        // {
-        //     if(child.Visible == true)
-        //     {
-        //         child.Visible = false;
-        //         child.SetProcess(false);
-        //     }
-        //     else
-        //     {
-        //         child.Visible = true;
-        //         child.SetProcess(true);
-        //     }  
-        // }
+            _EquippedWeapon.Visible = false;
+            _EquippedWeapon.SetProcess(false);
+            _EquippedWeapon = active_weapon;
+            UpdateAmmoLabel(active_weapon.GetAmmoCapacity(), active_weapon.GetCurrentAmmo());
+            active_weapon.Visible = true;
+            active_weapon.SetProcess(true);
     }
     public void UpdateAmmoLabel(int AmmoCapacity, int CurrentAmmo)
     {

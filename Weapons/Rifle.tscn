@@ -9,6 +9,7 @@ _Recoil = 0.3
 _WeaponMesh = NodePath("Rifle")
 AmmoCapacity = 6
 _Damage = 334
+FireMode = 1
 WeaponType = 1
 
 [node name="Rifle" parent="." index="1" instance=ExtResource("2_0gvqw")]

@@ -28,7 +28,7 @@ public partial class WeaponHandler: Node3D
     public override void _PhysicsProcess(double delta)
     {
 
-        if(_EquippedWeapon.WeaponType == FireMode.Auto)
+        if(_EquippedWeapon.FireMode == FireMode.Auto)
         {
             if(Input.IsActionPressed("fire"))
             {

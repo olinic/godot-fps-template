@@ -14,7 +14,9 @@ public partial class hitscan_weapon : Node3D, IGun, ICanAttack
     [Export]
     private int _Damage;
     [Export]
-    public FireMode WeaponType;
+    public FireMode FireMode;
+    [Export]
+    public WeaponType WeaponType;
 
     public int CurrentAmmo;
     private Vector3 _WeaponPosition;

@@ -1,30 +1,34 @@
+using System.Collections.Generic;
 using Godot;
 
 
 public partial class WeaponHandler: Node3D
 {
-    
-  
-    private hitscan_weapon primary;
- 
-    private hitscan_weapon secondary;
-    [Export]
-    private Timer _CooldownTimer;
+    [Export] private Timer _CooldownTimer;
+
+    [Signal] public delegate void ammo_updateEventHandler(int ammoCount);
+
+    private List<hitscan_weapon> Weapons = new();
     private hitscan_weapon _EquippedWeapon;
 
-    [Signal]
-	public delegate void ammo_updateEventHandler(int ammoCount);
 
     public override void _Ready()
     {
-        primary = (hitscan_weapon) GD.Load<PackedScene>("res://Weapons/SMG.tscn").Instantiate();
-        secondary = (hitscan_weapon) GD.Load<PackedScene>("res://Weapons/Rifle.tscn").Instantiate();
-        AddChild(primary);
-        AddChild(secondary);
-
-        Equip(primary);
-        UnEquip(secondary);
+        hitscan_weapon primary = (hitscan_weapon) GD.Load<PackedScene>("res://Weapons/SMG.tscn").Instantiate();
+        hitscan_weapon secondary = (hitscan_weapon) GD.Load<PackedScene>("res://Weapons/Rifle.tscn").Instantiate();
+        Weapons.Add(primary);
+        Weapons.Add(secondary);
+        Weapons.ForEach(weapon => {
+            AddChild(weapon);
+        });
+        EquipType(WeaponType.Primary);
     }
+
+    private void EquipType(WeaponType type)
+    {
+        Equip(Weapons.Find(weapon => weapon.WeaponType == type));
+    }
+
     public override void _PhysicsProcess(double delta)
     {
 
@@ -61,25 +65,15 @@ public partial class WeaponHandler: Node3D
     {
         if(@event.IsActionPressed("weapon_1"))
         {
-            Equip(primary);
-            UnEquip(secondary);
+            EquipType(WeaponType.Primary);
         }
         if(@event.IsActionPressed("weapon_2"))
         {
-            Equip(secondary);
-            UnEquip(primary);
+            EquipType(WeaponType.Secondary);
         }
         if(@event.IsActionPressed("controller_switch_weapons"))
         {
-            if(_EquippedWeapon == primary)
-            {
-                ControllerEquip(secondary);
-            }
-            else
-            {
-                ControllerEquip(primary);
-            }
-
+            Equip(Weapons.Find(weapon => weapon != _EquippedWeapon));
         }
     }
     public void Equip(hitscan_weapon active_weapon)
@@ -88,26 +82,17 @@ public partial class WeaponHandler: Node3D
         UpdateAmmoLabel(active_weapon.GetAmmoCapacity(), active_weapon.GetCurrentAmmo());
         active_weapon.Visible = true;
         active_weapon.SetProcess(true);
+        Weapons.FindAll(weapon => weapon != active_weapon).ForEach(UnEquip);
     }
-    public void UnEquip(hitscan_weapon inactive_weapon)
+
+    private void UnEquip(hitscan_weapon inactive_weapon)
     {  
         inactive_weapon.Visible = false;
         inactive_weapon.SetProcess(false);
     }
-        
-    
-    public void ControllerEquip(hitscan_weapon active_weapon)
-    {
-            _EquippedWeapon.Visible = false;
-            _EquippedWeapon.SetProcess(false);
-            _EquippedWeapon = active_weapon;
-            UpdateAmmoLabel(active_weapon.GetAmmoCapacity(), active_weapon.GetCurrentAmmo());
-            active_weapon.Visible = true;
-            active_weapon.SetProcess(true);
-    }
+
     public void UpdateAmmoLabel(int AmmoCapacity, int CurrentAmmo)
     {
-        //AmmoLabel.Text = ammoCount.ToString();
         EmitSignal(SignalName.ammo_update, AmmoCapacity, CurrentAmmo);
     }
 }

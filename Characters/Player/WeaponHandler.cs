@@ -14,14 +14,19 @@ public partial class WeaponHandler: Node3D
 
     public override void _Ready()
     {
-        hitscan_weapon primary = (hitscan_weapon) GD.Load<PackedScene>("res://Weapons/SMG.tscn").Instantiate();
-        hitscan_weapon secondary = (hitscan_weapon) GD.Load<PackedScene>("res://Weapons/Rifle.tscn").Instantiate();
+        hitscan_weapon primary = InstaniateWeapon("SMG");
+        hitscan_weapon secondary = InstaniateWeapon("Rifle");
         Weapons.Add(primary);
         Weapons.Add(secondary);
         Weapons.ForEach(weapon => {
             AddChild(weapon);
         });
         EquipType(WeaponType.Primary);
+    }
+
+    private hitscan_weapon InstaniateWeapon(string name)
+    {
+        return (hitscan_weapon) GD.Load<PackedScene>("res://Weapons/" + name + ".tscn").Instantiate();
     }
 
     private void EquipType(WeaponType type)

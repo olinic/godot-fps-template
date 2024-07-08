@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://8by78r4lfkdn"]
+[gd_scene load_steps=14 format=3 uid="uid://8by78r4lfkdn"]
 
 [ext_resource type="Script" path="res://Characters/Player/Player.cs" id="1_vgjuy"]
 [ext_resource type="Script" path="res://Characters/Player/SmoothCamera.gd" id="2_s6ifw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dbagux3odyp51" path="res://Characters/Health/HealthComponent.tscn" id="5_cwc2g"]
 [ext_resource type="PackedScene" uid="uid://0dsgm8b4840u" path="res://Characters/HitboxComponent.tscn" id="6_labdc"]
 [ext_resource type="Script" path="res://Characters/HitboxComponent.cs" id="7_edghr"]
+[ext_resource type="PackedScene" uid="uid://cihcnaryq5wt5" path="res://Characters/Health/HealthBar.tscn" id="9_52e1f"]
 [ext_resource type="Script" path="res://Characters/Player/AmmoLabel.cs" id="10_wunak"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qf1at"]
@@ -15,6 +16,9 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_ds0l4"]
 font_size = 64
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_p7i3g"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_vgjuy")
@@ -129,6 +133,11 @@ size_flags_vertical = 8
 text = "999"
 label_settings = SubResource("LabelSettings_ds0l4")
 script = ExtResource("10_wunak")
+
+[node name="HealthBar" parent="MarginContainer" node_paths=PackedStringArray("HealthComponent") instance=ExtResource("9_52e1f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28496, 0)
+texture = SubResource("ViewportTexture_p7i3g")
+HealthComponent = NodePath("../../HealthComponent")
 
 [connection signal="ammo_update" from="SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler" to="MarginContainer/AmmoLabel" method="OnWeaponHandlerAmmoUpdate"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="OnHealthComponentHealthDepleted"]

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Godot;
 
-
 public partial class WeaponHandler: Node3D
 {
     [Export] private Timer _CooldownTimer;
@@ -9,8 +8,7 @@ public partial class WeaponHandler: Node3D
     [Signal] public delegate void ammo_updateEventHandler(int ammoCount);
 
     private List<hitscan_weapon> Weapons = new();
-    private hitscan_weapon _EquippedWeapon;
-
+    public hitscan_weapon EquippedWeapon { get; private set; }
 
     public override void _Ready()
     {
@@ -24,7 +22,7 @@ public partial class WeaponHandler: Node3D
         EquipType(WeaponType.Primary);
     }
 
-    private hitscan_weapon InstaniateWeapon(string name)
+    private static hitscan_weapon InstaniateWeapon(string name)
     {
         return (hitscan_weapon) GD.Load<PackedScene>("res://Weapons/" + name + ".tscn").Instantiate();
     }
@@ -37,7 +35,7 @@ public partial class WeaponHandler: Node3D
     public override void _PhysicsProcess(double delta)
     {
 
-        if(_EquippedWeapon.FireMode == FireMode.Auto)
+        if(EquippedWeapon.FireMode == FireMode.Auto)
         {
             if(Input.IsActionPressed("fire"))
             {
@@ -53,16 +51,16 @@ public partial class WeaponHandler: Node3D
         }
         if(Input.IsActionJustPressed("reload"))
         {
-            _EquippedWeapon.Reload();
+            EquippedWeapon.Reload();
             EmitAmmoUpdate();
         }
     }
     public void shoot(double delta)
     {
-        if(_CooldownTimer.IsStopped() && _EquippedWeapon.CurrentAmmo > 0)
+        if(_CooldownTimer.IsStopped() && EquippedWeapon.CurrentAmmo > 0)
         {
-            _EquippedWeapon.Shoot(delta);
-            _CooldownTimer.Start(1.0f / _EquippedWeapon.FireRate);
+            EquippedWeapon.Shoot(delta);
+            _CooldownTimer.Start(1.0f / EquippedWeapon.FireRate);
         }
         EmitAmmoUpdate();
     }
@@ -78,15 +76,21 @@ public partial class WeaponHandler: Node3D
         }
         if(@event.IsActionPressed("controller_switch_weapons"))
         {
-            Equip(Weapons.Find(weapon => weapon != _EquippedWeapon));
+            SwapWeapon();
         }
     }
+
+    public void SwapWeapon()
+    {
+        Equip(Weapons.Find(weapon => weapon != EquippedWeapon));
+    }
+
     public void Equip(hitscan_weapon active_weapon)
     {
         active_weapon.Visible = true;
         active_weapon.SetProcess(true);
         Weapons.FindAll(weapon => weapon != active_weapon).ForEach(UnEquip);
-        _EquippedWeapon = active_weapon;
+        EquippedWeapon = active_weapon;
         EmitAmmoUpdate();
     }
 
@@ -98,6 +102,6 @@ public partial class WeaponHandler: Node3D
 
     public void EmitAmmoUpdate()
     {
-        EmitSignal(SignalName.ammo_update, _EquippedWeapon.GetAmmoCapacity(), _EquippedWeapon.GetCurrentAmmo());
+        EmitSignal(SignalName.ammo_update, EquippedWeapon.GetAmmoCapacity(), EquippedWeapon.GetCurrentAmmo());
     }
 }

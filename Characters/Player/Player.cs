@@ -130,7 +130,6 @@ public partial class Player : CharacterBody3D, IMoveStateProvider
 
 	public void OnHealthComponentHealthDepleted()
 	{
-		GD.Print("Uh oh");
 		GetTree().ReloadCurrentScene();
 	}
 }

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cqomnalqqa2oj"]
 
-[ext_resource type="Script" path="res://Weapons/hitscan_weapon.cs" id="1_0dlxk"]
+[ext_resource type="Script" path="res://Weapons/HitscanWeapon.cs" id="1_0dlxk"]
 
 [node name="HitscanWeapon" type="Node3D"]
 script = ExtResource("1_0dlxk")

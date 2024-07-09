@@ -1,22 +1,15 @@
 using Godot;
 public enum FireMode {Auto, Semi};
-public partial class hitscan_weapon : Node3D, IGun, ICanAttack
+public partial class HitscanWeapon : Node3D, IGun, ICanAttack
 {
-	[Export]
-    public float FireRate;
-    [Export]
-    public float _Recoil;
-    [Export]
-    private Node3D _WeaponMesh;
+	[Export] public float FireRate;
+    [Export] public float _Recoil;
+    [Export] private Node3D _WeaponMesh;
    
-    [Export]
-    public int AmmoCapacity;
-    [Export]
-    private int _Damage;
-    [Export]
-    public FireMode FireMode;
-    [Export]
-    public WeaponType WeaponType;
+    [Export] public int AmmoCapacity;
+    [Export] private int _Damage;
+    [Export] public FireMode FireMode;
+    [Export] public WeaponType WeaponType;
 
     public int CurrentAmmo;
     private Vector3 _WeaponPosition;

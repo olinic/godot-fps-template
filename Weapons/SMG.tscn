@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b24ku1p85yyw8"]
 
-[ext_resource type="PackedScene" uid="uid://cqomnalqqa2oj" path="res://Weapons/hitscan_weapon.tscn" id="1_d40to"]
+[ext_resource type="PackedScene" uid="uid://cqomnalqqa2oj" path="res://Weapons/HitscanWeapon.tscn" id="1_d40to"]
 [ext_resource type="PackedScene" uid="uid://dhofqgqocs304" path="res://Weapons/SMG.glb" id="2_0ic1q"]
 
 [node name="SMG" node_paths=PackedStringArray("_WeaponMesh") instance=ExtResource("1_d40to")]

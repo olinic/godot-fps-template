@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://3k37y08uy0sn"]
 
-[ext_resource type="PackedScene" uid="uid://cqomnalqqa2oj" path="res://Weapons/hitscan_weapon.tscn" id="1_61ton"]
+[ext_resource type="PackedScene" uid="uid://cqomnalqqa2oj" path="res://Weapons/HitscanWeapon.tscn" id="1_61ton"]
 [ext_resource type="PackedScene" uid="uid://cxtthr1judv1w" path="res://Weapons/Rifle.glb" id="2_0gvqw"]
 
 [node name="Rifle" node_paths=PackedStringArray("_WeaponMesh") instance=ExtResource("1_61ton")]

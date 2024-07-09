@@ -7,13 +7,13 @@ public partial class WeaponHandler: Node3D
 
     [Signal] public delegate void ammo_updateEventHandler(int ammoCount);
 
-    private List<hitscan_weapon> Weapons = new();
-    public hitscan_weapon EquippedWeapon { get; private set; }
+    private List<HitscanWeapon> Weapons = new();
+    public HitscanWeapon EquippedWeapon { get; private set; }
 
     public override void _Ready()
     {
-        hitscan_weapon primary = InstaniateWeapon("SMG");
-        hitscan_weapon secondary = InstaniateWeapon("Rifle");
+        HitscanWeapon primary = InstaniateWeapon("SMG");
+        HitscanWeapon secondary = InstaniateWeapon("Rifle");
         Weapons.Add(primary);
         Weapons.Add(secondary);
         Weapons.ForEach(weapon => {
@@ -22,9 +22,9 @@ public partial class WeaponHandler: Node3D
         EquipType(WeaponType.Primary);
     }
 
-    private static hitscan_weapon InstaniateWeapon(string name)
+    private static HitscanWeapon InstaniateWeapon(string name)
     {
-        return (hitscan_weapon) GD.Load<PackedScene>("res://Weapons/" + name + ".tscn").Instantiate();
+        return (HitscanWeapon) GD.Load<PackedScene>("res://Weapons/" + name + ".tscn").Instantiate();
     }
 
     private void EquipType(WeaponType type)
@@ -85,7 +85,7 @@ public partial class WeaponHandler: Node3D
         Equip(Weapons.Find(weapon => weapon != EquippedWeapon));
     }
 
-    public void Equip(hitscan_weapon active_weapon)
+    public void Equip(HitscanWeapon active_weapon)
     {
         active_weapon.Visible = true;
         active_weapon.SetProcess(true);
@@ -94,7 +94,7 @@ public partial class WeaponHandler: Node3D
         EmitAmmoUpdate();
     }
 
-    private void UnEquip(hitscan_weapon inactive_weapon)
+    private void UnEquip(HitscanWeapon inactive_weapon)
     {  
         inactive_weapon.Visible = false;
         inactive_weapon.SetProcess(false);

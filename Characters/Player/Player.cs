@@ -7,10 +7,9 @@ public partial class Player : CharacterBody3D, IMoveStateProvider
 	private const float ControllerLookMulitplier = 7; 
 	private const float VerticalLookLowerLimit = -90; 
 	private const float VerticalLookUpperLimit = 90; 
-	[Export]
-	private int HorizontalLookSetting = 6;
-	[Export]
-	private int VerticalLookSetting = 6;
+
+	[Export] private int HorizontalLookSetting = 6;
+	[Export] private int VerticalLookSetting = 6;
 
 	private float HorizontalLookSensitivity;
 	private float VerticalLookSensitivity;
@@ -18,10 +17,10 @@ public partial class Player : CharacterBody3D, IMoveStateProvider
 	private Node3D CameraController;
 
 	private IMoveState _moveState;
-	private Walk _walk;
-	private Sprint _sprint;
-	private Jump _jump;
-	private Fall _fall;
+	private readonly Walk _walk;
+	private readonly Sprint _sprint;
+	private readonly Jump _jump;
+	private readonly Fall _fall;
 
 	private Vector2 MouseMotion = Vector2.Zero;
 
@@ -33,6 +32,7 @@ public partial class Player : CharacterBody3D, IMoveStateProvider
 		_fall = new Fall(this);
 		ChangeState(_walk);
 	}
+
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -40,7 +40,8 @@ public partial class Player : CharacterBody3D, IMoveStateProvider
 		VerticalLookSensitivity = SettingToSensitivity(VerticalLookSetting);
 		CameraController = GetNode<Node3D>("CameraController");
 	}
-	public float SettingToSensitivity(int setting)
+
+	public static float SettingToSensitivity(int setting)
 	{
 		// 6 is regular speed. Adjust by 10% higher or lower based on setting.
 		return 0.4f + (0.1f * setting);
@@ -74,15 +75,18 @@ public partial class Player : CharacterBody3D, IMoveStateProvider
 			ControllerLook(delta);
 		}
 	}
+
 	public void MouseLook(float delta){
 		AdjustCameraLook(delta, MouseMotion);
 		MouseMotion = Vector2.Zero;
 	}
+
 	public void ControllerLook(float delta)
 	{
 		Vector2 AimDir = Input.GetVector("aim_left", "aim_right", "aim_up", "aim_down");
 		AdjustCameraLook(delta, -AimDir * ControllerLookMulitplier);
 	}
+	
 	public void AdjustCameraLook(float delta, Vector2 lookRotation)
 	{
 		RotateY(lookRotation.X * delta * HorizontalLookSensitivity );
@@ -96,7 +100,6 @@ public partial class Player : CharacterBody3D, IMoveStateProvider
 			CameraController.RotationDegrees.Y,
 			CameraController.RotationDegrees.Z
 		);
-		
 	}
 
 	private void ChangeState(IMoveState newState)

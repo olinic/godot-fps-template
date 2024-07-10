@@ -1,43 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://b24ku1p85yyw8"]
 
 [ext_resource type="PackedScene" uid="uid://cqomnalqqa2oj" path="res://Weapons/HitscanWeapon.tscn" id="1_d40to"]
-[ext_resource type="PackedScene" uid="uid://dhofqgqocs304" path="res://Weapons/SMG.glb" id="2_0ic1q"]
+[ext_resource type="PackedScene" uid="uid://da5m4sq4pruj1" path="res://Weapons/Weapon Models/blasterD.glb" id="2_toliv"]
 
 [node name="SMG" node_paths=PackedStringArray("_WeaponMesh") instance=ExtResource("1_d40to")]
 FireRate = 14.0
 _Recoil = 0.05
-_WeaponMesh = NodePath("SMG")
+_WeaponMesh = NodePath("blasterD2")
 AmmoCapacity = 20
 _Damage = 100
 
-[node name="SMG" parent="." index="1" instance=ExtResource("2_0ic1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.35, -1)
-
-[node name="Suppressors_003" parent="SMG" index="0"]
-layers = 2
-
-[node name="Part_024" parent="SMG" index="1"]
-layers = 2
-
-[node name="Rail_009" parent="SMG" index="2"]
-layers = 2
-
-[node name="Grip_017" parent="SMG" index="3"]
-layers = 2
-
-[node name="Charger_011" parent="SMG" index="4"]
-layers = 2
-
-[node name="Scope_016" parent="SMG" index="5"]
-layers = 2
-
-[node name="Part_029" parent="SMG" index="6"]
-layers = 2
-
-[node name="Part_030" parent="SMG" index="7"]
-layers = 2
-
-[node name="Gun butt_012" parent="SMG" index="8"]
-layers = 2
-
-[editable path="SMG"]
+[node name="blasterD2" parent="." index="1" instance=ExtResource("2_toliv")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.537111, -0.367995, -0.883823)

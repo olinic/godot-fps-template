@@ -2,7 +2,7 @@ using Godot;
 using GdUnit4;
 using static GdUnit4.Assertions;
 using System.Threading.Tasks;
-using static TestUtils.SignalTester;
+using static FPS.Test.SignalTester;
 
 namespace FPS.Characters.Health;
 [TestSuite]

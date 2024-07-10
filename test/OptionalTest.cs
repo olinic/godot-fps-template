@@ -1,6 +1,7 @@
 using GdUnit4;
 using static GdUnit4.Assertions;
 
+namespace FPS;
 [TestSuite]
 public class OptionalTest
 {

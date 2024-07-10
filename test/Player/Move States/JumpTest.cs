@@ -2,6 +2,7 @@ using Godot;
 using GdUnit4;
 using static GdUnit4.Assertions;
 using System;
+using FPS.Test;
 
 namespace FPS.Characters.Player.Movestates;
 [TestSuite]

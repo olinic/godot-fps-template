@@ -1,8 +1,8 @@
 
 using System.Collections.Generic;
-using System.Dynamic;
 using Godot;
 
+namespace FPS.Test;
 public class InputWrapper
 {
     private static readonly HashSet<string> _actions = new();

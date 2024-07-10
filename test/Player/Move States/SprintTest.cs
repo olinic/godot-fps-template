@@ -1,7 +1,7 @@
 using Godot;
 using GdUnit4;
 using static GdUnit4.Assertions;
-
+using FPS.Test;
 
 namespace FPS.Characters.Player.Movestates;
 [TestSuite]

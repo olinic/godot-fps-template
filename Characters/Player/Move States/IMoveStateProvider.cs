@@ -1,6 +1,6 @@
 using Godot;
 
-
+namespace FPS.Characters.Player.Movestates;
 public interface IMoveStateProvider
 {
     Walk GetWalk();

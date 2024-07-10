@@ -1,5 +1,7 @@
 using System.Security.Cryptography.X509Certificates;
 using Godot;
+
+namespace FPS.Characters.Player.Movestates;
 public class Walk : IMoveState
 {
     protected float _speed = 300.0f;

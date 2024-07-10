@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-
+namespace FPS.Characters.Player.Movestates;
 public class Jump : IMoveState
 {
     protected IMoveStateProvider _provider;

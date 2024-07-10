@@ -3,6 +3,7 @@ using GdUnit4;
 using static GdUnit4.Assertions;
 using System;
 
+namespace FPS.Characters.Player.Movestates;
 [TestSuite]
 public class Jumptest{
     private Player Player;

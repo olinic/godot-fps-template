@@ -1,5 +1,6 @@
 using Godot;
 
+namespace FPS.Characters.Health;
 public partial class HealthComponent : Node3D, ICanTakeDamage
 {
 	[Export] private int MAX_HEALTH = 1000;

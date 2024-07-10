@@ -3,7 +3,7 @@ using GdUnit4;
 using static GdUnit4.Assertions;
 
 
-
+namespace FPS.Characters.Player.Movestates;
 [TestSuite]
 public class SprintTest{
     private Player Player;

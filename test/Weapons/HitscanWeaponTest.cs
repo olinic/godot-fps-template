@@ -2,6 +2,7 @@ using Godot;
 using GdUnit4;
 using static GdUnit4.Assertions;
 
+namespace FPS.Weapons;
 [TestSuite]
 public class HitscanWeaponTest
 {

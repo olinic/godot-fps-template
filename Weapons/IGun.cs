@@ -1,5 +1,6 @@
 using Godot.Bridge;
 
+namespace FPS.Weapons;
 public interface IGun
 {
     public void Shoot(double delta);

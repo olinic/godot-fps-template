@@ -1,5 +1,6 @@
 using Godot;
 
+namespace FPS.Characters.Player.Movestates;
 public interface IMoveState
 {
     Vector3 GetInitialVelocity(Vector3 currentVelocity)

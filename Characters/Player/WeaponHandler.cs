@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
+namespace FPS.Weapons;
 public partial class WeaponHandler: Node3D
 {
     [Export] private Timer _CooldownTimer;

@@ -1,5 +1,6 @@
 using Godot;
 
+namespace FPS.Characters.Health;
 public partial class HealthBar : Node3D
 {
     [Export]

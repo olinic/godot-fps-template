@@ -1,5 +1,6 @@
 using Godot;
 
+namespace FPS.Characters.Health;
 public partial class HealthBarProgress : ProgressBar
 {
     public void OnHealthComponentHealthChanged(Health health)

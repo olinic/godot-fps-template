@@ -1,5 +1,7 @@
 using Godot;
+using FPS.Characters.Health;
 
+namespace FPS.Characters;
 public partial class HitboxComponent : Node3D, ICanTakeDamage
 {
 	[Export] public HealthComponent health;

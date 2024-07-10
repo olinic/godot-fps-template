@@ -1,5 +1,6 @@
 using Godot;
 
+namespace FPS.Characters.Player.Movestates;
 public class Sprint : Walk
 {
 

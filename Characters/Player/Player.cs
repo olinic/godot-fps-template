@@ -1,7 +1,8 @@
 using Godot;
 using System;
 using System.ComponentModel;
-
+using FPS.Characters.Player.Movestates;
+namespace FPS.Characters.Player;
 public partial class Player : CharacterBody3D, IMoveStateProvider
 {
 	private const float ControllerLookMulitplier = 7; 
@@ -26,10 +27,10 @@ public partial class Player : CharacterBody3D, IMoveStateProvider
 
 	public Player()
 	{
-		_walk = new Walk(this);
-		_sprint = new Sprint(this);
-		_jump = new Jump(this);
-		_fall = new Fall(this);
+		_walk = new Movestates.Walk(this);
+		_sprint = new Movestates.Sprint(this);
+		_jump = new Movestates.Jump(this);
+		_fall = new Movestates.Fall(this);
 		ChangeState(_walk);
 	}
 

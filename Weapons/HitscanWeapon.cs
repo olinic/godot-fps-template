@@ -1,4 +1,6 @@
 using Godot;
+
+namespace FPS.Weapons;
 public enum FireMode {Auto, Semi};
 public partial class HitscanWeapon : Node3D, IGun, ICanAttack
 {

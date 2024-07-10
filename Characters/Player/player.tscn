@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://Characters/Player/Player.cs" id="1_vgjuy"]
 [ext_resource type="Script" path="res://Characters/Player/SmoothCamera.gd" id="2_s6ifw"]
-[ext_resource type="Script" path="res://Characters/Player/WeaponHandler.cs" id="3_blyuh"]
+[ext_resource type="Script" path="res://Weapons/WeaponHandler.cs" id="3_blyuh"]
 [ext_resource type="Script" path="res://Characters/Player/Crosshair.gd" id="3_j7ya5"]
 [ext_resource type="PackedScene" uid="uid://dbagux3odyp51" path="res://Characters/Health/HealthComponent.tscn" id="5_cwc2g"]
 [ext_resource type="PackedScene" uid="uid://0dsgm8b4840u" path="res://Characters/HitboxComponent.tscn" id="6_labdc"]
 [ext_resource type="Script" path="res://Characters/HitboxComponent.cs" id="7_edghr"]
 [ext_resource type="PackedScene" uid="uid://cihcnaryq5wt5" path="res://Characters/Health/HealthBar.tscn" id="9_52e1f"]
-[ext_resource type="Script" path="res://Characters/Player/AmmoLabel.cs" id="10_wunak"]
+[ext_resource type="Script" path="res://Weapons/AmmoLabel.cs" id="10_wunak"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qf1at"]
 

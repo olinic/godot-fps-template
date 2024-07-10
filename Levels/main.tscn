@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://1l52toog6a3o"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_yq6do"]
+[ext_resource type="Script" path="res://Main.cs" id="1_mq13a"]
 [ext_resource type="PackedScene" uid="uid://8by78r4lfkdn" path="res://Characters/Player/player.tscn" id="2_kbfp0"]
 [ext_resource type="PackedScene" uid="uid://cry7pdahodwk1" path="res://Demo/Demo_Floor.tscn" id="3_ya4a7"]
 [ext_resource type="Material" uid="uid://wnd73sylvq6n" path="res://Levels/Materials/Orange.tres" id="4_lqfxj"]
@@ -20,7 +20,7 @@ sky = SubResource("Sky_cdg7h")
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_on1sf"]
 
 [node name="Main" type="Node3D"]
-script = ExtResource("1_yq6do")
+script = ExtResource("1_mq13a")
 
 [node name="Player" parent="." instance=ExtResource("2_kbfp0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9469, 1.97801, 33.1903)

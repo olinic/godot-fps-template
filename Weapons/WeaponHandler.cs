@@ -40,14 +40,14 @@ public partial class WeaponHandler: Node3D
         {
             if(Input.IsActionPressed("fire"))
             {
-                shoot(delta);
+                Shoot(delta);
             }
         }
         else
         {
             if(Input.IsActionJustPressed("fire"))
             {
-               shoot(delta);
+               Shoot(delta);
             }
         }
         if(Input.IsActionJustPressed("reload"))
@@ -56,7 +56,7 @@ public partial class WeaponHandler: Node3D
             EmitAmmoUpdate();
         }
     }
-    public void shoot(double delta)
+    public void Shoot(double delta)
     {
         if(_CooldownTimer.IsStopped() && EquippedWeapon.CurrentAmmo > 0)
         {

@@ -54,6 +54,10 @@ public partial class Player : CharacterBody3D, IMoveStateProvider
 		{
 			MouseMotion = -eventMouseMotion.Relative * 0.06f;
 		}
+		if(@event.IsActionPressed("kill"))
+		{
+			QueueFree();
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -136,4 +140,5 @@ public partial class Player : CharacterBody3D, IMoveStateProvider
 	{
 		GetTree().ReloadCurrentScene();
 	}
+	
 }

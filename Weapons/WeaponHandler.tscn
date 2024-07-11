@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bop1pomqoqmrg"]
+
+[ext_resource type="Script" path="res://Weapons/WeaponHandler.cs" id="1_katdl"]
+
+[node name="WeaponHandler" type="Node3D" node_paths=PackedStringArray("_CooldownTimer")]
+script = ExtResource("1_katdl")
+_CooldownTimer = NodePath("CooldownTimer")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true

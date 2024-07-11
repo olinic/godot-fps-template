@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Characters/Player/Player.cs" id="1_vgjuy"]
 [ext_resource type="Script" path="res://Characters/Player/SmoothCamera.gd" id="2_s6ifw"]
-[ext_resource type="Script" path="res://Weapons/WeaponHandler.cs" id="3_blyuh"]
 [ext_resource type="Script" path="res://Characters/Player/Crosshair.gd" id="3_j7ya5"]
+[ext_resource type="PackedScene" uid="uid://bop1pomqoqmrg" path="res://Weapons/WeaponHandler.tscn" id="3_jgb4h"]
 [ext_resource type="PackedScene" uid="uid://dbagux3odyp51" path="res://Characters/Health/HealthComponent.tscn" id="5_cwc2g"]
 [ext_resource type="PackedScene" uid="uid://0dsgm8b4840u" path="res://Characters/HitboxComponent.tscn" id="6_labdc"]
 [ext_resource type="Script" path="res://Characters/HitboxComponent.cs" id="7_edghr"]
@@ -61,12 +61,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5889, 0)
 cull_mask = 2
 current = true
 
-[node name="WeaponHandler" type="Node3D" parent="SubViewportContainer/SubViewport/Weapon Camera" node_paths=PackedStringArray("_CooldownTimer")]
-script = ExtResource("3_blyuh")
-_CooldownTimer = NodePath("CooldownTimer")
-
-[node name="CooldownTimer" type="Timer" parent="SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler"]
-one_shot = true
+[node name="WeaponHandler" parent="SubViewportContainer/SubViewport/Weapon Camera" instance=ExtResource("3_jgb4h")]
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15

@@ -20,8 +20,10 @@ material = SubResource("StandardMaterial3D_rxivp")
 [sub_resource type="ViewportTexture" id="ViewportTexture_iff47"]
 viewport_path = NodePath("SubViewport")
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("_weaponHandler", "_CooldownTimer")]
 script = ExtResource("1_w4er2")
+_weaponHandler = NodePath("WeaponHandler")
+_CooldownTimer = NodePath("WeaponHandler/Timer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_mh6nu")
@@ -44,6 +46,8 @@ shape = SubResource("CapsuleShape3D_r0kmt")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28496, 0)
 texture = SubResource("ViewportTexture_iff47")
 HealthComponent = NodePath("../HealthComponent")
+
+[node name="ShootTimer" type="Timer" parent="."]
 
 [node name="WeaponHandler" parent="." node_paths=PackedStringArray("_CooldownTimer") instance=ExtResource("6_l5p5g")]
 _CooldownTimer = NodePath("Timer")

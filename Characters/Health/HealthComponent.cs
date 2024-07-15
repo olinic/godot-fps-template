@@ -20,6 +20,7 @@ public partial class HealthComponent : Node3D, ICanTakeDamage
 			Value = MAX_HEALTH,
 			Max = MAX_HEALTH
 		};
+		EmitSignal(SignalName.health_changed, _health);
 	}
 
 	public void ApplyDamage(Attack attack)

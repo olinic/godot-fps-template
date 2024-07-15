@@ -11,32 +11,26 @@ public partial class HealthComponent : Node3D, ICanTakeDamage
 	[Signal]
 	public delegate void health_changedEventHandler(Health health);
 
-	private Health _health;
+	public Health Health { get; private set; }
 
 	public override void _Ready()
 	{
-		_health = new Health() 
+		Health = new Health() 
 		{
 			Value = MAX_HEALTH,
 			Max = MAX_HEALTH
 		};
-		EmitSignal(SignalName.health_changed, _health);
+		EmitSignal(SignalName.health_changed, Health);
 	}
 
 	public void ApplyDamage(Attack attack)
 	{
-		_health.Value -= attack.Damage;
-		_health.Value = Mathf.Clamp(_health.Value, 0, _health.Max);
-		EmitSignal(SignalName.health_changed, _health);
-		if(_health.Value == 0)
+		Health.Value -= attack.Damage;
+		Health.Value = Mathf.Clamp(Health.Value, 0, Health.Max);
+		EmitSignal(SignalName.health_changed, Health);
+		if(Health.Value == 0)
 		{
 			EmitSignal(SignalName.health_depleted);
 		}
-	}
-
-	
-	public Health Health 
-	{
-		get{ return _health; }
 	}
 }

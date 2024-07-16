@@ -13,8 +13,7 @@ public class HealthComponentTest
     {
         HealthComponent health = new HealthComponent();
         health._Ready();
-        Attack attack = new Attack();
-        attack.Damage = 300;
+        Attack attack = new() { Damage = 300 };
         health.ApplyDamage(attack);
         AssertInt(health.Health.Value).IsEqual(700);
     }
@@ -23,8 +22,7 @@ public class HealthComponentTest
     {
         HealthComponent health = new HealthComponent();
         health._Ready();
-        Attack attack = new Attack();
-        attack.Damage = 1000;
+        Attack attack = new() { Damage = 1000 };
         await AssertSignalEmitted("health_depleted", () => health.ApplyDamage(attack)).On(health);
         AssertInt(health.Health.Value).IsEqual(0);
     }

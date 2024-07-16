@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" path="res://Weapons/HitscanWeapon.cs" id="1_0dlxk"]
 
-[node name="HitscanWeapon" type="Node3D"]
+[node name="HitscanWeapon" type="Node3D" node_paths=PackedStringArray("RayCast")]
 script = ExtResource("1_0dlxk")
+RayCast = NodePath("RayCast3D")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -100)

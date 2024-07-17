@@ -15,7 +15,6 @@ public partial class HealthComponent : Node3D, ICanTakeDamage
 
 	public override void _Ready()
 	{
-		Health = new Health() { Max = MAX_HEALTH };
 		AdjustHealth(MAX_HEALTH);
 	}
 
@@ -26,7 +25,8 @@ public partial class HealthComponent : Node3D, ICanTakeDamage
 
 	private void AdjustHealth(int value)
 	{
-		Health.Value = Mathf.Clamp(value, 0, Health.Max);
+		int clamped = Mathf.Clamp(value, 0, MAX_HEALTH);
+		Health = Health.WithMaxAndValue(MAX_HEALTH, clamped);
 		EmitSignal(SignalName.health_changed, Health);
 		if(Health.Value == 0)
 		{

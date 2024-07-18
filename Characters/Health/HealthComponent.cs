@@ -26,7 +26,11 @@ public partial class HealthComponent : Node3D, ICanTakeDamage
 	private void AdjustHealth(int value)
 	{
 		int clamped = Mathf.Clamp(value, 0, MAX_HEALTH);
-		Health = Health.WithMaxAndValue(MAX_HEALTH, clamped);
+		Health = new Health()
+		{
+			Max = MAX_HEALTH,
+			Value = clamped
+		};
 		EmitSignal(SignalName.health_changed, Health);
 		if(Health.Value == 0)
 		{

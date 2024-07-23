@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://8by78r4lfkdn"]
+[gd_scene load_steps=14 format=3 uid="uid://8by78r4lfkdn"]
 
 [ext_resource type="Script" path="res://Characters/Player/Player.cs" id="1_vgjuy"]
 [ext_resource type="Script" path="res://Characters/Player/SmoothCamera.gd" id="2_s6ifw"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://0dsgm8b4840u" path="res://Characters/HitboxComponent.tscn" id="6_labdc"]
 [ext_resource type="Script" path="res://Characters/HitboxComponent.cs" id="7_edghr"]
 [ext_resource type="Script" path="res://Characters/Player/PersonalHealthBar.cs" id="9_2yv82"]
+[ext_resource type="Script" path="res://Characters/Player/WeaponControls.cs" id="10_w6vne"]
 [ext_resource type="Script" path="res://Weapons/AmmoLabel.cs" id="10_wunak"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qf1at"]
@@ -133,6 +134,10 @@ max_value = 1000.0
 value = 1000.0
 show_percentage = false
 script = ExtResource("9_2yv82")
+
+[node name="WeaponControls" type="Node3D" parent="." node_paths=PackedStringArray("_weaponHandler")]
+script = ExtResource("10_w6vne")
+_weaponHandler = NodePath("../SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler")
 
 [connection signal="ammo_update" from="SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler" to="MarginContainer/AmmoLabel" method="OnWeaponHandlerAmmoUpdate"]
 [connection signal="health_changed" from="HealthComponent" to="MarginContainer/PersonalHealthBar" method="OnHealthComponentHealthChanged"]

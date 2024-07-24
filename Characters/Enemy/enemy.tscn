@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c50syaf06uecf"]
+[gd_scene load_steps=13 format=3 uid="uid://c50syaf06uecf"]
 
 [ext_resource type="Script" path="res://Characters/Enemy/Enemy.cs" id="1_w4er2"]
 [ext_resource type="PackedScene" uid="uid://dbagux3odyp51" path="res://Characters/Health/HealthComponent.tscn" id="2_q8tcm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Characters/HitboxComponent.cs" id="4_2n5tf"]
 [ext_resource type="PackedScene" uid="uid://cihcnaryq5wt5" path="res://Characters/Health/HealthBar.tscn" id="5_84gxg"]
 [ext_resource type="PackedScene" uid="uid://bop1pomqoqmrg" path="res://Weapons/WeaponHandler.tscn" id="6_l5p5g"]
+[ext_resource type="Script" path="res://Characters/Enemy/EnemyWeaponControls.cs" id="7_onhho"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mh6nu"]
 
@@ -56,5 +57,9 @@ _CooldownTimer = NodePath("Timer")
 wait_time = 0.05
 one_shot = true
 autostart = true
+
+[node name="WeaponControls" type="Node3D" parent="." node_paths=PackedStringArray("_weaponHandler")]
+script = ExtResource("7_onhho")
+_weaponHandler = NodePath("../WeaponHandler")
 
 [connection signal="health_depleted" from="HealthComponent" to="." method="OnHealthComponentHealthDepleted"]

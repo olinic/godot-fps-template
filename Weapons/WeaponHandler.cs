@@ -46,7 +46,7 @@ public partial class WeaponHandler: Node3D
 
     public void Shoot(double delta)
     {
-        if(_CooldownTimer.IsStopped() && EquippedWeapon.CurrentAmmo > 0)
+        if(_CooldownTimer.IsStopped() && EquippedWeapon.GetCurrentAmmo() > 0)
         {
             EquippedWeapon.Shoot(delta);
             _CooldownTimer.Start(1.0f / EquippedWeapon.FireRate);

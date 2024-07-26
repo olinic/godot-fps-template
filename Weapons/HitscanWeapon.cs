@@ -14,14 +14,14 @@ public partial class HitscanWeapon : Node3D, IGun, ICanAttack
     [Export] public WeaponType WeaponType;
     [Export] public RayCast3D RayCast;
 
-    public int CurrentAmmo;
+    private int _CurrentAmmo;
     private Vector3 _WeaponPosition;
 
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		CurrentAmmo = AmmoCapacity;
+		_CurrentAmmo = AmmoCapacity;
         _WeaponPosition = WeaponMesh.Position;
 
         RayCast.CollideWithAreas = true;
@@ -37,7 +37,7 @@ public partial class HitscanWeapon : Node3D, IGun, ICanAttack
 	public void Shoot(double delta)
     {
         
-        CurrentAmmo--;
+        _CurrentAmmo--;
         if(RayCast.GetCollider() is ICanTakeDamage target)
         {
             GD.PrintT("Weapon Fired!", RayCast.GetCollider());
@@ -49,7 +49,7 @@ public partial class HitscanWeapon : Node3D, IGun, ICanAttack
     }
     public void Reload()
     {
-        CurrentAmmo = AmmoCapacity;
+        _CurrentAmmo = AmmoCapacity;
     }
 
     public Attack GetAttack()
@@ -59,7 +59,7 @@ public partial class HitscanWeapon : Node3D, IGun, ICanAttack
 
     public int GetCurrentAmmo()
     {
-        return CurrentAmmo;
+        return _CurrentAmmo;
     }
     public int GetAmmoCapacity()
     {

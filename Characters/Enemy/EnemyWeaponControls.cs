@@ -20,7 +20,7 @@ public partial class EnemyWeaponControls: Node3D
 
     private void HandleReload()
     {
-        if (_weaponHandler.EquippedWeapon.CurrentAmmo == 0)
+        if (_weaponHandler.EquippedWeapon.GetCurrentAmmo() == 0)
         {
             _weaponHandler.Reload();
 			GD.Print("Enemy Reloaded");

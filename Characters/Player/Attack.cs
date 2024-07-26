@@ -1,4 +1,4 @@
 public class Attack
 {
-    public int Damage { get; set; }
+    public float Damage { get; set; }
 }

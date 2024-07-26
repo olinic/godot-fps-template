@@ -3,8 +3,11 @@ using Godot;
 namespace FPS.Characters.Health;
 public partial class HealthComponent : Node3D, ICanTakeDamage
 {
-	[Export] private Timer _RegenTimer;
-	[Export] private int MAX_HEALTH = 1000;
+	[Export] public Timer _RegenTimer;
+	[Export] private float MAX_HEALTH = 1000;
+
+	[Export] private float REGEN_DURATION;
+	private float REGEN_RATE;
 	
 	[Signal]
 	public delegate void health_depletedEventHandler();
@@ -16,6 +19,10 @@ public partial class HealthComponent : Node3D, ICanTakeDamage
 
 	public override void _Ready()
 	{
+		//duration is 2 sec
+		//health is 600
+		//rate 10
+		REGEN_RATE = MAX_HEALTH/REGEN_DURATION;
 		Health = new Health()
 		{
 			Max = MAX_HEALTH,
@@ -26,7 +33,7 @@ public partial class HealthComponent : Node3D, ICanTakeDamage
 
     public override void _PhysicsProcess(double delta)
     {
-		ApplyHealthRegen();
+		ApplyHealthRegen(delta);
     }
 
     public void ApplyDamage(Attack attack)
@@ -35,9 +42,9 @@ public partial class HealthComponent : Node3D, ICanTakeDamage
 		AdjustHealth(Health.Value - attack.Damage);
 	}
 
-	private void AdjustHealth(int value)
+	private void AdjustHealth(float value)
 	{
-		int clamped = Mathf.Clamp(value, 0, MAX_HEALTH);
+		float clamped = Mathf.Clamp(value, 0, MAX_HEALTH);
 
 		if(clamped != Health.Value)
 		{
@@ -54,11 +61,11 @@ public partial class HealthComponent : Node3D, ICanTakeDamage
 		}	
 	}
 
-	private void ApplyHealthRegen()
+	private void ApplyHealthRegen(double delta)
 	{
 		if(_RegenTimer.IsStopped())
 		{
-			AdjustHealth(Health.Value + 5);
+			AdjustHealth(Health.Value + REGEN_RATE * (float) delta);
 		}
 	}
 }

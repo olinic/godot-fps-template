@@ -8,22 +8,27 @@ namespace FPS.Characters.Health;
 [TestSuite]
 public class HealthComponentTest
 {
+    private HealthComponent health;
+    [Before]
+    public void Before()
+    {
+        health = new HealthComponent();
+        health._RegenTimer = new Timer();
+        health._Ready();
+    }
     [TestCase]
     public void GivenAttack_ApplyDamage_ReducesHealth()
     {
-        HealthComponent health = new HealthComponent();
-        health._Ready();
+        
         Attack attack = new() { Damage = 300 };
         health.ApplyDamage(attack);
-        AssertInt(health.Health.Value).IsEqual(700);
+        AssertFloat(health.Health.Value).IsEqual(700);
     }
     [TestCase]
     public async Task GivenHealthReachesZero_ApplyDamage_Deletes()
     {
-        HealthComponent health = new HealthComponent();
-        health._Ready();
         Attack attack = new() { Damage = 1000 };
         await AssertSignalEmitted("health_depleted", () => health.ApplyDamage(attack)).On(health);
-        AssertInt(health.Health.Value).IsEqual(0);
+        AssertFloat(health.Health.Value).IsEqual(0);
     }
 }

@@ -6,6 +6,7 @@ namespace FPS.Characters.Player;
 public partial class WeaponControls: Node3D
 {
     [Export] private WeaponHandler _weaponHandler;
+    
 
     public override void _PhysicsProcess(double delta)
     {

@@ -48,8 +48,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28496, 0)
 texture = SubResource("ViewportTexture_iff47")
 HealthComponent = NodePath("../HealthComponent")
 
-[node name="ShootTimer" type="Timer" parent="."]
-
 [node name="WeaponHandler" parent="." node_paths=PackedStringArray("_CooldownTimer") instance=ExtResource("6_l5p5g")]
 _CooldownTimer = NodePath("Timer")
 
@@ -58,8 +56,13 @@ wait_time = 0.05
 one_shot = true
 autostart = true
 
-[node name="WeaponControls" type="Node3D" parent="." node_paths=PackedStringArray("_weaponHandler")]
+[node name="WeaponControls" type="Node3D" parent="." node_paths=PackedStringArray("_weaponHandler", "_ReloadTimer")]
 script = ExtResource("7_onhho")
 _weaponHandler = NodePath("../WeaponHandler")
+_ReloadTimer = NodePath("ReloadTimer")
+
+[node name="ReloadTimer" type="Timer" parent="WeaponControls"]
+one_shot = true
+autostart = true
 
 [connection signal="health_depleted" from="HealthComponent" to="." method="OnHealthComponentHealthDepleted"]

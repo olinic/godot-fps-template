@@ -6,36 +6,30 @@ namespace FPS.Characters.Enemy;
 public partial class EnemyWeaponControls: Node3D
 {
     [Export] private WeaponHandler _weaponHandler;
+	[Export] private Timer _ReloadTimer;
+
 
     public override void _PhysicsProcess(double delta)
     {
         HandleShoot(delta);
-        HandleReload();
+		if(_ReloadTimer.IsStopped())
+		{
+        	HandleReload();
+		}
     }
 
     private void HandleReload()
     {
-        if (true /*out of ammo*/)
+        if (_weaponHandler.EquippedWeapon.CurrentAmmo == 0)
         {
             _weaponHandler.Reload();
+			GD.Print("Enemy Reloaded");
+			_ReloadTimer.Start(2.0f);
         }
     }
 
     private void HandleShoot(double delta)
     {
-        if (_weaponHandler.GetFireMode() == FireMode.Auto)
-        {
-            if(true /*cooldown timer is stopped*/)
-            {
-                _weaponHandler.Shoot(delta);
-            }
-        }
-        else
-        {
-            if(true)
-            {
-                _weaponHandler.Shoot(delta);
-            }
-        }
+		_weaponHandler.Shoot(delta);
     }
 }

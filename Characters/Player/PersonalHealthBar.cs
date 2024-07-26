@@ -2,6 +2,7 @@ using FPS.Characters.Health;
 using Godot;
 using System;
 
+
 public partial class PersonalHealthBar : ProgressBar
 {
 

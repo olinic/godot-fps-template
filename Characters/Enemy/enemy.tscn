@@ -56,9 +56,9 @@ wait_time = 0.05
 one_shot = true
 autostart = true
 
-[node name="WeaponControls" type="Node3D" parent="." node_paths=PackedStringArray("_weaponHandler", "_ReloadTimer")]
+[node name="WeaponControls" type="Node3D" parent="." node_paths=PackedStringArray("_WeaponHandler", "_ReloadTimer")]
 script = ExtResource("7_onhho")
-_weaponHandler = NodePath("../WeaponHandler")
+_WeaponHandler = NodePath("../WeaponHandler")
 _ReloadTimer = NodePath("ReloadTimer")
 
 [node name="ReloadTimer" type="Timer" parent="WeaponControls"]

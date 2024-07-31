@@ -13,8 +13,12 @@ public partial class Menu : Control
 	{
 	}
 
-	public void _on_start_button_pressed()
+	public void OnStartButtonPressed()
 	{
 		GetTree().ChangeSceneToFile("res://Levels/main.tscn");
+	}
+	public void OnQuitButtonPressed()
+	{
+		GetTree().Quit();
 	}
 }

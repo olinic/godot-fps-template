@@ -13,7 +13,6 @@ public class HealthComponentTest
     public void Before()
     {
         health = new HealthComponent();
-        health._RegenTimer = new Timer();
         health._Ready();
     }
     [TestCase]

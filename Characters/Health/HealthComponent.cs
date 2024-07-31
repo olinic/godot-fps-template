@@ -3,8 +3,9 @@ using Godot;
 namespace FPS.Characters.Health;
 public partial class HealthComponent : Node3D, ICanTakeDamage
 {
-	[Export] public Timer _RegenTimer;
-	[Export] private float MAX_HEALTH = 1000;
+	public Timer _RegenTimer;
+	//[Export] private float MAX_HEALTH = 1000;
+	public float MAX_HEALTH { get; init; } = 1000;
 
 	[Export] private float REGEN_DURATION;
 	private float REGEN_RATE;
@@ -19,6 +20,8 @@ public partial class HealthComponent : Node3D, ICanTakeDamage
 
 	public override void _Ready()
 	{
+		_RegenTimer = new() { OneShot = true, Autostart = false, WaitTime = 2.0f};
+		AddChild(_RegenTimer);
 		//duration is 2 sec
 		//health is 600
 		//rate 10

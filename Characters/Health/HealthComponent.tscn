@@ -4,9 +4,5 @@
 
 [node name="HealthComponent" type="Node3D" node_paths=PackedStringArray("_RegenTimer")]
 script = ExtResource("1_sn062")
-_RegenTimer = NodePath("RegenTimer")
+_RegenTimer = NodePath("")
 REGEN_DURATION = 1.0
-
-[node name="RegenTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true

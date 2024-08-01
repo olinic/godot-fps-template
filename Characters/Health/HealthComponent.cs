@@ -3,7 +3,7 @@ using Godot;
 namespace FPS.Characters.Health;
 public partial class HealthComponent : Node3D, ICanTakeDamage
 {
-	public Timer _regenTimer;
+	public Timer RegenTimer;
 	public float MaxHealth { get; set; } = 1000;
 	public float RegenDurationSeconds { 
 		get => _regenDurationSeconds; 
@@ -34,8 +34,8 @@ public partial class HealthComponent : Node3D, ICanTakeDamage
 
 	public override void _Ready()
 	{
-		_regenTimer = new() { OneShot = true, Autostart = false, WaitTime = 2.0f};
-		AddChild(_regenTimer);
+		RegenTimer = new() { OneShot = true, Autostart = false, WaitTime = 2.0f};
+		AddChild(RegenTimer);
 		Health = new Health()
 		{
 			Max = MaxHealth,
@@ -51,7 +51,7 @@ public partial class HealthComponent : Node3D, ICanTakeDamage
 
 	private void ApplyHealthRegen(double delta)
 	{
-		if(_regenTimer.IsStopped())
+		if(RegenTimer.IsStopped())
 		{
 			AdjustHealth(Health.Value + _regenRate * (float) delta);
 		}
@@ -59,7 +59,7 @@ public partial class HealthComponent : Node3D, ICanTakeDamage
 
     public void ApplyDamage(Attack attack)
 	{
-		_regenTimer.Start();
+		RegenTimer.Start();
 		AdjustHealth(Health.Value - attack.Damage);
 	}
 

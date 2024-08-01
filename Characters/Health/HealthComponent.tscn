@@ -2,7 +2,5 @@
 
 [ext_resource type="Script" path="res://Characters/Health/HealthComponent.cs" id="1_sn062"]
 
-[node name="HealthComponent" type="Node3D" node_paths=PackedStringArray("_RegenTimer")]
+[node name="HealthComponent" type="Node3D"]
 script = ExtResource("1_sn062")
-_RegenTimer = NodePath("")
-REGEN_DURATION = 1.0

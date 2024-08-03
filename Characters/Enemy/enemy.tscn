@@ -46,13 +46,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28496, 0)
 texture = SubResource("ViewportTexture_iff47")
 HealthComponent = NodePath("../HealthComponent")
 
-[node name="WeaponHandler" parent="." node_paths=PackedStringArray("_CooldownTimer") instance=ExtResource("6_l5p5g")]
-_CooldownTimer = NodePath("Timer")
-
-[node name="Timer" type="Timer" parent="WeaponHandler"]
-wait_time = 0.05
-one_shot = true
-autostart = true
+[node name="WeaponHandler" parent="." instance=ExtResource("6_l5p5g")]
 
 [node name="WeaponControls" type="Node3D" parent="." node_paths=PackedStringArray("_WeaponHandler", "_ReloadTimer")]
 script = ExtResource("7_onhho")

@@ -4,7 +4,7 @@ using Godot;
 namespace FPS.Weapons;
 public partial class WeaponHandler: Node3D
 {
-    [Export] private Timer _CooldownTimer;
+    [Export] private Timer CooldownTimer;
 
     [Signal] public delegate void ammo_updateEventHandler(int ammoCount);
 
@@ -46,10 +46,10 @@ public partial class WeaponHandler: Node3D
 
     public void Shoot(double delta)
     {
-        if(_CooldownTimer.IsStopped() && EquippedWeapon.GetCurrentAmmo() > 0)
+        if(CooldownTimer.IsStopped() && EquippedWeapon.GetCurrentAmmo() > 0)
         {
             EquippedWeapon.Shoot(delta);
-            _CooldownTimer.Start(1.0f / EquippedWeapon.FireRate);
+            CooldownTimer.Start(1.0f / EquippedWeapon.FireRate);
         }
         EmitAmmoUpdate();
     }

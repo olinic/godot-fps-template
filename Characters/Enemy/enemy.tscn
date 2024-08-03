@@ -48,10 +48,10 @@ HealthComponent = NodePath("../HealthComponent")
 
 [node name="WeaponHandler" parent="." instance=ExtResource("6_l5p5g")]
 
-[node name="WeaponControls" type="Node3D" parent="." node_paths=PackedStringArray("_WeaponHandler", "_ReloadTimer")]
+[node name="WeaponControls" type="Node3D" parent="." node_paths=PackedStringArray("WeaponHandler", "ReloadTimer")]
 script = ExtResource("7_onhho")
-_WeaponHandler = NodePath("../WeaponHandler")
-_ReloadTimer = NodePath("ReloadTimer")
+WeaponHandler = NodePath("../WeaponHandler")
+ReloadTimer = NodePath("ReloadTimer")
 
 [node name="ReloadTimer" type="Timer" parent="WeaponControls"]
 one_shot = true

@@ -5,26 +5,25 @@ using Godot;
 namespace FPS.Characters.Enemy;
 public partial class EnemyWeaponControls: Node3D
 {
-    [Export] private WeaponHandler _WeaponHandler;
-	[Export] private Timer _ReloadTimer;
-
+    [Export] private WeaponHandler WeaponHandler;
+	[Export] private Timer ReloadTimer;
 
     public override void _PhysicsProcess(double delta)
     {
-		if(_ReloadTimer.IsStopped())
+		if(ReloadTimer.IsStopped())
 		{
-            _WeaponHandler.Shoot(delta);
+            WeaponHandler.Shoot(delta);
         	HandleReload();
 		}
     }
 
     private void HandleReload()
     {
-        if (_WeaponHandler.EquippedWeapon.GetCurrentAmmo() == 0)
+        if (WeaponHandler.EquippedWeapon.GetCurrentAmmo() == 0)
         {
-            _WeaponHandler.Reload();
+            WeaponHandler.Reload();
 			GD.Print("Enemy Reloaded");
-			_ReloadTimer.Start(1.5f);
+			ReloadTimer.Start(1.5f);
         }
     }
 }

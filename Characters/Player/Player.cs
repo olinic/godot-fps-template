@@ -9,8 +9,8 @@ public partial class Player : CharacterBody3D, IMoveStateProvider
 	private const float VerticalLookLowerLimit = -90; 
 	private const float VerticalLookUpperLimit = 90; 
 
-	[Export] private int HorizontalLookSetting = 6;
-	[Export] private int VerticalLookSetting = 6;
+	private int HorizontalLookSetting = 6;
+	private int VerticalLookSetting = 6;
 
 	private float HorizontalLookSensitivity;
 	private float VerticalLookSensitivity;

@@ -4,15 +4,15 @@ namespace FPS.Weapons;
 public enum FireMode {Auto, Semi};
 public partial class HitscanWeapon : Node3D, IGun, ICanAttack
 {
-	[Export] public float FireRate;
-    [Export] public float _Recoil;
     [Export] public Node3D WeaponMesh;
-   
-    [Export] public int AmmoCapacity;
-    [Export] private int _Damage;
-    [Export] public FireMode FireMode;
-    [Export] public WeaponType WeaponType;
     [Export] public RayCast3D RayCast;
+
+	public float FireRate;
+    public float _Recoil;
+    public int AmmoCapacity;
+    public int _Damage;
+    public FireMode FireMode;
+    public WeaponType WeaponType;
 
     private int _CurrentAmmo;
     private Vector3 _WeaponPosition;

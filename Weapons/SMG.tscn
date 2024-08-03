@@ -1,14 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://b24ku1p85yyw8"]
+[gd_scene load_steps=4 format=3 uid="uid://b24ku1p85yyw8"]
 
 [ext_resource type="PackedScene" uid="uid://cqomnalqqa2oj" path="res://Weapons/HitscanWeapon.tscn" id="1_d40to"]
+[ext_resource type="Script" path="res://Weapons/SMG.cs" id="2_e680h"]
 [ext_resource type="PackedScene" uid="uid://da5m4sq4pruj1" path="res://Weapons/Weapon Models/blasterD.glb" id="2_toliv"]
 
 [node name="SMG" node_paths=PackedStringArray("WeaponMesh") instance=ExtResource("1_d40to")]
-FireRate = 14.0
-_Recoil = 0.05
+script = ExtResource("2_e680h")
 WeaponMesh = NodePath("blasterD2")
-AmmoCapacity = 20
-_Damage = 100
 
 [node name="blasterD2" parent="." index="1" instance=ExtResource("2_toliv")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.537111, -0.367995, -0.883823)

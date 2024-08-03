@@ -11,11 +11,22 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ebtuw")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 647.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5
+offset_top = -43.5
+offset_right = 33.5
+offset_bottom = 43.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
@@ -25,16 +36,18 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 13
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="Start Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Start Button" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(138, 47)
 layout_mode = 2
 text = "Start"
 
-[node name="Quit Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Quit Button" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(138, 47)
 layout_mode = 2
 text = "Quit"
 
@@ -46,5 +59,5 @@ offset_right = 672.0
 offset_bottom = 59.0
 text = "Main Menu"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Start Button" to="." method="OnStartButtonPressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit Button" to="." method="OnQuitButtonPressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Start Button" to="." method="OnStartButtonPressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Quit Button" to="." method="OnQuitButtonPressed"]

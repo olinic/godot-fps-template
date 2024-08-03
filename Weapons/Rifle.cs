@@ -6,9 +6,9 @@ public partial class Rifle: HitscanWeapon
     public Rifle()
     {
         FireRate = 144;
-        _Recoil = 0.3f;
+        Recoil = 0.3f;
         AmmoCapacity = 6;
-        _Damage = 334;
+        Damage = 334;
         FireMode = FireMode.Semi;
         WeaponType = WeaponType.Secondary;
     }

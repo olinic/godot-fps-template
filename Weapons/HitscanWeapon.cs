@@ -8,9 +8,9 @@ public partial class HitscanWeapon : Node3D, IGun, ICanAttack
     [Export] public RayCast3D RayCast;
 
 	public float FireRate;
-    public float _Recoil;
+    public float Recoil;
     public int AmmoCapacity;
-    public int _Damage;
+    public int Damage;
     public FireMode FireMode;
     public WeaponType WeaponType;
 
@@ -44,7 +44,7 @@ public partial class HitscanWeapon : Node3D, IGun, ICanAttack
             
             target.ApplyDamage(GetAttack());
         }
-        WeaponMesh.Position = WeaponMesh.Position with { Z = WeaponMesh.Position.Z + _Recoil};
+        WeaponMesh.Position = WeaponMesh.Position with { Z = WeaponMesh.Position.Z + Recoil};
         
     }
     public void Reload()
@@ -54,7 +54,7 @@ public partial class HitscanWeapon : Node3D, IGun, ICanAttack
 
     public Attack GetAttack()
     {
-        return new Attack() { Damage = _Damage};
+        return new Attack() { Damage = Damage};
     }
 
     public int GetCurrentAmmo()

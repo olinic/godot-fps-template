@@ -34,25 +34,16 @@ size_flags_vertical = 8
 layout_mode = 2
 text = "Start"
 
-[node name="Options Button" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Placeholder"
-
 [node name="Quit Button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
-[node name="TextEdit" type="TextEdit" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.0
-offset_top = 40.0
-offset_right = 48.0
-offset_bottom = 75.0
-grow_horizontal = 2
-size_flags_vertical = 0
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 531.0
+offset_top = 19.0
+offset_right = 672.0
+offset_bottom = 59.0
 text = "Main Menu"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Start Button" to="." method="OnStartButtonPressed"]

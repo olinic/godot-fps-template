@@ -5,8 +5,7 @@ using Godot;
 namespace FPS.Characters.Player;
 public partial class WeaponControls: Node3D
 {
-    [Export] private WeaponHandler _weaponHandler;
-    
+    [Export] private WeaponHandler WeaponHandler;
 
     public override void _PhysicsProcess(double delta)
     {
@@ -19,24 +18,24 @@ public partial class WeaponControls: Node3D
     {
         if (Input.IsActionJustPressed("reload"))
         {
-            _weaponHandler.Reload();
+            WeaponHandler.Reload();
         }
     }
 
     private void HandleShoot(double delta)
     {
-        if (_weaponHandler.GetFireMode() == FireMode.Auto)
+        if (WeaponHandler.GetFireMode() == FireMode.Auto)
         {
             if(Input.IsActionPressed("fire"))
             {
-                _weaponHandler.Shoot(delta);
+                WeaponHandler.Shoot(delta);
             }
         }
         else
         {
             if(Input.IsActionJustPressed("fire"))
             {
-                _weaponHandler.Shoot(delta);
+                WeaponHandler.Shoot(delta);
             }
         }
     }
@@ -45,15 +44,15 @@ public partial class WeaponControls: Node3D
     {
         if(Input.IsActionPressed("weapon_1"))
         {
-            _weaponHandler.EquipType(WeaponType.Primary);
+            WeaponHandler.EquipType(WeaponType.Primary);
         }
         if(Input.IsActionPressed("weapon_2"))
         {
-            _weaponHandler.EquipType(WeaponType.Secondary);
+            WeaponHandler.EquipType(WeaponType.Secondary);
         }
         if(Input.IsActionPressed("controller_switch_weapons"))
         {
-            _weaponHandler.SwapWeapon();
+            WeaponHandler.SwapWeapon();
         }
     }
 }

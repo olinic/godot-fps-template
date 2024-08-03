@@ -135,9 +135,9 @@ value = 1000.0
 show_percentage = false
 script = ExtResource("9_2yv82")
 
-[node name="WeaponControls" type="Node3D" parent="." node_paths=PackedStringArray("_weaponHandler")]
+[node name="WeaponControls" type="Node3D" parent="." node_paths=PackedStringArray("WeaponHandler")]
 script = ExtResource("10_w6vne")
-_weaponHandler = NodePath("../SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler")
+WeaponHandler = NodePath("../SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler")
 
 [connection signal="ammo_update" from="SubViewportContainer/SubViewport/Weapon Camera/WeaponHandler" to="MarginContainer/AmmoLabel" method="OnWeaponHandlerAmmoUpdate"]
 [connection signal="health_changed" from="HealthComponent" to="MarginContainer/PersonalHealthBar" method="OnHealthComponentHealthChanged"]

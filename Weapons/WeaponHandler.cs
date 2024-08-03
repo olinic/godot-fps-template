@@ -68,10 +68,10 @@ public partial class WeaponHandler: Node3D
         EmitAmmoUpdate();
     }
 
-    private void UnEquip(HitscanWeapon inactive_weapon)
+    private void UnEquip(HitscanWeapon inactiveWeapon)
     {  
-        inactive_weapon.Visible = false;
-        inactive_weapon.SetProcess(false);
+        inactiveWeapon.Visible = false;
+        inactiveWeapon.SetProcess(false);
     }
 
     public void EmitAmmoUpdate()

@@ -39,13 +39,36 @@ public class HealthComponentTest
     }
 
     [TestCase]
-    public void GivenRegen_Health_ReturnsGreaterHealth()
+    public void GivenPartialRegen_Health_ReturnsGreaterHealth()
+    {
+        Attack attack = new() { Damage = 999 };
+        health.ApplyDamage(attack);
+        AssertFloat(health.Health.Value).IsEqual(1);
+        health.RegenTimer.Stop();
+        health._PhysicsProcess(health.RegenDurationSeconds/2);
+        AssertFloat(health.Health.Value).IsEqual(501);
+    }
+
+    [TestCase]
+    public void GivenPartialRegenWithDifferentDuration_Health_ReturnsGreaterHealth()
+    {
+        health.RegenDurationSeconds = 5;
+        Attack attack = new() { Damage = 999 };
+        health.ApplyDamage(attack);
+        AssertFloat(health.Health.Value).IsEqual(1);
+        health.RegenTimer.Stop();
+        health._PhysicsProcess(health.RegenDurationSeconds/2);
+        AssertFloat(health.Health.Value).IsEqual(501);
+    }
+
+    [TestCase]
+    public void GivenFullRegen_Health_ReturnsGreaterHealth()
     {
         Attack attack = new() { Damage = 300 };
         health.ApplyDamage(attack);
         AssertFloat(health.Health.Value).IsEqual(700);
         health.RegenTimer.Stop();
-        health._PhysicsProcess(3);
+        health._PhysicsProcess(health.RegenDurationSeconds);
         AssertFloat(health.Health.Value).IsEqual(1000);
     }
 }

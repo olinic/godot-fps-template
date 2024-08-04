@@ -7,7 +7,7 @@ public partial class HitscanWeapon : Node3D, IGun, ICanAttack
     [Export] public Node3D WeaponMesh;
     [Export] public RayCast3D RayCast;
 
-	public float FireRate;
+	public float RoundsPerSecond;
     public float Recoil;
     public int AmmoCapacity;
     public int Damage;

@@ -5,7 +5,7 @@ public partial class SMG: HitscanWeapon
 {
     public SMG()
     {
-        FireRate = 14;
+        RoundsPerSecond = 14;
         Recoil = 0.05f;
         AmmoCapacity = 20;
         Damage = 100;
